@@ -25,7 +25,7 @@ const t = useTranslations(lang);
 {
   !!caseStudy ? (
     <section class="flex flex-col gap-8 py-8 mx-4 lg:mx-0" id={caseStudy.title}>
-      <h1 class="flex items-center justify-center col-span-2">
+      <h1 class="flex items-center justify-center col-span-full">
         {caseStudy.title}
       </h1>
       <BoxGrid narrow>
@@ -38,7 +38,7 @@ const t = useTranslations(lang);
           </div>
         </Box>
         <Box>
-          <div class="overflow-hidden h-full w-full rounded-3xl">
+          <div class="overflow-hidden w-full h-full rounded-3xl">
           <Image
             src={caseStudy.image}
             alt={caseStudy.title}
@@ -46,7 +46,6 @@ const t = useTranslations(lang);
           />
           </div>
         </Box>
-        {/* <div class="col-span-1" /> */}
         <Box padded>
           <div class="flex flex-col gap-4">
             <h2 class="text-primaryLight dark:text-primaryDark">
@@ -63,7 +62,7 @@ const t = useTranslations(lang);
             <p>{caseStudy.deliveredValue}</p>
           </div>
         </Box>
-      <Box padded customClass="col-span-2">
+      <Box padded customClass="col-span-full">
         <div class="flex flex-col gap-4">
           <h2 class="text-primaryLight dark:text-primaryDark">
             {t("caseStudies.theProduct")}

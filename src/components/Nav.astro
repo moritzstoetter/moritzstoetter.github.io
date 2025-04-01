@@ -15,22 +15,42 @@ const t = useTranslations(lang);
 >
   <div class="flex items-center justify-between">
     <a href="/">
-      <div class="block dark:hidden">
-        <Image
-          width={256}
-          height={64}
-          src="/logo_light.png"
-          alt="modern embedded logo"
-        />
+      <div class="hidden md:block pr-4">
+        <div class="block dark:hidden">
+          <Image
+            width={256}
+            height={64}
+            src="/logo_light.png"
+            alt="modern embedded logo"
+          />
+        </div>
+        <div class="hidden dark:block">
+          <Image
+            width={256}
+            height={64}
+            src="/logo_dark.png"
+            alt="modern embedded logo"
+          />
+        </div>
       </div>
-      <div class="hidden dark:block">
-        <Image
-          width={256}
-          height={64}
-          src="/logo_dark.png"
-          alt="modern embedded logo"
-        />
-      </div>
+        <div class="block md:hidden">
+          <div class="block dark:hidden">
+            <Image
+              width={64}
+              height={64}
+              src="/logo_mobile_light.png"
+              alt="modern embedded logo"
+            />
+          </div>
+          <div class="hidden dark:block">
+            <Image
+              width={64}
+              height={64}
+              src="/logo_mobile_dark.png"
+              alt="modern embedded logo"
+            />
+          </div>
+        </div>
     </a>
     <div class="flex items-center gap-4">
       <div class="hidden md:block">

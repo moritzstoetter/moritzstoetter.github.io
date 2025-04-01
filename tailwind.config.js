@@ -5,16 +5,17 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   darkMode: "selector",
   theme: {
+    screens: {
+      'sm': '450px',
+      'md': '768px',
+      'lg': '1024px',
+    },
     extend: {
       colors: {
         primaryLight: "#9d0006",
         primaryDark: "#d79921",
         secondaryLight: "#cc241d  ",
         secondaryDark: "#fabd2f",
-        // redDark: "#fb4934",
-        // redLight: "#cc241d",
-        // greenDark: "#79740e",
-        // greenLight: "#b8bb26",
         backgroundLight: "#EFEDEA",
         backgroundDark: "#2F2F2F",
         backgroundDarker: "#282828",
