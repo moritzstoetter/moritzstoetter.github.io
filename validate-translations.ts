@@ -1,17 +1,6 @@
 import { labels } from "./src/i18n/labels";
 
 type Languages = keyof typeof labels;
-type DeepKeys<T> = T extends object
-  ? {
-      [K in keyof T]: `${K & string}${T[K] extends object
-        ? `.${DeepKeys<T[K]> & string}`
-        : ""}`;
-    }[keyof T]
-  : never;
-
-type FlattenedTranslations = {
-  [K in DeepKeys<(typeof labels)[Languages]>]: string;
-};
 
 function flattenObject(obj: any, prefix = ""): Record<string, string> {
   return Object.keys(obj).reduce((acc: Record<string, string>, k) => {

@@ -12,8 +12,6 @@ const blogPosts = await getCollection("blog");
 
 const blogPost = blogPosts.find((s) => s.slug === `${lang}/${slug}`);
 
-const formattedDate = blogPost?.data.date.toLocaleString(lang);
-
 const rendering = await blogPost?.render();
 
 const relatedArticles = await findBlogpostsByTags(

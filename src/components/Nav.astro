@@ -1,13 +1,9 @@
 ---
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import BurgerMenu from "./ui/BurgerMenu.astro";
 import LanguagePicker from "./ui/LanguagePicker.astro";
 import NavList from "./NavList.astro";
 import ThemeIcon from "./ui/ThemeIcon.astro";
-import Image from "astro/components/Image.astro";
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+import { Image } from "astro:assets";
 ---
 
 <div

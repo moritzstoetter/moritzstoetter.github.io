@@ -1,11 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import Box from "../../components/ui/Box.astro";
 import {
   getLangFromUrl,
   idIsOfLanguage,
-  useTranslations,
 } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 import BoxGrid from "../../components/ui/BoxGrid.astro";
@@ -15,8 +12,6 @@ const blogPosts = await getCollection("blog");
 const lang = getLangFromUrl(Astro.url);
 
 const langBlogPosts = blogPosts.filter((c) => idIsOfLanguage(c.id, lang));
-
-const t = useTranslations(lang);
 
 export async function getStaticPaths() {
   const pages = await getCollection("blog");
