@@ -49,11 +49,7 @@ function validateTranslations() {
   if (errors.length > 0) {
     errors.forEach((error) => console.error(error + "\n"));
     throw Error("\n❌ Translation validation failed:\n");
-  } else {
-    console.log(
-      "\n✅ All translations are complete and match the reference language.\n",
-    );
-  }
+  } 
 }
 
 // Run the validation

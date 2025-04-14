@@ -50,14 +50,11 @@ const testimonials = Astro.props.testimonials;
     const slides = document.querySelectorAll(".slide");
 
     function updateIndex(newIndex: number) {
-      console.log("slide_count " + slides.length + ", updateIndex " + newIndex);
-
       const slideWidth = (slides[0] as HTMLElement).offsetWidth;
       const slidesElement = document.querySelector(".slides") as HTMLElement;
       if (slidesElement) {
         const containerWidth = slidesElement.parentElement?.offsetWidth || 0;
         const visibleSlides = Math.floor(containerWidth / slideWidth);
-        console.log("visible slides: " + visibleSlides);
 
         currentIndex = mod(newIndex, slides.length + 1 - visibleSlides);
         slidesElement.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
@@ -76,7 +73,6 @@ const testimonials = Astro.props.testimonials;
     });
 
     rightButton?.addEventListener("click", () => {
-      console.log("right clicked");
       updateIndex(currentIndex + 1);
     });
   });
