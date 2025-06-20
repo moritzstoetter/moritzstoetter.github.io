@@ -1,7 +1,7 @@
 {
   "identifier": 3,
   "name": "Lukas",
-  "subheading": "Embeddeded Software Developer @ WSAudiology",
+  "subheading": "Embedded Software Developer @ WSAudiology",
   "quote": "Moritz helped us a lot with his ability to design complex software architectures and implement them in modern C++ and Python. The system he developed is already serving us well and will be with us for a long time.",
   "image": "../assets/lukas.jpeg"
 }
