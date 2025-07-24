@@ -17,7 +17,7 @@ Nehmen wir an, Sie haben ein von GitHub gehostetes Repository mit dem Namen `act
 Wir können Deploy Keys verwenden, um diesen Zugriff zu gewähren. Dazu erstellen wir ein Schlüsselpaar mit dem Namen der Entität, zu der wir Zugriff gewähren wollen. In diesem Fall ist diese Entität `private_repo`:
 
 ```bash
-ssh-keygen -t ed25519 -C "it@github.com:account_name/private_repo.git" -f deploy_key -N ""
+ssh-keygen -t ed25519 -C "git@github.com:account_name/private_repo.git" -f deploy_key -N ""
 ```
 
 Der Kommentar `git@github.com:account_name/private_repo.git` ist hier der Schlüssel und Ihr **Job wird fehlschlagen, wenn** Sie dies falsch konfigurieren. Ersetzen Sie `account_name` durch den Namen des Kontos und `private_repo` durch den Namen des Repos, auf das Sie Zugriff gewähren wollen.
@@ -33,7 +33,6 @@ Fügen Sie *deploy_key* zu den Secrets von `action_repo` hinzu (Einstellungen > 
 Dann verwenden Sie dieses Geheimnis innerhalb der GH-Aktionen von `action_repo` wie folgt in `ci.yml`:
 
 ```yaml
-
 # ... 
 
 jobs:

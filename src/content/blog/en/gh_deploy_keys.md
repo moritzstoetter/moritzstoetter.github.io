@@ -17,7 +17,7 @@ Say you have a GitHub hosted repository named `action_repo` that runs some GitHu
 We can use Deploy Keys to grant this access. In order to do so we create a key-pair in the name of the entity we are granting access to. In this case that entity is `private_repo`:
 
 ```bash
-ssh-keygen -t ed25519 -C "it@github.com:account_name/private_repo.git" -f deploy_key -N ""
+ssh-keygen -t ed25519 -C "git@github.com:account_name/private_repo.git" -f deploy_key -N ""
 ```
 
 The comment `git@github.com:account_name/private_repo.git` is key here and your **job will fail if** you misconfigure this. Replace `account_name` with the name of the account and `private_repo` with the name of the repo you have granted access to. 
@@ -33,6 +33,8 @@ Take *deploy_key* and add to to the secrets of `action_repo` (Settings > Secrets
 Then use this secret within the GH actions of `action_repo` like this in your `ci.yml`:
 
 ```yaml
+# ...
+
 jobs:
   your-job:
     
