@@ -39,12 +39,12 @@ export const labels = {
     },
     caseStudies: {
       title: "Case Studies",
-      aboutTheClient: "About the Client",
+      aboutTheClient: "The Client",
       theChallenge: "The Challenge",
-      deliveredValue: "Delivered Value",
+      deliveredValue: "The Value",
       theProduct: "The Product",
-      technologies: "Technologies",
-      testimonial: "What the Client Says",
+      technologies: "The Stack",
+      testimonial: "The Feedback",
       notFound: "Case study not found",
     },
     blog: {
@@ -55,7 +55,7 @@ export const labels = {
       send: "Send",
       bookACall: "Book a call",
       bookACallDescription:
-        "If you would like to schedule a non-binding consultation, you can make an appointment here.",
+        "If you would like to schedule a non-binding consultation, please make an appointment here.",
       name: "Name",
       email: "Email",
       message: "Message",
@@ -97,12 +97,12 @@ export const labels = {
     },
     caseStudies: {
       title: "Fallstudien",
-      aboutTheClient: "Über den Kunden",
+      aboutTheClient: "Der Kunde",
       theChallenge: "Die Herausforderung",
       deliveredValue: "Der Mehrwert",
       theProduct: "Das Produkt",
-      technologies: "Technologien",
-      testimonial: "Was der Kunde sagt",
+      technologies: "Der Stack",
+      testimonial: "Das Feedback",
       notFound: "Fallstudie nicht gefunden",
     },
     blog: {

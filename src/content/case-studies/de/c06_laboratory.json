@@ -1,0 +1,12 @@
+{
+  "slug": "c06_laboratory",
+  "title": "Wireless- und Inter-Prozessor-Kommunikation",
+  "description": "Wir haben hochmoderne Laborgeräte auf Sendung gebracht.",
+  "about": "Der Kunde war ein international führendes Life-Science-Unternehmen mit Hauptsitz in Norddeutschland, das Instrumente, Verbrauchsmaterialien und Dienstleistungen für den Einsatz in Laboren auf der ganzen Welt entwickelt, herstellt und vertreibt. Seine Produkte stehen für die Spitze der deutschen Ingenieurskunst in Bezug auf Innovation und Qualität.",
+  "challenge": "Nach einigen Rückschlägen bei der Hardware-Auswahl und mit anderen Dienstleistern bat man uns um Hilfe bei der Firmware-Entwicklung für ein Wireless-Modul und dessen Integration in die Software einer Neuentwicklung. Von Anfang an sahen wir uns mit Designherausforderungen, hohen Anforderungen und einer großen Codebasis konfrontiert.",
+  "deliveredValue": "Wir implementierten die Firmware für dieses Multi-MCU-System auf der Grundlage des kundeneigenen Frameworks und integrierten es in sein Produkt und CI/CD. Damit ermöglichten wir dem Kunden die nahtlose Anbindung eines neuen Flaggschiffmodells und verschafften ihnen damit erneut einen Vorsprung vor der Konkurrenz.",
+  "product": "Evaluierung und Risikoanalyse der ESP-AT-Firmware — Entwurf und und Proof-of-Concept eines bidirektionalen RPC-Protokolls basierend auf MessagePack — Implementierung eines WiFi-Station-Dienstes — Implementierung eines BLE-Beacon-Dienstes — Implementierung eines HTTPS-Server-Dienstes mit Unterstützung von Server-Sent-Events — Unterstützung eines WiFi- und BLE-Zertifizierungsverfahrens — Integration einer MessagePack-basierten RPC-Schnittstelle in Firmware auf dem ESP32-C3 und dem STM32H7 — Integration der ESP32-Firmware in die GitLab-CI des Kunden mit maßgeschneidertem Docker-Container — Implementierung eines modularen, Stream-basierten Transport-Layers mit Multiplexer, Verschlüsselung und mehr — Flash-Verschlüsselung auf dem ESP32C3 — DMA-basierte UART-Kommunikation auf dem STM32, um die Haupt-MCU zu entlasten — Leistungsoptimierung (zeitlich) der Fertigungstestsoftware — Tiefgreifendes Interrupt-Debugging im USB-OTG device",
+  "tech": ["C++23", "C++20", "Python", "STM32", "ARM Cortex-M", "ESP32", "Risc-V", "FreeRTOS", "CMake", "Conan", "Catch2", "Trompeloeil", "CI/CD", "WiFi", "BLE", "HTTPS", "Server-Sent-Events", "RPC", "MessagePack", "USB", "AES-CTR", "Docker", "Segger Ozone", "UART", "DMA"],
+  "testimonials": [],
+  "image": "../assets/laboratory.webp"
+}
