@@ -1,7 +1,7 @@
 {
   "slug": "s01_development",
   "title": "Softwareentwicklung",
-  "description": "Wir entwickeln Softwarelösungen, die genau auf Ihren Anwendungsfall zugeschnitten sind. Eingebettete Systeme sind unsere Spezialität, insbesondere auch Mikrocontroller. Hier erfahren Sie mehr über unseren Tech-Stack.",
+  "description": "Wir entwickeln Softwarelösungen, die genau auf Ihren Anwendungsfall zugeschnitten sind. Eingebettete Systeme sind unsere Spezialität, insbesondere auch Mikrocontroller. Hier erfahren Sie mehr die Technologien und Tools, die wir jeden Tag verwenden.",
   "tech": [ 
     {
       "name": "C++",
@@ -57,6 +57,11 @@
       "name": "Zephyr",
       "description": "Mit dem vermutlich vollständigsten BLE Stack am Markt führt an Zephyr manchmal kein Weg vorbei. Wir unterstützen Sie hier!",
       "image": "../assets/tech/zephyr.svg"
+    },
+    {
+      "name": "Docker",
+      "description": "So gut wie jede CI-Pipeline verwendet Container. Wir verwenden docker täglich als lokalen daily driver und für CI/CD Integration.",
+      "image": "../assets/tech/docker.png"
     }
   ],
   "image": "../assets/development.png",

@@ -13,14 +13,47 @@ const lang = getLangFromUrl(Astro.url);
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Cutting edge software development for embedded devices in modern C++."
+      content="Cutting edge software development for embedded devices."
     />
     <meta
       name="keywords"
       content="Freelance, C++, Embedded, RTOS, Software Developer, BLE, Wifi, Firmware, Senior Software Developer, Software Architect"
     />
     <title>modern embedded</title>
+
+    <!-- Favicons -->
+    <!-- SVG favicon with embedded CSS -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- PNG fallbacks with media queries -->
+    <link rel="icon" href="/favicon-light-16x16.png" sizes="16x16" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon-dark-16x16.png" sizes="16x16" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon-light-32x32.png" sizes="32x32" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon-dark-32x32.png" sizes="32x32" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon-light-192x192.png" sizes="192x192" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon-dark-192x192.png" sizes="192x192" media="(prefers-color-scheme: dark)" />
+    <!-- Apple touch icon (iOS doesn't support media queries) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-dark-180x180.png" />
+
+    <!-- Web app manifest -->
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`https://modernembedded.tech/${lang}/`} />
+    <meta property="og:title" content="modern embedded - Cutting edge embedded software development" />
+    <meta property="og:description" content="Cutting edge software development for embedded devices in modern C++." />
+    <meta property="og:image" content="https://modernembedded.tech/logo_dark.png" />
+    <meta property="og:site_name" content="modern embedded" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={`https://modernembedded.tech/${lang}/`} />
+    <meta property="twitter:title" content="modern embedded - Cutting edge embedded software development" />
+    <meta property="twitter:description" content="Cutting edge software development for embedded devices in modern C++." />
+    <meta property="twitter:image" content="https://modernembedded.tech/logo_dark.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={`https://modernembedded.tech/${lang}/`} />
     <!-- Check for dark mode to avoid light/dark theme blinking -->
     <script is:inline>
       if (

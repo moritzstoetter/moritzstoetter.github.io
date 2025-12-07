@@ -1,7 +1,7 @@
 {
   "slug": "s01_development",
   "title": "Software Development",
-  "description": "We develop software solutions that are tailored to your use case. Our specialty are embedded systems, specifically including microcontrollers. Here you can learn a little about our tech stack.",
+  "description": "We develop software solutions that are tailored to your use case. Our specialty are embedded systems, specifically including microcontrollers. Here you can learn about the technologies and tools that we touch every day.",
   "tech": [ 
     {
       "name": "C++",
@@ -57,6 +57,11 @@
       "name": "Zephyr",
       "description": "They have the most complete BLE stack on the market, so sometimes there is no alternative. We support you here!",
       "image": "../assets/tech/zephyr.svg"
+    },
+    {
+      "name": "Docker",
+      "description": "Virtually every CI pipeline out there is powered by containers. We use it daily as our local driver and for CI/CD integration.",
+      "image": "../assets/tech/docker.png"
     }
   ],
   "image": "../assets/development.png",
