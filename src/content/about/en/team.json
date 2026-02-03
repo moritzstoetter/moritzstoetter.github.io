@@ -2,7 +2,7 @@
   "members": [
     {
       "name": "Moritz Stötter",
-      "description": "Moritz specializes in software development for embedded devices in modern C++. He has many years of experience on all the popular platforms, and knows exactly how to apply the awesome power C++ to the smallest devices. He has spearheaded the development and delivery of many technical products, successfully guiding them from initial concept and requirement analysis through architecture design, implementation, and final deployment. His approach revolves around leveraging advanced language features and tools to achieve safety, optimal runtime performance, and clean, maintainable interfaces.",
+      "description": "Moritz specializes in software development for embedded devices in modern C++. He has many years of experience on all the popular platforms, and knows exactly how to apply the awesome power of C++ to the smallest devices. He has spearheaded the development and delivery of many technical products, successfully guiding them from initial concept and requirement analysis through architecture design, implementation, and final deployment. His approach revolves around leveraging advanced language features and tools to achieve safety, optimal runtime performance, and clean, maintainable interfaces.",
       "image": "../assets/moritz.webp"
     }
   ]

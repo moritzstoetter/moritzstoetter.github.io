@@ -9,7 +9,7 @@ tags: ["consulting", "development", "cpp"]
 
 ### Es gibt keine Zukunft für Werkzeuge, die deine Arbeit als Geisel nehmen
 
-In der Welt der Softwareentwicklung bestimmen die Entscheidungen, die Du heute hinsichtlich Deiner Tools triffst, Deine Freiheit von morgen. Allzu oft finden sich Entwicklerteams in Ökosystemen wieder, die sie nie bewusst gewählt haben, zahlen stetig steigende Lizenzgebühren für Tools, die sie nicht ersetzen können, und es schweigend hinnehmen, wenn wichtige Funktionen verschwinden oder nicht weiter entwickelt werden. Dies ist keine nachhaltige Art, Produkte zu entwickeln, und die Branche wird sich langsam einer grundlegenden Wahrheit bewusst: Es gibt keine Zukunft für Werkzeuge, die deine Arbeit in Geiselhaft nehmen.
+In der Welt der Softwareentwicklung bestimmen die Entscheidungen, die Du heute hinsichtlich Deiner Tools triffst, Deine Freiheit von morgen. Allzu oft finden sich Entwicklerteams in Ökosystemen wieder, die sie nie bewusst gewählt haben, zahlen stetig steigende Lizenzgebühren für Tools, die sie nicht ersetzen können, und müssen es schweigend hinnehmen, wenn wichtige Funktionen verschwinden oder nicht weiter entwickelt werden. Dies ist keine nachhaltige Art, Produkte zu entwickeln, und die Branche wird sich langsam einer grundlegenden Wahrheit bewusst: Es gibt keine Zukunft für Werkzeuge, die deine Arbeit in Geiselhaft nehmen.
 
 #### Die Geiselnahme: Beispiele aus der Praxis
 
