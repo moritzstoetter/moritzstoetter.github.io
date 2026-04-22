@@ -77,13 +77,13 @@ Das gleiche Prinzip gilt für die gesamte Toolchain. GCC und Clang bieten Compil
 
 Jedes Framework und jede Bibliothek, die Du einsetzt, ist eine langfristige Verpflichtung. Bevor Ihr eine Abhängigkeit einführt, fragt: Was wäre erforderlich, um XY wieder zu entfernen, wenn es nötig wäre? Wenn die Antwort „eine komplette Neuprogrammierung unserer Anwendung” lautet, solltet Ihr es euch vielleicht noch einmal überlegen.
 
-Das bedeutet nicht, dass man immer alle Frameworks und Bibliotheken vermeiden sollte. Es bedeutet, dass Ihr Euch gut überlegen solltet, wo Ihr welche einsetzt und wie tief Ihr sie integriert. Nutzt Frameworks für das, was sie gut können, aber zieht klare Grenzen zwischen dem Framework-Code und Ihrer Anwendungslogik ein. Bevorzugt Sie Bibliotheken, die spezifische Probleme lösen, gegenüber monolithischen Frameworks, die Eure gesamte Codebasis übernehmen wollt.
+Das bedeutet nicht, dass man immer alle Frameworks und Bibliotheken vermeiden sollte. Es bedeutet, dass Ihr Euch gut überlegen solltet, wo Ihr welche einsetzt und wie tief Ihr sie integriert. Nutzt Frameworks für das, was sie gut können, aber zieht klare Grenzen zwischen dem Framework-Code und Eurer Anwendungslogik ein. Bevorzugt Bibliotheken, die spezifische Probleme lösen, gegenüber monolithischen Frameworks, die Eure gesamte Codebasis übernehmen wollen.
 
 Wenn Ihr ein Framework oder Tool einsetzt, macht Euch mit dessen Lizenz- und Governance-Modell vertraut. Wer kontrolliert dessen Ausrichtung? Was passiert, wenn die Maintainer das Interesse verlieren oder das dahinterstehende Unternehmen seine Strategie ändert? Könnt Ihr es bei Bedarf forken?
 
 #### Die Vorteile der Freiheit
 
-Bei der Wahl offener, standardbasierter Tools geht es nicht nur darum, Probleme zu vermeiden. Sie schaffen echte Vorteile für Euer Engineering.
+Bei der Wahl offener, standardisierter Tools geht es nicht nur darum, Probleme zu vermeiden. Sie schaffen echte Vorteile für Euer Engineering.
 
 ##### Schnellere Einarbeitung und übertragbares Wissen
 
@@ -101,7 +101,7 @@ Das finanzielle Argument ist klar. FLOSS-Tools nach Industriestandard haben in d
 
 ##### Größere Flexibilität
 
-Wenn Eure Tools offen und standardbasiert sind, wird Eure Produktarchitektur flexibler. Ihr könnt Komponenten leichter austauschen, neue Technologien einführen und auf neue Anforderungen reagieren. Eure technischen Schulden reduzieren sich.
+Wenn Eure Tools offen und standardisiert sind, wird Eure Produktarchitektur flexibler. Ihr könnt Komponenten leichter austauschen, neue Technologien einführen und auf neue Anforderungen reagieren. Eure technischen Schulden reduzieren sich.
 
 ##### Geringeres Risiko einer Einstellung
 
@@ -118,5 +118,3 @@ Bei der Umstellung von proprietären auf offene Tools geht es darum, technische 
 Tools, die deine Arbeit gefangen halten, haben keine Zukunft, einfach weil es einen besseren Weg gibt. Die Welt der Embedded Software erwacht, und die Tools, die überleben werden, sind diejenigen, die sich ihren Platz durch echten Mehrwert und nicht durch Lock-in verdienen.
 
 Der Weg in die Zukunft wird also klar. Die Embedded-Software-Branche wird konvergieren zu offenen, standardbasierten Tools, die in anderen Bereichen der Softwareentwicklung bereits etabliert sind. Teams, die diesen Wandel jetzt begrüßen, werden sich für die Zukunft besser positioniert sehen, mit relevanteren Skills, geringeren Kosten und größerer Innovationsfreiheit.
-
-
