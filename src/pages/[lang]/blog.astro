@@ -11,7 +11,9 @@ import ArticlePreview from "../../components/business/ArticlePreview.astro";
 const blogPosts = await getCollection("blog");
 const lang = getLangFromUrl(Astro.url);
 
-const langBlogPosts = blogPosts.filter((c) => idIsOfLanguage(c.id, lang));
+const langBlogPosts = blogPosts
+  .filter((c) => idIsOfLanguage(c.id, lang))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 export async function getStaticPaths() {
   const pages = await getCollection("blog");
