@@ -110,7 +110,8 @@ const expertiseCollection = defineCollection({
         z.object({
           name: z.string(),
           description: z.string(),
-          image: image(),
+          // Empty string allowed as a placeholder for tech without a logo yet.
+          image: z.union([z.literal(""), image()]),
         }),
       ),
       image: image(),
@@ -121,12 +122,14 @@ const expertiseCollection = defineCollection({
 export interface Tech {
   name: string;
   description: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  image:
+    | {
+        src: string;
+        width: number;
+        height: number;
+        format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+      }
+    | "";
 }
 
 export interface Expertise {

@@ -6,7 +6,7 @@ const testimonials = Astro.props.testimonials;
 
 <div class="items-center w-full gap-2 flex">
   {
-    testimonials.length >= 3 && (
+    testimonials.length >= 2 && (
       <button class="caret-left w-12 h-12 md:flex sm:hidden">
         <svg
           class="w-full h-full fill-textLight dark:fill-textDark"
@@ -24,7 +24,7 @@ const testimonials = Astro.props.testimonials;
         testimonials
           .sort(() => Math.random() - 0.5)
           .map((testimonial: any) => (
-            <div class={"px-4 slide flex-none w-full lg:w-1/3"}>
+            <div class={"px-4 slide flex-none w-full"}>
               <Testimonial testimonial={testimonial.data} />
             </div>
           ))
@@ -32,7 +32,7 @@ const testimonials = Astro.props.testimonials;
     </div>
   </div>
   {
-    testimonials.length >= 3 && (
+    testimonials.length >= 2 && (
       <button class="caret-right w-12 h-12 md:flex sm:hidden">
         <svg
           class="w-full h-full fill-textLight dark:fill-textDark"

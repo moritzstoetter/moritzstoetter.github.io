@@ -10,13 +10,19 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <Box href={`/${lang}/expertise/${expertise.slug}`}>
-  <div class="relative overflow-hidden rounded-2xl h-64">
-    {/* Background Image */}
-    <div class="absolute inset-0">
+  <div class="relative h-80 overflow-hidden rounded-2xl md:h-[28rem]">
+    {/* Background Image: full width on mobile; sharp left half + strongly blurred right half on larger screens */}
+    <div class="absolute inset-0 flex">
       <Image
         src={expertise.image}
         alt={expertise.title}
-        class="object-cover w-full h-full"
+        class="object-cover w-full h-full md:w-1/2"
+      />
+      <Image
+        src={expertise.image}
+        alt=""
+        aria-hidden="true"
+        class="hidden h-full w-1/2 scale-110 object-cover blur-3xl md:block"
       />
     </div>
 
