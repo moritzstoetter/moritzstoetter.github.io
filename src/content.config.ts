@@ -1,7 +1,15 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
+
+// Derive the entry id from its file path (lang/<name>), stripping the
+// extension. Without this, the glob loader would use a `slug` field present in
+// the JSON data as the id, dropping the language prefix and colliding across
+// the de/en variants.
+const pathId = ({ entry }: { entry: string }) => entry.replace(/\.[^.]+$/, "");
 
 const blogCollection = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -28,7 +36,7 @@ export interface BlogPost {
 }
 
 const aboutCollection = defineCollection({
-  type: "data",
+  loader: glob({ pattern: "**/*.json", base: "./src/content/about", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       members: z.array(
@@ -57,7 +65,7 @@ export interface About {
 }
 
 const caseStudiesCollection = defineCollection({
-  type: "data",
+  loader: glob({ pattern: "**/*.json", base: "./src/content/case-studies", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
@@ -92,7 +100,7 @@ export interface CaseStudy {
 }
 
 const servicesCollection = defineCollection({
-  type: "data",
+  loader: glob({ pattern: "**/*.json", base: "./src/content/services", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
@@ -136,7 +144,7 @@ export interface Service {
 }
 
 const testimonialsCollection = defineCollection({
-  type: "data",
+  loader: glob({ pattern: "**/*.json", base: "./src/content/testimonials", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       identifier: z.number(),

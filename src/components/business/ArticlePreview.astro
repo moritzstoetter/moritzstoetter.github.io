@@ -8,7 +8,7 @@ const article = Astro.props.article;
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<Box href={`/${lang}/blog/${article.slug.split("/")[1]}`} padded>
+<Box href={`/${lang}/blog/${article.id.split("/")[1]}`} padded>
   <div class="grid grid-cols-1 gap-4">
     <Image src={article.data.image} alt={article.data.imageAlt} />
     <h3 class="italic text-center">{article.data.title}</h3>

@@ -1,53 +1,55 @@
 @import "./fonts.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
-p,
-span,
-div,
-ul,
-li {
-  @apply text-textLight dark:text-textDark;
+@layer base {
+  p,
+  span,
+  div,
+  ul,
+  li {
+    @apply text-textLight dark:text-textDark;
+  }
+
+  p,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply break-words hyphens-auto;
+  }
+
+  h1 {
+    @apply my-8 text-center text-2xl font-bold uppercase sm:text-3xl md:my-16 lg:text-4xl;
+  }
+
+  h2 {
+    @apply text-xl sm:text-2xl lg:text-3xl;
+  }
+
+  h3 {
+    @apply text-lg sm:text-xl lg:text-2xl;
+  }
+
+  p {
+    @apply text-lg;
+  }
 }
 
-p,
-h3,
-h4,
-h5,
-h6 {
-  @apply break-words hyphens-auto;
-}
+@layer components {
+  .button-primary {
+    @apply w-full rounded-full border-2 border-transparent bg-primaryLight px-8 py-4 text-center text-white transition-colors duration-300 hover:bg-primaryLight/80 focus:border-white focus:outline-none md:w-fit md:text-left dark:bg-primaryDark hover:dark:bg-primaryDark/80;
+  }
 
+  .focused-link {
+    @apply border-2 border-transparent text-primaryLight outline-none focus:border-primaryLight dark:text-primaryDark dark:focus:border-primaryDark;
+  }
 
-h1 {
-  @apply my-8 text-center text-2xl font-bold uppercase sm:text-3xl md:my-16 lg:text-4xl;
-}
-
-h2 {
-  @apply text-xl sm:text-2xl lg:text-3xl;
-}
-
-h3 {
-  @apply text-lg sm:text-xl lg:text-2xl;
-}
-
-.button-primary {
-  @apply w-full rounded-full border-2 border-transparent bg-primaryLight px-8 py-4 text-center text-white transition-colors duration-300 hover:bg-primaryLight/80 focus:border-white focus:outline-none md:w-fit md:text-left dark:bg-primaryDark hover:dark:bg-primaryDark/80;
-}
-
-.focused-link {
-  @apply border-2 border-transparent text-primaryLight outline-none focus:border-primaryLight dark:text-primaryDark dark:focus:border-primaryDark;
-}
-
-p {
-  @apply text-lg;
-}
-
-textarea,
-input {
-  @apply rounded-lg border-2 border-transparent bg-white px-4 py-2 text-lg hover:bg-neutral-100 focus:border-primaryLight focus:bg-primaryLight/5 focus:outline-none dark:bg-backgroundDark hover:dark:bg-backgroundDark/80 dark:focus:border-primaryDark focus:dark:bg-neutral-800;
+  textarea,
+  input {
+    @apply rounded-lg border-2 border-transparent bg-white px-4 py-2 text-lg hover:bg-neutral-100 focus:border-primaryLight focus:bg-primaryLight/5 focus:outline-none dark:bg-backgroundDark hover:dark:bg-backgroundDark/80 dark:focus:border-primaryDark focus:dark:bg-neutral-800;
+  }
 }
 
 html.light .astro-code,

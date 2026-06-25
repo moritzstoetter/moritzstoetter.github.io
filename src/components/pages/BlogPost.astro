@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { findBlogpostsByTags } from "../../lib/articles/util";
 import ArticlePreview from "../business/ArticlePreview.astro";
@@ -10,9 +10,9 @@ const lang = getLangFromUrl(Astro.url);
 
 const blogPosts = await getCollection("blog");
 
-const blogPost = blogPosts.find((s) => s.slug === `${lang}/${slug}`);
+const blogPost = blogPosts.find((s) => s.id === `${lang}/${slug}`);
 
-const rendering = await blogPost?.render();
+const rendering = blogPost ? await render(blogPost) : undefined;
 
 const relatedArticles = await findBlogpostsByTags(
   lang,
