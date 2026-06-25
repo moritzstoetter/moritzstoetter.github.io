@@ -1,22 +1,22 @@
 {
   "slug": "s03_cicd",
-  "title": "DevOps",
-  "description": "Entwickeln Sie mit uns die Prozesse und die Kultur, die hinter hochwertigen Produkten steht.",
+  "title": "DevOps + AI",
+  "description": "Heben Sie Ihre Entwicklungsprozesse und -kultur auf die nächste Stufe.",
   "tech": [
     {
       "name": "Git",
       "description": "",
-      "image": ""
+      "image": "../assets/tech/git.webp"
     },
     {
       "name": "Github",
       "description": "",
-      "image": ""
+      "image": "../assets/tech/github.webp"
     },
     {
       "name": "Gitlab",
       "description": "",
-      "image": ""
+      "image": "../assets/tech/gitlab.webp"
     },
     {
       "name": "Docker",

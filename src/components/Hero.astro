@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import hero from "../assets/hero.png";
+import hero from "../assets/hero2.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ContactButton from "./ContactButton.astro";
 
@@ -10,24 +10,28 @@ const t = useTranslations(lang);
 
 <section
   id="hero"
-  class="relative grid items-center grid-cols-1 mt-4 md:mt-16 md:grid-cols-2 overflow-hidden rounded-3xl"
+  class="relative grid grid-cols-1 mt-4 md:mt-16 md:grid-cols-2 md:aspect-2/1 overflow-hidden rounded-3xl"
 >
   <!-- Background Image Container -->
   <div class="absolute inset-0 w-full h-full">
-    <Image 
-      src={hero} 
-      alt="hero" 
+    <Image
+      src={hero}
+      alt="hero"
       class="object-cover w-full h-full"
     />
   </div>
-  
+
   <!-- Content Container with background overlay for better text readability -->
-  <div class="relative z-10 flex flex-col  bg-white/75 dark:bg-black/75 p-8">
-    <h1 class="text-start sm:text-4xl lg:text-5xl text-primaryLight dark:text-primaryDark">
+  <div class="relative z-10 flex flex-col justify-center gap-4 p-8 min-w-0 bg-white/75 dark:bg-black/75">
+    <h1 class="my-0 text-start text-2xl font-normal normal-case sm:text-4xl lg:text-5xl text-primaryLight dark:text-primaryDark">
       {t("home.hero.title")}
     </h1>
-    <h3 class="pb-8">{t("home.hero.subtitle")}</h3>
-    <ContactButton/>
+    <p class="text-lg sm:text-xl lg:text-2xl">{t("home.hero.subtitle")}</p>
   </div>
   <div class="hidden md:block"> <!-- Empty div to maintain grid layout --> </div>
+
+  <!-- Call to action over the background image, bottom-right -->
+  <div class="absolute bottom-8 right-8 z-10">
+    <ContactButton />
+  </div>
 </section>

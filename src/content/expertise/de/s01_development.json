@@ -9,14 +9,19 @@
             "image": "../assets/tech/cpp.svg"
         },
         {
+            "name": "Python",
+            "description": "Die reiche Landschaft an Bibliotheken und die Plattformunabhängigkeit machen Python zum Mittel unserer Wahl für Tooling und Scripting auf dem Host.",
+            "image": "../assets/tech/python.png"
+        },
+        {
             "name": "CMake",
             "description": "Buildtoolchains im Embeddedbereich sind immer noch häufig geprägt von herstellerspezifischen Lösungen geprägt. Um Ihre Entwicklungsabläufe miteinander verknüpfen zu können, verwenden wir CMake, den Goldstandard für C/C++ Projekte.",
             "image": "../assets/tech/cmake.svg"
         },
         {
-            "name": "Python",
-            "description": "Die reiche Landschaft an Bibliotheken und die Plattformunabhängigkeit machen Python zum Mittel unserer Wahl für Tooling und Scripting auf dem Host.",
-            "image": "../assets/tech/python.png"
+            "name": "Conan",
+            "description": "",
+            "image": "../assets/tech/conan.webp"
         },
         {
             "name": "FreeRTOS",

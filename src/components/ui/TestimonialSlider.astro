@@ -4,10 +4,23 @@ import Testimonial from "../../components/Testimonial.astro";
 const testimonials = Astro.props.testimonials;
 ---
 
-<div class="items-center w-full gap-2 flex">
+<div class="relative w-full">
+  <div class="w-full overflow-hidden slider-container">
+    <div class="flex transition-transform duration-500 slides">
+      {
+        testimonials
+          .sort(() => Math.random() - 0.5)
+          .map((testimonial: any) => (
+            <div class={"slide flex-none w-full h-80 md:h-[28rem]"}>
+              <Testimonial testimonial={testimonial.data} variant="slider" />
+            </div>
+          ))
+      }
+    </div>
+  </div>
   {
     testimonials.length >= 2 && (
-      <button class="caret-left w-12 h-12 md:flex sm:hidden">
+      <button class="caret-left absolute left-1/4 top-36 z-10 h-16 w-16 -translate-x-1/2 -translate-y-1/2 md:flex sm:hidden">
         <svg
           class="w-full h-full fill-textLight dark:fill-textDark"
           xmlns="http://www.w3.org/2000/svg"
@@ -18,22 +31,9 @@ const testimonials = Astro.props.testimonials;
       </button>
     )
   }
-  <div class="flex-1 overflow-hidden slider-container">
-    <div class="flex transition-transform duration-500 slides">
-      {
-        testimonials
-          .sort(() => Math.random() - 0.5)
-          .map((testimonial: any) => (
-            <div class={"px-4 slide flex-none w-full"}>
-              <Testimonial testimonial={testimonial.data} />
-            </div>
-          ))
-      }
-    </div>
-  </div>
   {
     testimonials.length >= 2 && (
-      <button class="caret-right w-12 h-12 md:flex sm:hidden">
+      <button class="caret-right absolute right-1/4 top-36 z-10 h-16 w-16 translate-x-1/2 -translate-y-1/2 md:flex sm:hidden">
         <svg
           class="w-full h-full fill-textLight dark:fill-textDark"
           xmlns="http://www.w3.org/2000/svg"

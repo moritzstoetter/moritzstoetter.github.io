@@ -4,8 +4,8 @@ import { getCollection } from "astro:content";
 import { useTranslations } from "../../i18n/utils";
 import Box from "../ui/Box.astro";
 import Tag from "../ui/Tag.astro";
-import TestimonialSlider from "../ui/TestimonialSlider.astro";
 import BoxGrid from "../ui/BoxGrid.astro";
+import Testimonial from "../Testimonial.astro";
 
 const { lang, slug } = Astro.props;
 
@@ -78,18 +78,23 @@ const t = useTranslations(lang);
             <p>{caseStudy.product}</p>
           </div>
         </Box>
-        <Box padded customClass="col-span-full">
-          <div class="flex flex-col gap-4">
-            {langTestimonials?.length > 0 && (
-              <>
-                <h2 class="text-primaryLight dark:text-primaryDark">
-                  {t("caseStudies.testimonial")}
-                </h2>
-                <TestimonialSlider testimonials={langTestimonials}/>
-              </>
-            )}
+        {langTestimonials?.length > 0 && (
+          <div class="flex flex-col col-span-full gap-4">
+            <h2 class="text-primaryLight dark:text-primaryDark">
+              {t("caseStudies.testimonial")}
+            </h2>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {[0, 1, 2].map((i) => {
+                const voice = langTestimonials[i];
+                return voice ? (
+                  <Testimonial testimonial={voice.data} variant="caseStudy" />
+                ) : (
+                  <div class="h-full min-h-[12rem] rounded-3xl border-2 border-dashed border-textLight/15 dark:border-textDark/15" />
+                );
+              })}
+            </div>
           </div>
-        </Box>
+        )}
       </BoxGrid>
     </section>
   ) : (

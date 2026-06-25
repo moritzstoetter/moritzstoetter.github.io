@@ -3,22 +3,48 @@ import { Image } from "astro:assets";
 import type { Testimonial } from "../content.config";
 import Box from "./ui/Box.astro";
 
-const testimonial: Testimonial = Astro.props.testimonial;
+interface Props {
+  testimonial: Testimonial;
+  variant?: "slider" | "caseStudy";
+}
+
+const { testimonial, variant = "slider" } = Astro.props;
+
+// Size variants. Keep full class strings literal so Tailwind can detect them.
+const styles = {
+  slider: {
+    gap: "gap-8",
+    image: "w-36 h-36",
+    name: "text-2xl sm:text-2xl lg:text-3xl",
+    subheading: "text-lg sm:text-xl lg:text-2xl",
+    quote: "text-lg sm:text-xl lg:text-2xl",
+  },
+  caseStudy: {
+    gap: "gap-4",
+    image: "w-16 h-16",
+    name: "font-medium",
+    subheading: "text-sm",
+    quote: "",
+  },
+}[variant];
 ---
 
 <Box padded customClass="h-full">
-  <div class="flex flex-col h-full gap-8">
+  <div class:list={["flex flex-col h-full", styles.gap]}>
     <div class="flex flex-col items-center gap-2 text-center">
       <Image
         src={testimonial.image}
         alt={testimonial.name}
-        class="flex-grow-0 flex-shrink-0 object-cover w-12 h-12 rounded-full"
+        class:list={[
+          "grow-0 shrink-0 object-cover rounded-full",
+          styles.image,
+        ]}
       />
-      <p>{testimonial.name}</p>
-      <p class="text-xs text-textLight/50 dark:text-textDark/50">
+      <p class={styles.name}>{testimonial.name}</p>
+      <p class:list={["text-textLight/50 dark:text-textDark/50", styles.subheading]}>
         {testimonial.subheading}
       </p>
     </div>
-    <p class="italic">"{testimonial.quote}"</p>
+    <p class:list={["italic", styles.quote]}>"{testimonial.quote}"</p>
   </div>
 </Box>

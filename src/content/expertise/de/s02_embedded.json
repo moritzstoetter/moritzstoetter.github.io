@@ -1,7 +1,7 @@
 {
   "slug": "s02_embedded",
   "title": "Mikrocontroller + Embedded Linux",
-  "description": "Eingebettete Systeme sind unsere Spezialität.",
+  "description": "Ihre Eingebetteten Systeme sind unsere Spezialität.",
   "tech": [
     {
       "name": "Arm Cortex",
@@ -31,12 +31,12 @@
     {
       "name": "NXP",
       "description": "",
-      "image": ""
+      "image": "../assets/tech/nxp.webp"
     },
     {
       "name": "Yocto",
       "description": "",
-      "image": ""
+      "image": "../assets/tech/yocto.webp"
     }
   ],
   "image": "../assets/output_3.webp",
