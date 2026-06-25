@@ -2,21 +2,21 @@
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import { findBlogpostsByTags } from "../../lib/articles/util";
-import ArticlePreview from "../business/ArticlePreview.astro";
+import { findInsightsByTags } from "../../lib/insights/util";
+import InsightPreview from "../business/InsightPreview.astro";
 
 const { slug } = Astro.params;
 const lang = getLangFromUrl(Astro.url);
 
-const blogPosts = await getCollection("blog");
+const insights = await getCollection("insights");
 
-const blogPost = blogPosts.find((s) => s.id === `${lang}/${slug}`);
+const insight = insights.find((s) => s.id === `${lang}/${slug}`);
 
-const rendering = blogPost ? await render(blogPost) : undefined;
+const rendering = insight ? await render(insight) : undefined;
 
-const relatedArticles = await findBlogpostsByTags(
+const relatedInsights = await findInsightsByTags(
   lang,
-  blogPost?.data.tags ?? [],
+  insight?.data.tags ?? [],
   slug,
 );
 
@@ -24,13 +24,13 @@ const t = useTranslations(lang);
 ---
 
 {
-  !!blogPost && !!rendering ? (
+  !!insight && !!rendering ? (
     <article class="flex flex-col gap-4 px-4 pb-8 mx-4 md:px-0 lg:mx-0">
-      <h1>{blogPost.data.title}</h1>
+      <h1>{insight.data.title}</h1>
       <div class="h-96 overflow-hidden">
         <Image
-          src={blogPost.data.image}
-          alt={blogPost.data.imageAlt}
+          src={insight.data.image}
+          alt={insight.data.imageAlt}
           class="w-full h-[200%] object-cover object-center -translate-y-1/4"
         />
       </div>
@@ -38,14 +38,14 @@ const t = useTranslations(lang);
         <rendering.Content />
       </div>
       <div class="w-full text-right">
-        <h6>{blogPost.data.date.toISOString().slice(0, 10)}</h6>
+        <h6>{insight.data.date.toISOString().slice(0, 10)}</h6>
       </div>
-      {relatedArticles?.length > 0 && (
+      {relatedInsights?.length > 0 && (
         <>
-          <h2>{t("common.relatedBlogArticles")}</h2>
+          <h2>{t("common.relatedInsights")}</h2>
           <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {relatedArticles.map((article) => (
-              <ArticlePreview article={article} />
+            {relatedInsights.map((insight) => (
+              <InsightPreview insight={insight} />
             ))}
           </div>
         </>
@@ -53,7 +53,7 @@ const t = useTranslations(lang);
     </article>
   ) : (
     <div>
-      <h1>{t("blog.notFound")}</h1>
+      <h1>{t("insights.notFound")}</h1>
     </div>
   )
 }

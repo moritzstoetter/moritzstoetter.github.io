@@ -2,55 +2,55 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { useTranslations } from "../../i18n/utils";
-import { findBlogpostsByTags } from "../../lib/articles/util";
-import ArticlePreview from "../business/ArticlePreview.astro";
+import { findInsightsByTags } from "../../lib/insights/util";
+import InsightPreview from "../business/InsightPreview.astro";
 import Technology from "../business/Technology.astro";
 import ContactButton from "../ContactButton.astro"
 
 const { lang, slug } = Astro.props;
 
-const services = await getCollection("services");
+const expertiseEntries = await getCollection("expertise");
 
-const service = services.find((s) => s.id === `${lang}/${slug}`)?.data;
+const expertise = expertiseEntries.find((s) => s.id === `${lang}/${slug}`)?.data;
 
-const relatedArticles = await findBlogpostsByTags(lang, service?.tags ?? []);
+const relatedInsights = await findInsightsByTags(lang, expertise?.tags ?? []);
 
 const t = useTranslations(lang);
 ---
 
 {
-  !!service ? (
-    <section class="flex flex-col gap-8 py-8 mx-4 lg:md-0" id={service.title}>
+  !!expertise ? (
+    <section class="flex flex-col gap-8 py-8 mx-4 lg:md-0" id={expertise.title}>
       <div class="relative h-64 -mx-4 overflow-hidden flex items-center">
         <div class="absolute inset-0">
-          <Image 
-            src={service.image} 
-            alt={service.title} 
-            class="w-full h-full object-cover" 
+          <Image
+            src={expertise.image}
+            alt={expertise.title}
+            class="w-full h-full object-cover"
           />
         </div>
         <div class="absolute inset-0 bg-white/75 dark:bg-black/75"></div>
         <h1 class="relative z-10 w-full text-center text-primaryLight dark:text-primaryDark">
-          {service.title}
+          {expertise.title}
         </h1>
       </div>
-      <p>{service.description}</p>
+      <p>{expertise.description}</p>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {service.tech.map((technology) => (
+        {expertise.tech.map((technology) => (
           <Technology technology={technology} />
         ))}
       </div>
       <ContactButton/>
-      <h2>{t("common.relatedBlogArticles")}</h2>
+      <h2>{t("common.relatedInsights")}</h2>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {relatedArticles.map((article) => (
-          <ArticlePreview article={article} />
+        {relatedInsights.map((insight) => (
+          <InsightPreview insight={insight} />
         ))}
       </div>
     </section>
   ) : (
     <div>
-      <h1>{t("home.services.notFound")}</h1>
+      <h1>{t("home.expertise.notFound")}</h1>
     </div>
   )
  }

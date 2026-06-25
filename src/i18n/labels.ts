@@ -14,9 +14,9 @@ export const labels = {
         "We at modern embedded have devoted ourselves to applying the highest quality standards to software solutions for embedded devices. We achieve this by employing cutting edge technology and tools, that have proven themselves as gold standards for their specific application. Modularity and malleability are guiding principles in our work.",
     },
     nav: {
-      home: "Services",
+      home: "Expertise",
       caseStudies: "Case Studies",
-      blog: "Blog",
+      insights: "Insights",
       about: "About",
       contact: "Contact",
     },
@@ -27,10 +27,10 @@ export const labels = {
           "We help you beat the competition with a product that is outstanding to the core.",
         cta: "Get in touch",
       },
-      services: {
-        title: "Our Services",
+      expertise: {
+        title: "Our Expertise",
         testimonials: "What our customers say",
-        notFound: "Service not found",
+        notFound: "Expertise not found",
       },
     },
     footer: {
@@ -47,8 +47,9 @@ export const labels = {
       testimonial: "The Feedback",
       notFound: "Case study not found",
     },
-    blog: {
-      notFound: "Blog Post not found",
+    insights: {
+      title: "Insights",
+      notFound: "Not found",
     },
     contact: {
       title: "Contact",
@@ -61,7 +62,7 @@ export const labels = {
       message: "Message",
     },
     common: {
-      relatedBlogArticles: "Related Blog Articles",
+      relatedInsights: "Related Insights",
     },
   },
   de: {
@@ -72,9 +73,9 @@ export const labels = {
         "Wir von modern embedded haben uns der Anwendung höchster Qualitätsansprüche für Softwarelösungen im Embeddedbereich verschrieben. Das erreichen wir durch den Einsatz der modernsten Technologien und Werkzeugen, die sich jeweils als Goldstandard für ihren jeweiligen Anwendungsfall etabliert haben. Modularität und Formbarkeit sind Leitprinzipien unserer Arbeit.",
     },
     nav: {
-      home: "Leistungen",
+      home: "Expertise",
       caseStudies: "Fallstudien",
-      blog: "Blog",
+      insights: "Insights",
       about: "Über uns",
       contact: "Kontakt",
     },
@@ -85,10 +86,10 @@ export const labels = {
           "Wir helfen Ihnen die Konkurrenz zu schlagen, mit einem herausragenden Produkt - bis in den Kern.",
         cta: "Kontaktieren Sie uns",
       },
-      services: {
-        title: "Unsere Dienstleistungen",
+      expertise: {
+        title: "Unsere Expertise",
         testimonials: "Was unsere Kunden sagen",
-        notFound: "Dienstleistung nicht gefunden",
+        notFound: "Expertise nicht gefunden",
       },
     },
     footer: {
@@ -105,8 +106,9 @@ export const labels = {
       testimonial: "Das Feedback",
       notFound: "Fallstudie nicht gefunden",
     },
-    blog: {
-      notFound: "Blog-Artikel nicht gefunden",
+    insights: {
+      title: "Insights",
+      notFound: "Insight nicht gefunden",
     },
     contact: {
       title: "Kontakt",
@@ -119,7 +121,7 @@ export const labels = {
       message: "Nachricht",
     },
     common: {
-      relatedBlogArticles: "Verwandte Blogartikel",
+      relatedInsights: "Verwandte Insights",
     },
   },
 } as const;

@@ -1,0 +1,32 @@
+{
+  "slug": "s04_cicd",
+  "title": "DevOps",
+  "description": "Entwickeln Sie mit uns die Prozesse und die Kultur, die hinter hochwertigen Produkten steht.",
+  "tech": [
+    {
+      "name": "Git",
+      "description": "",
+      "image": ""
+    },
+    {
+      "name": "Github",
+      "description": "",
+      "image": ""
+    },
+    {
+      "name": "Gitlab",
+      "description": "",
+      "image": ""
+    },
+    {
+      "name": "Docker",
+      "description": "So gut wie jede CI-Pipeline verwendet Container. Wir verwenden docker täglich als lokalen daily driver und für CI/CD Integration.",
+      "image": "../assets/tech/docker.png"
+    }
+  ],
+  "image": "../assets/output_1.webp",
+  "tags": [
+    "cpp",
+    "development"
+  ]
+}

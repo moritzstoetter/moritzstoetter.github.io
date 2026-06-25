@@ -1,10 +1,11 @@
 ---
-import { getCollection } from "astro:content";
-import BlogPost from "../../../components/pages/BlogPost.astro";
+import Expertise from "../../../components/pages/Expertise.astro";
 import Base from "../../../layouts/Base.astro";
 
+import { getCollection } from "astro:content";
+
 export async function getStaticPaths() {
-  const pages = await getCollection("blog");
+  const pages = await getCollection("expertise");
 
   const paths = pages.map((page) => {
     const [lang, ...slug] = page.id.split("/");
@@ -13,8 +14,10 @@ export async function getStaticPaths() {
 
   return paths;
 }
+
+const { lang, slug } = Astro.params;
 ---
 
 <Base>
-  <BlogPost />
+  <Expertise lang={lang} slug={slug} />
 </Base>

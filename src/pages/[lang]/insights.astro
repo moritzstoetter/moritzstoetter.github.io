@@ -3,20 +3,22 @@ import { getCollection } from "astro:content";
 import {
   getLangFromUrl,
   idIsOfLanguage,
+  useTranslations,
 } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 import BoxGrid from "../../components/ui/BoxGrid.astro";
-import ArticlePreview from "../../components/business/ArticlePreview.astro";
+import InsightPreview from "../../components/business/InsightPreview.astro";
 
-const blogPosts = await getCollection("blog");
+const insights = await getCollection("insights");
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-const langBlogPosts = blogPosts
+const langInsights = insights
   .filter((c) => idIsOfLanguage(c.id, lang))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 export async function getStaticPaths() {
-  const pages = await getCollection("blog");
+  const pages = await getCollection("insights");
 
   const paths = pages.map((page) => {
     const [lang] = page.id.split("/");
@@ -28,8 +30,8 @@ export async function getStaticPaths() {
 ---
 
 <Base>
-  <h1>Blog posts</h1>
+  <h1>{t("insights.title")}</h1>
   <BoxGrid wide>
-    {langBlogPosts.map((blogPost) => <ArticlePreview article={blogPost} />)}
+    {langInsights.map((insight) => <InsightPreview insight={insight} />)}
   </BoxGrid>
 </Base>

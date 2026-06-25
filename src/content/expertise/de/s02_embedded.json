@@ -1,0 +1,47 @@
+{
+  "slug": "s02_embedded",
+  "title": "Mikrocontroller + Embedded Linux",
+  "description": "Eingebettete Systeme sind unsere Spezialität.",
+  "tech": [
+    {
+      "name": "Arm Cortex",
+      "description": "Die Cortex-M Familie von ARM ist stark vertreten am Embeddedmarkt und uns natürlich bestens bekannt.",
+      "image": "../assets/tech/arm.png"
+    },
+    {
+      "name": "ST Microelectronics",
+      "description": "Wir sind große Fans der STM32 Familie, und greifen Ihnen gern unter die Arme bei der Entwicklung für diese MCUs.",
+      "image": "../assets/tech/stm.png"
+    },
+    {
+      "name": "Nordic Semiconductor",
+      "description": "Das IoT Powerhouse am Mikrocontrollermarkt. Wir unterstützen Sie gerne bei der Entwicklung in diesem Ökosystem, egal ob nRF Connect SDK oder Vanilla Zephyr.",
+      "image": "../assets/tech/nordic.svg"
+    },
+    {
+      "name": "Risc-V",
+      "description": "Risc-V Architekturen sind immer häufiger anzutreffen. Wir haben bereits konkrete Projekterfahrung sammeln können.",
+      "image": "../assets/tech/risc_v.jpeg"
+    },
+    {
+      "name": "Espressif",
+      "description": "Espressif ist längst aus der Makerszene heraus gewachsen und wir haben schon einige große Unternehmen bei der Integration von ihren Produkten unterstützt. Vielleicht Sie auch?",
+      "image": "../assets/tech/espressif.svg"
+    },
+    {
+      "name": "NXP",
+      "description": "",
+      "image": ""
+    },
+    {
+      "name": "Yocto",
+      "description": "",
+      "image": ""
+    }
+  ],
+  "image": "../assets/output_2.webp",
+  "tags": [
+    "cpp",
+    "development"
+  ]
+}

@@ -36,14 +36,14 @@ const alignment: "horizontal" | "vertical" = Astro.props.alignment;
   </li>
   <li>
     <a
-      href={`/${lang}/blog/`}
+      href={`/${lang}/insights/`}
       class={`text-lg ${
-        Astro.url.pathname === `/${lang}/blog/`
+        Astro.url.pathname === `/${lang}/insights/`
           ? "text-primaryLight dark:text-primaryDark"
           : ""
       }`}
     >
-      {t("nav.blog")}
+      {t("nav.insights")}
     </a>
   </li>
   <li>

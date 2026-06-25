@@ -1,0 +1,37 @@
+{
+    "slug": "s01_development",
+    "title": "Innovative Softwarelösungen",
+    "description": "Entwickeln Sie mit uns Softwarelösungen von höchster Qualität.",
+    "tech": [
+        {
+            "name": "C++",
+            "description": "C++ ist einzigartig gut geeigenet, die Brücke zu schlagen zwischen den Anforderungen von eingebetteten Geräten und den Anforderungen moderner Softwareentwicklung. Wir setzen den modernsten Standard ein, den Ihr Anwendungsfall zulässt.",
+            "image": "../assets/tech/cpp.svg"
+        },
+        {
+            "name": "CMake",
+            "description": "Buildtoolchains im Embeddedbereich sind immer noch häufig geprägt von herstellerspezifischen Lösungen geprägt. Um Ihre Entwicklungsabläufe miteinander verknüpfen zu können, verwenden wir CMake, den Goldstandard für C/C++ Projekte.",
+            "image": "../assets/tech/cmake.svg"
+        },
+        {
+            "name": "Python",
+            "description": "Die reiche Landschaft an Bibliotheken und die Plattformunabhängigkeit machen Python zum Mittel unserer Wahl für Tooling und Scripting auf dem Host.",
+            "image": "../assets/tech/python.png"
+        },
+        {
+            "name": "FreeRTOS",
+            "description": "Auch bei uns das am meisten verbreitete RTOS. Leichtgewichtig und sehr anpassbar passt es sehr gut zu unserer Philosophie.",
+            "image": "../assets/tech/freertos.svg"
+        },
+        {
+            "name": "Zephyr",
+            "description": "Mit dem vermutlich vollständigsten BLE Stack am Markt führt an Zephyr manchmal kein Weg vorbei. Wir unterstützen Sie hier!",
+            "image": "../assets/tech/zephyr.svg"
+        }
+    ],
+    "image": "../assets/output_0.webp",
+    "tags": [
+        "cpp",
+        "development"
+    ]
+}

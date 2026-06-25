@@ -8,8 +8,8 @@ import { z } from "astro/zod";
 // the de/en variants.
 const pathId = ({ entry }: { entry: string }) => entry.replace(/\.[^.]+$/, "");
 
-const blogCollection = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/blog", generateId: pathId }),
+const insightsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/insights", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -21,7 +21,7 @@ const blogCollection = defineCollection({
     }),
 });
 
-export interface BlogPost {
+export interface Insight {
   title: string;
   image: {
     src: string;
@@ -99,8 +99,8 @@ export interface CaseStudy {
   };
 }
 
-const servicesCollection = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/services", generateId: pathId }),
+const expertiseCollection = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/expertise", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
@@ -129,7 +129,7 @@ export interface Tech {
   };
 }
 
-export interface Service {
+export interface Expertise {
   slug: string;
   title: string;
   description: string;
@@ -169,9 +169,9 @@ export interface Testimonial {
 }
 
 export const collections = {
-  blog: blogCollection,
+  insights: insightsCollection,
   about: aboutCollection,
   "case-studies": caseStudiesCollection,
-  services: servicesCollection,
+  expertise: expertiseCollection,
   testimonials: testimonialsCollection,
 };
