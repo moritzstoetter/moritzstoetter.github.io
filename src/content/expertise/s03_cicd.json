@@ -1,0 +1,67 @@
+{
+  "slug": "s03_cicd",
+  "image": "./assets/output_1.webp",
+  "insights": [
+    "lock_in",
+    "less_is_more",
+    "modern_sw_dev"
+  ],
+  "case_studies": [
+    "c05_urban",
+    "c06_laboratory"
+  ],
+  "title": {
+    "de": "DevOps + AI",
+    "en": "DevOps + AI"
+  },
+  "description": {
+    "de": "Heben Sie Ihre Entwicklungsprozesse und -kultur auf die nächste Stufe.",
+    "en": "Lift your Development Process and Culture to the Next Level."
+  },
+  "tech": [
+    {
+      "name": {
+        "de": "Git",
+        "en": "Git"
+      },
+      "description": {
+        "de": "",
+        "en": ""
+      },
+      "image": "./assets/tech/git.webp"
+    },
+    {
+      "name": {
+        "de": "Github",
+        "en": "Github"
+      },
+      "description": {
+        "de": "",
+        "en": ""
+      },
+      "image": "./assets/tech/github.webp"
+    },
+    {
+      "name": {
+        "de": "Gitlab",
+        "en": "Gitlab"
+      },
+      "description": {
+        "de": "",
+        "en": ""
+      },
+      "image": "./assets/tech/gitlab.webp"
+    },
+    {
+      "name": {
+        "de": "Docker",
+        "en": "Docker"
+      },
+      "description": {
+        "de": "So gut wie jede CI-Pipeline verwendet Container. Wir verwenden docker täglich als lokalen daily driver und für CI/CD Integration.",
+        "en": "Virtually every CI pipeline out there is powered by containers. We use it daily as our local driver and for CI/CD integration."
+      },
+      "image": "./assets/tech/docker.png"
+    }
+  ]
+}

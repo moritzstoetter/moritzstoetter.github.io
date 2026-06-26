@@ -1,0 +1,94 @@
+{
+  "slug": "s01_development",
+  "image": "./assets/output_0.webp",
+  "insights": [
+    "lock_in",
+    "less_is_more",
+    "modern_sw_dev"
+  ],
+  "case_studies": [
+    "c06_laboratory",
+    "c04_wsa",
+    "c05_urban"
+  ],
+  "title": {
+    "de": "Innovative Softwarelösungen",
+    "en": "Innovative Software Solutions"
+  },
+  "description": {
+    "de": "Entwickeln Sie mit uns Softwarelösungen von höchster Qualität.",
+    "en": "Develop Software Solutions of the Highest Quality with Us."
+  },
+  "tech": [
+    {
+      "name": {
+        "de": "C++",
+        "en": "C++"
+      },
+      "description": {
+        "de": "C++ ist einzigartig gut geeigenet, die Brücke zu schlagen zwischen den Anforderungen von eingebetteten Geräten und den Anforderungen moderner Softwareentwicklung. Wir setzen den modernsten Standard ein, den Ihr Anwendungsfall zulässt.",
+        "en": "C++ is uniquely suited to bridge the gap between the constraints of a embedded device and the requirements of modern software development. We use the most recent standard that your use case allows. "
+      },
+      "image": "./assets/tech/cpp.svg",
+      "subtitle": {
+        "de": "C++20, C++23, C++26",
+        "en": "C++20, C++23, C++26"
+      }
+    },
+    {
+      "name": {
+        "de": "Python",
+        "en": "Python"
+      },
+      "description": {
+        "de": "Die reiche Landschaft an Bibliotheken und die Plattformunabhängigkeit machen Python zum Mittel unserer Wahl für Tooling und Scripting auf dem Host.",
+        "en": "The rich library landscape and the fact that it's platform agnostic make Python our number one choice for tooling and scripting on the host."
+      },
+      "image": "./assets/tech/python.png"
+    },
+    {
+      "name": {
+        "de": "CMake",
+        "en": "CMake"
+      },
+      "description": {
+        "de": "Buildtoolchains im Embeddedbereich sind immer noch häufig geprägt von herstellerspezifischen Lösungen geprägt. Um Ihre Entwicklungsabläufe miteinander verknüpfen zu können, verwenden wir CMake, den Goldstandard für C/C++ Projekte.",
+        "en": "Often, build toolchains in the embedded sector are still dominated by vendor specific solutions. To be able to integrate your development process with one another, we use CMake, the gold standard for C/C++ projects."
+      },
+      "image": "./assets/tech/cmake.svg"
+    },
+    {
+      "name": {
+        "de": "Conan",
+        "en": "Conan"
+      },
+      "description": {
+        "de": "",
+        "en": ""
+      },
+      "image": "./assets/tech/conan.webp"
+    },
+    {
+      "name": {
+        "de": "FreeRTOS",
+        "en": "FreeRTOS"
+      },
+      "description": {
+        "de": "Auch bei uns das am meisten verbreitete RTOS. Leichtgewichtig und sehr anpassbar passt es sehr gut zu unserer Philosophie.",
+        "en": "The most popular RTOS, also fo us. Light weight and very customizable, just as we like it."
+      },
+      "image": "./assets/tech/freertos.svg"
+    },
+    {
+      "name": {
+        "de": "Zephyr",
+        "en": "Zephyr"
+      },
+      "description": {
+        "de": "Mit dem vermutlich vollständigsten BLE Stack am Markt führt an Zephyr manchmal kein Weg vorbei. Wir unterstützen Sie hier!",
+        "en": "They have the most complete BLE stack on the market, so sometimes there is no alternative. We support you here!"
+      },
+      "image": "./assets/tech/zephyr.svg"
+    }
+  ]
+}

@@ -6,13 +6,10 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const pages = await getCollection("expertise");
-
-  const paths = pages.map((page) => {
-    const [lang, ...slug] = page.id.split("/");
-    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
-  });
-
-  return paths;
+  return pages.flatMap((page) => [
+    { params: { lang: "de", slug: page.id } },
+    { params: { lang: "en", slug: page.id } },
+  ]);
 }
 
 const { lang, slug } = Astro.params;

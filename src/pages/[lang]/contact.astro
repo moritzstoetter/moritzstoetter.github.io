@@ -1,23 +1,21 @@
 ---
+import contactImage from "../../assets/contact.png";
+import SplitBox from "../../components/ui/SplitBox.astro";
 import ContactForm from "../../components/ui/ContactForm.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 export async function getStaticPaths() {
-  return [
-    {
-      params: {
-        lang: "de",
-      },
-    },
-    {
-      params: {
-        lang: "en",
-      },
-    },
-  ];
+  return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
 }
 ---
 
 <Base>
-  <ContactForm />
+  <div class="flex flex-col gap-8 pb-8">
+    <SplitBox image={contactImage} title={t("home.hero.cta")} />
+    <ContactForm />
+  </div>
 </Base>

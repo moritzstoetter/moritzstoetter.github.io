@@ -1,0 +1,62 @@
+{
+  "slug": "c02_cropled_plc",
+  "client": "cropled AG",
+  "image": "./assets/cropled_plc.jpg",
+  "tech": [
+    "Embedded C++20",
+    "ESP32",
+    "FreeRTOS",
+    "Consensus Algorithms",
+    "Device Firmware Upgrades",
+    "UART",
+    "lwip",
+    "TCP/IP",
+    "Sockets",
+    "Multithreading",
+    "Multicore"
+  ],
+  "testimonials": [
+    "t02_samuel",
+    "t01_michael"
+  ],
+  "title": {
+    "de": "Powerline Kommunikationsschnittstelle",
+    "en": "Power Line Communication Interface"
+  },
+  "description": {
+    "de": "Wir haben es unserm Kunden ermöglicht seine Produkte über die Stromversorgung zu vernetzen.",
+    "en": "We have enabled our client to connect their products over the power supply."
+  },
+  "about": {
+    "de": "Die cropled AG ist ein Schweizer Startup, das es sich zum Ziel gesetzt hat Indoor-Farming zu revolutionieren. Ihr Hauptprodukt ist \"aurora\", eine mit IoT-Standards untereinander vernetzte und cloud-integrierte LED Pflanzenbeleuchtung. Mit ihrer Idee haben sie verschiedene Preise gewonnen, wie zum Beispiel den Zünder Award und Venture Kick.",
+    "en": "Cropled AG is a swiss startup, that is revolutionizing indoor farming. Their main product \"aurora\" is an LED plant lighting solution, that is interconnected via IoT standards, and connected to the cloud. They have won multiple awards with their idea including the Zünder Award und Venture Kick."
+  },
+  "challenge": {
+    "de": "Unter großem Zeitdruck suchte der Kunde nach einer Lösung eine große Anzahl Lampen miteinander zu vernetzen, ohne die ganze Kommunikation drahtlos zu gestalten. Nachdem bereits bereits einige Versuche fehlgeschlagen waren, fragte die cropled AG uns an, für die Entwicklung einer Kommunikationslösung, die die Lampen über ihre Stromversorgungsleitungen miteinander vernetzt.",
+    "en": "The client was under great time pressure and was looking for a solution to connect a large number of lamps with one another, without relying solely on wireless technologies. After some set backs, cropled reached out to us for the development of a solution, that connects the devices over their power supply."
+  },
+  "deliveredValue": {
+    "de": "Danke einer fokussierte Startphase und Anforderungsplanung konnten wir dem Kunden termingerecht, genau das liefern was er gesucht hatte. Die von uns entwickelte Kommunikationsschnittstelle entlastet die bereits implementierten, drahtlosen Kommunikationsstandards, so dass die cropled AG hier nun eine wirklich skalierfähige Technologie im Portfolio hat, die sie von der Konkurrenz abhebt.",
+    "en": "Thanks to a highly focused start phase and requirements analysis we managed to deliver exactly what the client wanted and on time. Our custom communication interface provides relieve for the existing, wireless communication standards, so that cropled AG now has a highly scalable technology in their portfolio, that sets them apart from the competition."
+  },
+  "product": {
+    "de": [
+      "Anforderungsanalyse, Konzeption, Design, Implementierung und Test einer Powerline-Kommunikationsschnittstelle (PLC), die die Kommunikation zwischen ESP32-Mikrocontrollern über die bestehende Stromversorgungsleitungen ermöglicht",
+      "FreeRTOS und C++20 basiert",
+      "Fehlersuche in der Hardware und Durchführung von Anpassungen im Feld",
+      "Treiberentwicklung für den PLC Transceiver",
+      "Nach Kundenwünschen maßgeschneiderter Algorithmus zur verteilten Konsensfindung auf Raft-Basis",
+      "Kommunikationsschnittstelle für die adressierte Full-Duplex-Kommunikation auf UART-Basis inkl. Definition einer geeigneten Datenpaketstruktur",
+      "Firmwareduplizierung über PLC, um OTA-artige Firmwareupdates zu ermöglichen"
+    ],
+    "en": [
+      "Requirements analysis, conception, design, implementation and test of a Power-Line-Communication-Interface (PLC), that enables the communication among multiple ESP32 microcontrollers over their preexisting power cabling",
+      "FreeRTOS and C++20 based",
+      "Hardware debugging and in-the-field-adjustment",
+      "Custom device driver for the PLC transceiver",
+      "Customer-specific distributed consensus algorithm based on Raft",
+      "Communication interface for directed, full-duplex communication based on UART including the definition and implementation of a custom data packet structure",
+      "PLC based firmware duplication to enable OTA-style device firmware upgrades"
+    ]
+  }
+}

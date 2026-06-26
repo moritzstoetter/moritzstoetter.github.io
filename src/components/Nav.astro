@@ -4,13 +4,16 @@ import LanguagePicker from "./ui/LanguagePicker.astro";
 import NavList from "./NavList.astro";
 import ThemeIcon from "./ui/ThemeIcon.astro";
 import { Image } from "astro:assets";
+import { getLangFromUrl } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <div
   class="sticky z-50 flex flex-col px-8 py-2 mx-4 mt-8 border-2 lg:mx-0 bg-white/50 backdrop-blur-md top-4 dark:bg-backgroundDarker/80 rounded-[39px] border-primaryLight/10 dark:border-neutral-700"
 >
   <div class="flex items-center justify-between">
-    <a href="/">
+    <a href={`/${lang}/`}>
       <div class="hidden md:block pr-4">
         <div class="block dark:hidden">
           <Image

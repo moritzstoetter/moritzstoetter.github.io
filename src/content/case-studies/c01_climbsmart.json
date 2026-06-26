@@ -1,0 +1,54 @@
+{
+  "slug": "c01_climbsmart",
+  "client": "Climb Smart GmbH",
+  "image": "./assets/climb_smart.png",
+  "tech": [
+    "Embedded C",
+    "BLE",
+    "I2C",
+    "Nordic Semiconductor",
+    "nRF Connect",
+    "ARM Cortex-M"
+  ],
+  "testimonials": [],
+  "title": {
+    "de": "BLE Gerätefirmware",
+    "en": "BLE Device Firmware"
+  },
+  "description": {
+    "de": "Unsere Firmware verschickt Echtzeitmessdaten via Bluetooth Low Energy.",
+    "en": "Our firmware transmits real-time sensor data via Bluetooth Low Energy."
+  },
+  "about": {
+    "de": "Die Climb Smart GmbH ist ein junges und sportliches Startup, das neuartige, digitale Trainingsgeräte für Kletterer entwickelt.",
+    "en": "Climb Smart GmbH is a young and athletic startup, that develops novel, digital training devices for climbers."
+  },
+  "challenge": {
+    "de": "Der Kunde suchte nach einer Lösung gesucht Kraftmesswerte in Echtzeit aufzunehmen, zu digitalisieren und per Bluetooth Low Energy an Endgeräte zu verteilen. Wir hatten hier völlig freie Hand in der Umsetzung und durften das Produkt mitgestalten.",
+    "en": "The customer was looking for a solution to collect force sensor measurements, digitize them and distribute them via Bluetooth Low Energy to user devices."
+  },
+  "deliveredValue": {
+    "de": "Wir haben in enger Abstimmung mit dem Kunden eine Lösung erarbeitet, die genau auf seine Bedürfnisse zugeschnitten ist, und die Konkurrenz in jeder Hinsicht um ein Vielfaches übertraf. Das hat der Climb Smart GmbH entscheidende Wettbewerbsvorteile verschafft.",
+    "en": "Closely coordinating with the customer we developed a solution, that caters exactly to his needs. Our implementation greatly surpassed that of the competition, which gave our customer an important competitive edge."
+  },
+  "product": {
+    "de": [
+      "Firmware Entwicklung für den Nordic Semiconductor SoC nrf52832",
+      "Zephyr RTOS basiert",
+      "Bluetooth Low Energy Kommunikation: Advertising, Verbindungsaufbau und -behandlung, Fehlerbehandlung, Dienste",
+      "Maßgeschneiderte Bluetoothdienste zum Verschicken von Echtzeitmessdaten",
+      "Treiberentwicklung für den ADC nau7802; Umsetzung aller Funktionalitäten gemäß Datenblatt; Verifikation via Oszilloskop",
+      "Kabelloses Gerätefirmwareupdate implementiert für Softwareaktualisierung im Feld",
+      "Programmierung und Debugging via SWD"
+    ],
+    "en": [
+      "Firmware development for the Nordic-Semiconductor SoC nRF52832",
+      "Zephyr RTOS based",
+      "Bluetooth Low Energy based communication: Advertising, connection handling, error handling, services",
+      "Custom bluetooth services for broadcasting real-time sensor values",
+      "Development of a custom driver for the ADC nau7802, implementing all its functionalities as per the datasheet provided by the manufacturer; testing and verification via oscilloscope",
+      "Over-the-air device firmware upgrade capabilities implemented for software updates in the field",
+      "Programming and debugging via SWD"
+    ]
+  }
+}

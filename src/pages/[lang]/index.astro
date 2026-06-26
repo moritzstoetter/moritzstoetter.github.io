@@ -1,57 +1,122 @@
 ---
 import { getCollection } from "astro:content";
-import ExpertisePreview from "../../components/business/ExpertisePreview.astro";
 import Hero from "../../components/Hero.astro";
 import TestimonialSlider from "../../components/ui/TestimonialSlider.astro";
-import {
-  getLangFromUrl,
-  idIsOfLanguage,
-  useTranslations,
-} from "../../i18n/utils";
+import ExpertiseList from "../../components/business/ExpertiseList.astro";
+import CaseStudyList from "../../components/business/CaseStudyList.astro";
+import InsightList from "../../components/business/InsightList.astro";
+import ContactForm from "../../components/ui/ContactForm.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 
-const expertise = await getCollection("expertise");
-const testimonials = await getCollection("testimonials");
-
 const lang = getLangFromUrl(Astro.url);
-
-const langExpertise = expertise.filter((s) => idIsOfLanguage(s.id, lang));
-const langTestimonials = testimonials.filter((t) => idIsOfLanguage(t.id, lang));
-
 const t = useTranslations(lang);
 
+const langTestimonials = await getCollection("testimonials");
+
 export async function getStaticPaths() {
-  return [
-    {
-      params: {
-        lang: "de",
-      },
-    },
-    {
-      params: {
-        lang: "en",
-      },
-    },
-  ];
+  return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
 }
 ---
 
 <Base>
-  <div class="flex flex-col gap-16 md:gap-24">
+  <div class="flex flex-col gap-24 md:gap-40">
     <Hero />
-    <section>
+    <section data-spy="expertise">
       <h1>{t("home.expertise.title")}</h1>
-      <div class="flex flex-col gap-16">
-        {
-          langExpertise?.map((item) => (
-            <ExpertisePreview expertise={item.data} />
-          ))
-        }
-      </div>
+      <ExpertiseList />
     </section>
-    <section class="mb-16 md:mb-24">
+    <section>
       <h1>{t("home.expertise.testimonials")}</h1>
       <TestimonialSlider testimonials={langTestimonials} />
     </section>
+    <section data-spy="case-studies">
+      <h1>{t("caseStudies.title")}</h1>
+      <CaseStudyList limit={2} />
+      <div class="mt-8 text-right">
+        <a class="focused-link text-lg" href={`/${lang}/case-studies/`}>
+          {t("common.seeAll")} →
+        </a>
+      </div>
+    </section>
+    <section data-spy="insights">
+      <h1>{t("insights.title")}</h1>
+      <InsightList limit={2} />
+      <div class="mt-8 text-right">
+        <a class="focused-link text-lg" href={`/${lang}/insights/`}>
+          {t("common.seeAll")} →
+        </a>
+      </div>
+    </section>
+    <section data-spy="contact" class="mb-16 md:mb-24">
+      <h1>{t("contact.title")}</h1>
+      <ContactForm />
+    </section>
   </div>
 </Base>
+
+<script>
+  // Scroll-spy: accent the nav link matching whichever section is crossing the
+  // viewport centre. Only active on pages that have [data-spy] sections (home).
+  const links = document.querySelectorAll<HTMLAnchorElement>("[data-spy-link]");
+  const sections = document.querySelectorAll<HTMLElement>("[data-spy]");
+  const activeClasses = ["text-primaryLight", "dark:text-primaryDark"];
+
+  const setActive = (key: string | null) => {
+    links.forEach((link) => {
+      const on = link.dataset.spyLink === key;
+      activeClasses.forEach((c) => link.classList.toggle(c, on));
+    });
+  };
+
+  if (sections.length > 0) {
+    // Track which spy-sections currently cross the centre line; accent the
+    // matching link, or clear when none do (e.g. over the testimonials).
+    const centred = new Set<HTMLElement>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const el = entry.target as HTMLElement;
+          if (entry.isIntersecting) centred.add(el);
+          else centred.delete(el);
+        }
+        const current = centred.values().next().value as HTMLElement | undefined;
+        setActive(current?.dataset.spy ?? null);
+      },
+      { rootMargin: "-50% 0px -50% 0px" },
+    );
+    sections.forEach((section) => observer.observe(section));
+  }
+</script>
+
+<style>
+  /* Each home section fades + rises in as it enters, holds while centred, then
+     fades + rises away as it exits the top. Pure CSS scroll-driven animation.
+     Gated behind @supports because the end state is invisible — browsers
+     without scroll-timeline must NOT apply it (they'd hide everything); they
+     just show the sections normally. Reduced-motion users skip it too. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      section {
+        animation: section-scroll linear both;
+        animation-timeline: view();
+      }
+
+      @keyframes section-scroll {
+        0% {
+          opacity: 0;
+          transform: translateY(4rem) scale(0.94);
+        }
+        30%,
+        70% {
+          opacity: 1;
+          transform: none;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-4rem) scale(0.94);
+        }
+      }
+    }
+  }
+</style>

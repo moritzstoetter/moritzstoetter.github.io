@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { idIsOfLanguage, useTranslations } from "../../i18n/utils";
+import { idIsOfLanguage, pick, useTranslations } from "../../i18n/utils";
 import ExpertisePreview from "../business/ExpertisePreview.astro";
 import Grid from "../ui/Grid.astro";
 import Box from "../ui/Box.astro";
@@ -11,13 +11,11 @@ const { lang, slug } = Astro.props;
 
 const expertiseEntries = await getCollection("expertise");
 
-const expertise = expertiseEntries.find((s) => s.id === `${lang}/${slug}`)?.data;
+const expertise = expertiseEntries.find((s) => s.id === slug)?.data;
 
 const insightEntries = await getCollection("insights");
 const caseStudyEntries = await getCollection("case-studies");
 
-// Resolve the explicitly-linked related content by slug, preserving the
-// authored order and filtering to the current language.
 const relatedInsights = (expertise?.insights ?? []).flatMap((s) => {
   const e = insightEntries.find(
     (i) => idIsOfLanguage(i.id, lang) && i.id.split("/")[1] === s,
@@ -25,15 +23,10 @@ const relatedInsights = (expertise?.insights ?? []).flatMap((s) => {
   return e ? [e] : [];
 });
 const relatedCaseStudies = (expertise?.case_studies ?? []).flatMap((s) => {
-  const e = caseStudyEntries.find(
-    (c) => idIsOfLanguage(c.id, lang) && c.data.slug === s,
-  );
+  const e = caseStudyEntries.find((c) => c.id === s);
   return e ? [e] : [];
 });
 
-// Match the "Unsere Expertise" section heading (base h1 styling), incl. its
-// generous vertical breathing room (my-8 md:my-16) so each related section is
-// clearly set apart (vertical rhythm / whitespace around section headings).
 const sectionHeading =
   "my-8 md:my-16 text-center font-bold uppercase text-2xl sm:text-3xl lg:text-4xl";
 
@@ -42,7 +35,7 @@ const t = useTranslations(lang);
 
 {
   !!expertise ? (
-    <section class="flex flex-col gap-8 py-8" id={expertise.title}>
+    <section class="flex flex-col gap-8 pb-8" id={expertise.slug}>
       <ExpertisePreview expertise={expertise} linked={false} swap />
       <Grid cols={3} gap={8}>
         {expertise.tech.map((technology) => (
@@ -57,9 +50,9 @@ const t = useTranslations(lang);
               <Box padded href={`/${lang}/case-studies/${caseStudy.data.slug}`} customClass="h-full">
                 <IconText
                   size="sm"
-                  title={caseStudy.data.title}
+                  title={pick(caseStudy.data.title, lang)}
                   subtitle={caseStudy.data.client}
-                  description={caseStudy.data.description}
+                  description={pick(caseStudy.data.description, lang)}
                 />
               </Box>
             ))}

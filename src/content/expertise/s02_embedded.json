@@ -1,0 +1,101 @@
+{
+  "slug": "s02_embedded",
+  "image": "./assets/output_3.webp",
+  "insights": [
+    "lock_in",
+    "less_is_more",
+    "modern_sw_dev"
+  ],
+  "case_studies": [
+    "c06_laboratory",
+    "c01_climbsmart",
+    "c04_wsa"
+  ],
+  "title": {
+    "de": "Mikrocontroller + Embedded Linux",
+    "en": "Microcontrollers + Embedded Linux"
+  },
+  "description": {
+    "de": "Ihre Eingebetteten Systeme sind unsere Spezialität.",
+    "en": "Your Embedded Systems are Our Specialty"
+  },
+  "tech": [
+    {
+      "name": {
+        "de": "Arm Cortex",
+        "en": "Arm Cortex"
+      },
+      "description": {
+        "de": "Die Cortex-M Familie von ARM ist stark vertreten am Embeddedmarkt und uns natürlich bestens bekannt.",
+        "en": "The Cortex-M family is very wide spread on the embedded market and intimately known to us."
+      },
+      "image": "./assets/tech/arm.png"
+    },
+    {
+      "name": {
+        "de": "ST Microelectronics",
+        "en": "ST Microelectronics"
+      },
+      "description": {
+        "de": "Wir sind große Fans der STM32 Familie, und greifen Ihnen gern unter die Arme bei der Entwicklung für diese MCUs.",
+        "en": "We are big fans of the STM32 family, and are are happy to support you in the development for these MCUs"
+      },
+      "image": "./assets/tech/stm.png"
+    },
+    {
+      "name": {
+        "de": "Nordic Semiconductor",
+        "en": "Nordic Semiconductor"
+      },
+      "description": {
+        "de": "Das IoT Powerhouse am Mikrocontrollermarkt. Wir unterstützen Sie gerne bei der Entwicklung in diesem Ökosystem, egal ob nRF Connect SDK oder Vanilla Zephyr.",
+        "en": "The IoT powerhouse on the microcontroller scene. We can assist you in the development in this eco-system, be it based on the nRF Connect SDK or vanilla Zephyr."
+      },
+      "image": "./assets/tech/nordic.svg"
+    },
+    {
+      "name": {
+        "de": "Risc-V",
+        "en": "Risc-V"
+      },
+      "description": {
+        "de": "Risc-V Architekturen sind immer häufiger anzutreffen. Wir haben bereits konkrete Projekterfahrung sammeln können.",
+        "en": "Risc-V architecture are gaining popularity. We have hands-on project experience already."
+      },
+      "image": "./assets/tech/risc_v.jpeg"
+    },
+    {
+      "name": {
+        "de": "Espressif",
+        "en": "Espressif"
+      },
+      "description": {
+        "de": "Espressif ist längst aus der Makerszene heraus gewachsen und wir haben schon einige große Unternehmen bei der Integration von ihren Produkten unterstützt. Vielleicht Sie auch?",
+        "en": "Espressif has long grown out of its maker-scence origins, and we have supported with a couple of large companies with integrating their devices. Maybe you too?"
+      },
+      "image": "./assets/tech/espressif.svg"
+    },
+    {
+      "name": {
+        "de": "NXP",
+        "en": "NXP"
+      },
+      "description": {
+        "de": "",
+        "en": ""
+      },
+      "image": "./assets/tech/nxp.webp"
+    },
+    {
+      "name": {
+        "de": "Yocto",
+        "en": "Yocto"
+      },
+      "description": {
+        "de": "",
+        "en": ""
+      },
+      "image": "./assets/tech/linux.webp"
+    }
+  ]
+}

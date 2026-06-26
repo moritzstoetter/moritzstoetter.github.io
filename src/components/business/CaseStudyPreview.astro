@@ -1,6 +1,6 @@
 ---
 import type { CaseStudy } from "../../content.config";
-import { getLangFromUrl } from "../../i18n/utils";
+import { getLangFromUrl, pick } from "../../i18n/utils";
 import SplitBox from "../ui/SplitBox.astro";
 
 interface Props {
@@ -19,10 +19,10 @@ const lang = getLangFromUrl(Astro.url);
 
 <SplitBox
   image={caseStudy.image}
-  imageAlt={caseStudy.title}
-  title={caseStudy.title}
+  imageAlt={pick(caseStudy.title, lang)}
+  title={pick(caseStudy.title, lang)}
   subtitle={caseStudy.client}
-  description={caseStudy.description}
+  description={pick(caseStudy.description, lang)}
   href={linked ? `/${lang}/case-studies/${caseStudy.slug}` : undefined}
   swap={swap}
 />

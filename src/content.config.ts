@@ -2,11 +2,23 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-// Derive the entry id from its file path (lang/<name>), stripping the
-// extension. Without this, the glob loader would use a `slug` field present in
-// the JSON data as the id, dropping the language prefix and colliding across
-// the de/en variants.
+// Derive the entry id from its file path, stripping the extension. For insights
+// (still split per language) this yields `lang/<name>`; for the merged data
+// collections it yields just `<name>` (the slug).
 const pathId = ({ entry }: { entry: string }) => entry.replace(/\.[^.]+$/, "");
+
+// A field carried in both languages. Both are required, so a missing
+// translation fails the build — structural protection against drift.
+const localized = <T extends z.ZodTypeAny>(schema: T) =>
+  z.object({ de: schema, en: schema });
+export type Localized<T> = { de: T; en: T };
+
+interface ImageMeta {
+  src: string;
+  width: number;
+  height: number;
+  format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+}
 
 const insightsCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/insights", generateId: pathId }),
@@ -26,12 +38,7 @@ const insightsCollection = defineCollection({
 export interface Insight {
   title: string;
   subtitle?: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  image: ImageMeta;
   imageAlt: string;
   author: string;
   date: Date;
@@ -45,7 +52,7 @@ const aboutCollection = defineCollection({
       members: z.array(
         z.object({
           name: z.string(),
-          description: z.string(),
+          description: localized(z.string()),
           image: image(),
         }),
       ),
@@ -54,13 +61,8 @@ const aboutCollection = defineCollection({
 
 export interface TeamMember {
   name: string;
-  description: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  description: Localized<string>;
+  image: ImageMeta;
 }
 
 export interface About {
@@ -72,37 +74,32 @@ const caseStudiesCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
-      title: z.string(),
       client: z.string(),
-      description: z.string(),
-      about: z.string(),
-      challenge: z.string(),
-      deliveredValue: z.string(),
-      product: z.array(z.string()),
+      image: image(),
       tech: z.array(z.string()),
       // Explicitly linked testimonials, by slug (filename).
       testimonials: z.array(z.string()),
-      image: image(),
+      title: localized(z.string()),
+      description: localized(z.string()),
+      about: localized(z.string()),
+      challenge: localized(z.string()),
+      deliveredValue: localized(z.string()),
+      product: localized(z.array(z.string())),
     }),
 });
 
 export interface CaseStudy {
   slug: string;
-  title: string;
   client: string;
-  description: string;
-  about: string;
-  challenge: string;
-  deliveredValue: string;
-  product: string[];
+  image: ImageMeta;
   tech: string[];
   testimonials: string[];
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  title: Localized<string>;
+  description: Localized<string>;
+  about: Localized<string>;
+  challenge: Localized<string>;
+  deliveredValue: Localized<string>;
+  product: Localized<string[]>;
 }
 
 const expertiseCollection = defineCollection({
@@ -110,49 +107,39 @@ const expertiseCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
-      title: z.string(),
-      description: z.string(),
-      tech: z.array(
-        z.object({
-          name: z.string(),
-          description: z.string(),
-          // Empty string allowed as a placeholder for tech without a logo yet.
-          image: z.union([z.literal(""), image()]),
-        }),
-      ),
       image: image(),
       // Explicitly linked related insights / case studies, by slug (filename).
       insights: z.array(z.string()).default([]),
       case_studies: z.array(z.string()).default([]),
+      title: localized(z.string()),
+      description: localized(z.string()),
+      tech: z.array(
+        z.object({
+          name: localized(z.string()),
+          subtitle: localized(z.string()).optional(),
+          description: localized(z.string()),
+          // Empty string allowed as a placeholder for tech without a logo yet.
+          image: z.union([z.literal(""), image()]),
+        }),
+      ),
     }),
 });
 
 export interface Tech {
-  name: string;
-  description: string;
-  image:
-    | {
-        src: string;
-        width: number;
-        height: number;
-        format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-      }
-    | "";
+  name: Localized<string>;
+  subtitle?: Localized<string>;
+  description: Localized<string>;
+  image: ImageMeta | "";
 }
 
 export interface Expertise {
   slug: string;
-  title: string;
-  description: string;
-  tech: Tech[];
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  image: ImageMeta;
   insights: string[];
   case_studies: string[];
+  title: Localized<string>;
+  description: Localized<string>;
+  tech: Tech[];
 }
 
 const testimonialsCollection = defineCollection({
@@ -161,21 +148,16 @@ const testimonialsCollection = defineCollection({
     z.object({
       name: z.string(),
       subheading: z.string(),
-      quote: z.string(),
       image: image(),
+      quote: localized(z.string()),
     }),
 });
 
 export interface Testimonial {
   name: string;
   subheading: string;
-  quote: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  image: ImageMeta;
+  quote: Localized<string>;
 }
 
 export const collections = {

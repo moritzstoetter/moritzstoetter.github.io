@@ -1,9 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import type { TeamMember } from "../../content.config";
+import { getLangFromUrl, pick } from "../../i18n/utils";
 import Box from "../ui/Box.astro";
 
 const member: TeamMember = Astro.props.member;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <Box padded>
@@ -13,6 +15,6 @@ const member: TeamMember = Astro.props.member;
       src={member.image}
       alt={member.name}
     />
-    <p class="">{member.description}</p>
+    <p class="">{pick(member.description, lang)}</p>
   </div>
 </Box>

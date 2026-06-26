@@ -12,18 +12,20 @@ const alignment: "horizontal" | "vertical" = Astro.props.alignment;
 >
   <li>
     <a
-      href={`/${lang}/`}
+      data-spy-link="expertise"
+      href={`/${lang}/expertise/`}
       class={`text-lg ${
-        Astro.url.pathname === `/${lang}/`
+        Astro.url.pathname === `/${lang}/expertise/`
           ? "text-primaryLight dark:text-primaryDark"
           : ""
       }`}
     >
-      {t("nav.home")}
+      {t("nav.expertise")}
     </a>
   </li>
   <li>
     <a
+      data-spy-link="case-studies"
       href={`/${lang}/case-studies/`}
       class={`text-lg ${
         Astro.url.pathname === `/${lang}/case-studies/`
@@ -36,6 +38,7 @@ const alignment: "horizontal" | "vertical" = Astro.props.alignment;
   </li>
   <li>
     <a
+      data-spy-link="insights"
       href={`/${lang}/insights/`}
       class={`text-lg ${
         Astro.url.pathname === `/${lang}/insights/`
@@ -48,6 +51,7 @@ const alignment: "horizontal" | "vertical" = Astro.props.alignment;
   </li>
   <li>
     <a
+      data-spy-link="contact"
       href={`/${lang}/contact/`}
       class={`text-lg ${
         Astro.url.pathname === `/${lang}/contact/`

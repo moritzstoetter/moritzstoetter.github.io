@@ -1,36 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-import {
-  getLangFromUrl,
-  idIsOfLanguage,
-  useTranslations,
-} from "../../i18n/utils";
+import InsightList from "../../components/business/InsightList.astro";
 import Base from "../../layouts/Base.astro";
-import InsightPreview from "../../components/business/InsightPreview.astro";
-
-const insights = await getCollection("insights");
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const langInsights = insights
-  .filter((c) => idIsOfLanguage(c.id, lang))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 export async function getStaticPaths() {
-  const pages = await getCollection("insights");
-
-  const paths = pages.map((page) => {
-    const [lang] = page.id.split("/");
-    return { params: { lang }, props: page };
-  });
-
-  return paths;
+  return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
 }
 ---
 
 <Base>
-  <h1>{t("insights.title")}</h1>
-  <div class="flex flex-col gap-16 pb-16">
-    {langInsights.map((insight) => <InsightPreview insight={insight} />)}
+  <div class="pb-16">
+    <InsightList />
   </div>
 </Base>

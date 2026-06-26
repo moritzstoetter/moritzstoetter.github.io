@@ -1,6 +1,6 @@
 ---
 import type { Expertise } from "../../content.config";
-import { getLangFromUrl } from "../../i18n/utils";
+import { getLangFromUrl, pick } from "../../i18n/utils";
 import SplitBox from "../ui/SplitBox.astro";
 
 interface Props {
@@ -19,9 +19,9 @@ const lang = getLangFromUrl(Astro.url);
 
 <SplitBox
   image={expertise.image}
-  imageAlt={expertise.title}
-  title={expertise.title}
-  description={expertise.description}
+  imageAlt={pick(expertise.title, lang)}
+  title={pick(expertise.title, lang)}
+  description={pick(expertise.description, lang)}
   href={linked ? `/${lang}/expertise/${expertise.slug}` : undefined}
   swap={swap}
 />

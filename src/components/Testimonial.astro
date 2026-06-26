@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { Testimonial } from "../content.config";
+import { getLangFromUrl, pick } from "../i18n/utils";
 import Box from "./ui/Box.astro";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { testimonial, variant = "slider" } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
 // Size variants. Keep full class strings literal so Tailwind can detect them.
 const styles = {
@@ -45,6 +47,6 @@ const styles = {
         {testimonial.subheading}
       </p>
     </div>
-    <p class:list={["italic text-center", styles.quote]}>"{testimonial.quote}"</p>
+    <p class:list={["italic text-center", styles.quote]}>"{pick(testimonial.quote, lang)}"</p>
   </div>
 </Box>

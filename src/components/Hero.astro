@@ -7,7 +7,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<div id="hero" class="mt-4 md:mt-16">
+<div id="hero">
   {/* Frosted text on the left, sharp image on the right (swap) */}
   <SplitBox
     image={hero}

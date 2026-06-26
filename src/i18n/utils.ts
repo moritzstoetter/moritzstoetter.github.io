@@ -21,3 +21,9 @@ export function useTranslations(lang: keyof typeof labels) {
 export const idIsOfLanguage = (id: string, lang: string) => {
   return id.indexOf(`${lang}/`) > -1;
 };
+
+// Select the current-language value from a localized `{ de, en }` field.
+export const pick = <T>(
+  field: { de: T; en: T },
+  lang: keyof typeof labels,
+): T => field[lang];

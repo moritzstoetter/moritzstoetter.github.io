@@ -1,0 +1,12 @@
+{
+  "members": [
+    {
+      "name": "Moritz Stötter",
+      "image": "./assets/moritz.webp",
+      "description": {
+        "de": "Moritz ist spezialisiert auf die Softwareentwicklung für Embedded Devices in modernem C++. Er greift auf viele Jahre Erfahrung auf allen gängigen Plattformen zurück, und weiß genau wie man die phantastische Kraft von C++ auf die kleinsten Geräte anwenden kann. Er war federführend in der Entwicklung und Auslieferung von vielen technischen Produkten und hat diese erfolgreich vom anfänglichen Konzept und der Anforderungsplanung über Architekturdesign und Implementierung, hin zum endgültigen Einsatz geführt. Seine Arbeitsweise stützt sich auf die Verwendung von fortgeschrittenen Sprachfeatures und Werkzeugen, um Sicherheit, optimale Laufzeitperformanz, und saubere, wartbare Schnittstellen zu garantieren.",
+        "en": "Moritz specializes in software development for embedded devices in modern C++. He has many years of experience on all the popular platforms, and knows exactly how to apply the awesome power of C++ to the smallest devices. He has spearheaded the development and delivery of many technical products, successfully guiding them from initial concept and requirement analysis through architecture design, implementation, and final deployment. His approach revolves around leveraging advanced language features and tools to achieve safety, optimal runtime performance, and clean, maintainable interfaces."
+      }
+    }
+  ]
+}

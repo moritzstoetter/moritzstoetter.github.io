@@ -1,17 +1,20 @@
 ---
 import type { Tech } from "../../content.config";
+import { getLangFromUrl, pick } from "../../i18n/utils";
 import Box from "../ui/Box.astro";
 import IconText from "../ui/IconText.astro";
 
 const tech: Tech = Astro.props.technology;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <Box padded>
   <IconText
     size="sm"
-    title={tech.name}
-    description={tech.description}
+    title={pick(tech.name, lang)}
+    subtitle={tech.subtitle ? pick(tech.subtitle, lang) : undefined}
+    description={pick(tech.description, lang)}
     icon={tech.image || undefined}
-    iconAlt={tech.name}
+    iconAlt={pick(tech.name, lang)}
   />
 </Box>

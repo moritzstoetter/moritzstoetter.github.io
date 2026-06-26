@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { useTranslations } from "../../i18n/utils";
+import { pick, useTranslations } from "../../i18n/utils";
 import CaseStudyPreview from "../business/CaseStudyPreview.astro";
 import Box from "../ui/Box.astro";
 import Grid from "../ui/Grid.astro";
@@ -11,11 +11,9 @@ const { lang, slug } = Astro.props;
 const caseStudies = await getCollection("case-studies");
 const testimonials = await getCollection("testimonials");
 
-const caseStudy = caseStudies.find((s) => s.id === `${lang}/${slug}`)?.data;
+const caseStudy = caseStudies.find((s) => s.id === slug)?.data;
 const langTestimonials = (caseStudy?.testimonials ?? []).flatMap((s) => {
-  const voice = testimonials.find(
-    (t) => t.id.startsWith(lang) && t.id.split("/")[1] === s,
-  );
+  const voice = testimonials.find((t) => t.id === s);
   return voice ? [voice] : [];
 });
 
@@ -24,7 +22,7 @@ const t = useTranslations(lang);
 
 {
   !!caseStudy ? (
-    <section class="flex flex-col gap-8 py-8" id={caseStudy.title}>
+    <section class="flex flex-col gap-8 pb-8" id={caseStudy.slug}>
       <CaseStudyPreview caseStudy={caseStudy} linked={false} swap />
       <Grid cols={2} class="pb-8">
         <Box padded>
@@ -32,7 +30,7 @@ const t = useTranslations(lang);
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.aboutTheClient")}
             </h2>
-            <p>{caseStudy.about}</p>
+            <p>{pick(caseStudy.about, lang)}</p>
           </div>
         </Box>
         <Box padded>
@@ -40,7 +38,7 @@ const t = useTranslations(lang);
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.theChallenge")}
             </h2>
-            <p>{caseStudy.challenge}</p>
+            <p>{pick(caseStudy.challenge, lang)}</p>
           </div>
         </Box>
         <Box padded>
@@ -48,7 +46,7 @@ const t = useTranslations(lang);
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.deliveredValue")}
             </h2>
-            <p>{caseStudy.deliveredValue}</p>
+            <p>{pick(caseStudy.deliveredValue, lang)}</p>
           </div>
         </Box>
         <Box padded>
@@ -64,7 +62,7 @@ const t = useTranslations(lang);
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.theProduct")}
             </h2>
-            <p>{caseStudy.product.join(" — ")}</p>
+            <p>{pick(caseStudy.product, lang).join(" — ")}</p>
           </div>
         </Box>
         {langTestimonials?.length > 0 && (
