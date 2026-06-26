@@ -1,10 +1,11 @@
 ---
-title: "Das Argument für Abstraktionen und Ausdrucksstärke: Weniger ist mehr"
+title: "Weniger ist mehr"
+subtitle: "Warum jede Zeile Code auch eine Belastung ist: Das Argument für Abstraktionen und Ausdrucksstärke"
 author: "Moritz Stötter"
 date: 2023-12-09
 image: "../assets/tree.png" # https://docs.astro.build/en/guides/images/#images-in-content-collections
 imageAlt: "rooted"
-tags: ["development", "cpp"]
+insights: ["lock_in","modern_sw_dev"]
 ---
 
 

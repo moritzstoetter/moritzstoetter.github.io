@@ -63,6 +63,7 @@ export const labels = {
     },
     common: {
       relatedInsights: "Related Insights",
+      relatedCaseStudies: "Related Case Studies",
     },
   },
   de: {
@@ -122,6 +123,7 @@ export const labels = {
     },
     common: {
       relatedInsights: "Verwandte Insights",
+      relatedCaseStudies: "Verwandte Fallstudien",
     },
   },
 } as const;

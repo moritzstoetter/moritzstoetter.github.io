@@ -7,7 +7,6 @@ import {
   useTranslations,
 } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
-import ContactButton from "../../components/ContactButton.astro";
 
 const about = await getCollection("about");
 
@@ -31,12 +30,11 @@ export async function getStaticPaths() {
 
 <Base>
   <h1>{t("about.title")}</h1>
-  <section class="flex flex-col gap-8 pb-8 mx-4 lg:mx-0">
+  <section class="flex flex-col gap-8 pb-8">
     <p>{t("about.description")}</p>
     <!-- <h2>{t("about.team")}</h2> -->
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-1">
       {langAbout?.data.members.map((member) => <TeamMember member={member} />)}
     </div>
-    <ContactButton />
   </section>
 </Base>

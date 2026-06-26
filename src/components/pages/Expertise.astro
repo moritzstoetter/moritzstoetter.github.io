@@ -1,11 +1,11 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { useTranslations } from "../../i18n/utils";
-import { findInsightsByTags } from "../../lib/insights/util";
-import InsightPreview from "../business/InsightPreview.astro";
+import { idIsOfLanguage, useTranslations } from "../../i18n/utils";
+import ExpertisePreview from "../business/ExpertisePreview.astro";
+import Grid from "../ui/Grid.astro";
+import Box from "../ui/Box.astro";
+import IconText from "../ui/IconText.astro";
 import Technology from "../business/Technology.astro";
-import ContactButton from "../ContactButton.astro"
 
 const { lang, slug } = Astro.props;
 
@@ -13,40 +13,75 @@ const expertiseEntries = await getCollection("expertise");
 
 const expertise = expertiseEntries.find((s) => s.id === `${lang}/${slug}`)?.data;
 
-const relatedInsights = await findInsightsByTags(lang, expertise?.tags ?? []);
+const insightEntries = await getCollection("insights");
+const caseStudyEntries = await getCollection("case-studies");
+
+// Resolve the explicitly-linked related content by slug, preserving the
+// authored order and filtering to the current language.
+const relatedInsights = (expertise?.insights ?? []).flatMap((s) => {
+  const e = insightEntries.find(
+    (i) => idIsOfLanguage(i.id, lang) && i.id.split("/")[1] === s,
+  );
+  return e ? [e] : [];
+});
+const relatedCaseStudies = (expertise?.case_studies ?? []).flatMap((s) => {
+  const e = caseStudyEntries.find(
+    (c) => idIsOfLanguage(c.id, lang) && c.data.slug === s,
+  );
+  return e ? [e] : [];
+});
+
+// Match the "Unsere Expertise" section heading (base h1 styling), incl. its
+// generous vertical breathing room (my-8 md:my-16) so each related section is
+// clearly set apart (vertical rhythm / whitespace around section headings).
+const sectionHeading =
+  "my-8 md:my-16 text-center font-bold uppercase text-2xl sm:text-3xl lg:text-4xl";
 
 const t = useTranslations(lang);
 ---
 
 {
   !!expertise ? (
-    <section class="flex flex-col gap-8 py-8 mx-4 lg:md-0" id={expertise.title}>
-      <div class="relative h-64 -mx-4 overflow-hidden flex items-center">
-        <div class="absolute inset-0">
-          <Image
-            src={expertise.image}
-            alt={expertise.title}
-            class="w-full h-full object-cover"
-          />
-        </div>
-        <div class="absolute inset-0 bg-white/75 dark:bg-black/75"></div>
-        <h1 class="relative z-10 w-full text-center text-primaryLight dark:text-primaryDark">
-          {expertise.title}
-        </h1>
-      </div>
-      <p>{expertise.description}</p>
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+    <section class="flex flex-col gap-8 py-8" id={expertise.title}>
+      <ExpertisePreview expertise={expertise} linked={false} swap />
+      <Grid cols={3} gap={8}>
         {expertise.tech.map((technology) => (
           <Technology technology={technology} />
         ))}
-      </div>
-      <ContactButton/>
-      <h2>{t("common.relatedInsights")}</h2>
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {relatedInsights.map((insight) => (
-          <InsightPreview insight={insight} />
-        ))}
-      </div>
+      </Grid>
+      {relatedCaseStudies.length > 0 && (
+        <div class="flex flex-col gap-4">
+          <h2 class={sectionHeading}>{t("common.relatedCaseStudies")}</h2>
+          <Grid cols={3} gap={4}>
+            {relatedCaseStudies.map((caseStudy) => (
+              <Box padded href={`/${lang}/case-studies/${caseStudy.data.slug}`} customClass="h-full">
+                <IconText
+                  size="sm"
+                  title={caseStudy.data.title}
+                  subtitle={caseStudy.data.client}
+                  description={caseStudy.data.description}
+                />
+              </Box>
+            ))}
+          </Grid>
+        </div>
+      )}
+      {relatedInsights.length > 0 && (
+        <div class="flex flex-col gap-4">
+          <h2 class={sectionHeading}>{t("common.relatedInsights")}</h2>
+          <Grid cols={3} gap={4}>
+            {relatedInsights.map((insight) => (
+              <Box padded href={`/${lang}/insights/${insight.id.split("/")[1]}`} customClass="h-full">
+                <IconText
+                  size="sm"
+                  title={insight.data.title}
+                  subtitle={insight.data.subtitle}
+                />
+              </Box>
+            ))}
+          </Grid>
+        </div>
+      )}
     </section>
   ) : (
     <div>

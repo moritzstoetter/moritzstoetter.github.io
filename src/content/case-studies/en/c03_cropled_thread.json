@@ -1,12 +1,22 @@
 {
   "slug": "c03_cropled_thread",
   "title": "Thread Mesh Network",
+  "client": "cropled AG",
   "description": "We showed our client the way through the labyrinth of IoT standards.",
   "about": "Cropled AG is a swiss startup, that is revolutionizing indoor farming. Their main product \"aurora\" is an LED plant lighting solution, that is interconnected via IoT standards, and connected to the cloud. They have won multiple awards with their idea including the Zünder Award und Venture Kick.",
   "challenge": "The client was under great time pressure and was looking for a solution to connect a large number of lamps with one another, without relying solely on wireless technologies. After some set backs, cropled reached out to us for the development of a solution, that connects the devices over their power supply.",
   "deliveredValue": "Thanks to a highly focused start phase and requirements analysis we managed to deliver exactly what the client wanted and on time. Our custom communication interface provides relieve for the existing, wireless communication standards, so that cropled AG now has a highly scalable technology in their portfolio, that sets them apart from the competition.",
-  "product": "Requirements analysis, conception, design, implementation and test of a Power-Line-Communication-Interface (PLC), that enables the communication among multiple ESP32 microcontrollers over their preexisting power cabling — FreeRTOS and C++20 based — Hardware debugging and in-the-field-adjustment — Custom device driver for the PLC transceiver — Customer-specific distributed consensus algorithm based on Raft — Communication interface for directed, full-duplex communication based on UART including the definition and implementation of a custom data packet structure — PLC based firmware duplication to enable OTA-style device firmware upgrades",
-  "tech": ["Embedded C++20", "ESP32", "FreeRTOS", "IEEE 802.15.4", "OpenThread", "Matter", "Multithreading", "Multicore"],
-  "testimonials": [2, 1],
+  "product": ["Requirements analysis, conception, design, implementation and test of a Power-Line-Communication-Interface (PLC), that enables the communication among multiple ESP32 microcontrollers over their preexisting power cabling","FreeRTOS and C++20 based","Hardware debugging and in-the-field-adjustment","Custom device driver for the PLC transceiver","Customer-specific distributed consensus algorithm based on Raft","Communication interface for directed, full-duplex communication based on UART including the definition and implementation of a custom data packet structure","PLC based firmware duplication to enable OTA-style device firmware upgrades"],
+  "tech": [
+    "Embedded C++20",
+    "ESP32",
+    "FreeRTOS",
+    "IEEE 802.15.4",
+    "OpenThread",
+    "Matter",
+    "Multithreading",
+    "Multicore"
+  ],
+  "testimonials": ["t02_samuel","t01_michael"],
   "image": "../assets/cropled_thread.webp"
 }

@@ -1,10 +1,9 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { useTranslations } from "../../i18n/utils";
+import CaseStudyPreview from "../business/CaseStudyPreview.astro";
 import Box from "../ui/Box.astro";
-import Tag from "../ui/Tag.astro";
-import BoxGrid from "../ui/BoxGrid.astro";
+import Grid from "../ui/Grid.astro";
 import Testimonial from "../Testimonial.astro";
 
 const { lang, slug } = Astro.props;
@@ -13,45 +12,27 @@ const caseStudies = await getCollection("case-studies");
 const testimonials = await getCollection("testimonials");
 
 const caseStudy = caseStudies.find((s) => s.id === `${lang}/${slug}`)?.data;
-const langTestimonials = testimonials.filter(
-  (t) =>
-    t.id.startsWith(lang) &&
-    caseStudy?.testimonials.includes(t.data.identifier),
-);
+const langTestimonials = (caseStudy?.testimonials ?? []).flatMap((s) => {
+  const voice = testimonials.find(
+    (t) => t.id.startsWith(lang) && t.id.split("/")[1] === s,
+  );
+  return voice ? [voice] : [];
+});
 
 const t = useTranslations(lang);
 ---
 
 {
   !!caseStudy ? (
-    <section class="flex flex-col gap-8 py-8 mx-4 lg:mx-0" id={caseStudy.title}>
-      <h1 class="flex items-center justify-center col-span-full ">
-        {caseStudy.title}
-      </h1>
-      <div class="flex flex-row items-center gap-4">
-        {/* <span class="text-primaryLight dark:text-primaryDark text-2xl">{t("caseStudies.technologies")}</span> */}
-        <ul class="flex flex-row flex-wrap items-center justify-center gap-4">
-          {caseStudy.tech.map((tech) => (
-            <Tag text={tech} />
-          ))}
-        </ul>
-      </div>
-      <BoxGrid narrow>
+    <section class="flex flex-col gap-8 py-8" id={caseStudy.title}>
+      <CaseStudyPreview caseStudy={caseStudy} linked={false} swap />
+      <Grid cols={2} class="pb-8">
         <Box padded>
           <div class="flex flex-col gap-4">
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.aboutTheClient")}
             </h2>
             <p>{caseStudy.about}</p>
-          </div>
-        </Box>
-        <Box>
-          <div class="overflow-hidden w-full h-full rounded-3xl">
-            <Image
-              src={caseStudy.image}
-              alt={caseStudy.title}
-              class="w-full h-full object-cover inset-0"
-            />
           </div>
         </Box>
         <Box padded>
@@ -70,32 +51,42 @@ const t = useTranslations(lang);
             <p>{caseStudy.deliveredValue}</p>
           </div>
         </Box>
+        <Box padded>
+          <div class="flex flex-col gap-4">
+            <h2 class="text-primaryLight dark:text-primaryDark">
+              {t("caseStudies.technologies")}
+            </h2>
+            <p>{caseStudy.tech.join(" — ")}</p>
+          </div>
+        </Box>
         <Box padded customClass="col-span-full">
           <div class="flex flex-col gap-4">
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.theProduct")}
             </h2>
-            <p>{caseStudy.product}</p>
+            <p>{caseStudy.product.join(" — ")}</p>
           </div>
         </Box>
         {langTestimonials?.length > 0 && (
-          <div class="flex flex-col col-span-full gap-4">
-            <h2 class="text-primaryLight dark:text-primaryDark">
-              {t("caseStudies.testimonial")}
-            </h2>
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {[0, 1, 2].map((i) => {
-                const voice = langTestimonials[i];
-                return voice ? (
-                  <Testimonial testimonial={voice.data} variant="caseStudy" />
-                ) : (
-                  <div class="h-full min-h-[12rem] rounded-3xl border-2 border-dashed border-textLight/15 dark:border-textDark/15" />
-                );
-              })}
+          <Box
+            padded
+            customClass={langTestimonials.length > 1 ? "col-span-full" : undefined}
+          >
+            <div class="flex flex-col gap-4">
+              <h2 class="text-primaryLight dark:text-primaryDark">
+                {t("caseStudies.testimonial")}
+              </h2>
+              <div class="flex flex-col gap-4 md:flex-row md:justify-center">
+                {langTestimonials.slice(0, 3).map((voice) => (
+                  <div class="md:flex-1">
+                    <Testimonial testimonial={voice.data} variant="caseStudy" />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Box>
         )}
-      </BoxGrid>
+      </Grid>
     </section>
   ) : (
     <div>

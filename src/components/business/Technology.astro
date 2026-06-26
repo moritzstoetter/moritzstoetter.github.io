@@ -1,27 +1,17 @@
 ---
-import { Image } from "astro:assets";
 import type { Tech } from "../../content.config";
 import Box from "../ui/Box.astro";
+import IconText from "../ui/IconText.astro";
 
 const tech: Tech = Astro.props.technology;
 ---
 
 <Box padded>
-  <div class="grid items-center grid-cols-1 gap-4 md:grid-cols-3">
-    <div class="flex justify-center col-span-1">
-      {tech.image !== "" && (
-        <Image
-          class="w-full max-w-[150px] h-auto"
-          src={tech.image}
-          alt={tech.name ?? "tech"}
-        />
-      )}
-    </div>
-    <div class="flex flex-col md:col-span-2">
-      <h3 class="text-primaryLight dark:text-primaryDark">{tech.name}</h3>
-    </div>
-    <div class="md:col-span-3">
-      <p>{tech.description}</p>
-    </div>
-  </div>
- </Box>
+  <IconText
+    size="sm"
+    title={tech.name}
+    description={tech.description}
+    icon={tech.image || undefined}
+    iconAlt={tech.name}
+  />
+</Box>

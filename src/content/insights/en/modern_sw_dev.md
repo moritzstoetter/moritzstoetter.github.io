@@ -1,10 +1,11 @@
 ---
-title: "Why modern microcontrollers need modern methods"
+title: "Our Philosphy"
+subtitle: "Why modern microcontrollers need modern methods"
 author: "Moritz Stötter"
 date: 2023-10-06
 image: "../assets/yarn.webp" # https://docs.astro.build/en/guides/images/#images-in-content-collections
 imageAlt: "order from chaos"
-tags: ["development", "consulting", "cpp"]
+insights: ["lock_in","less_is_more"]
 ---
 
 ### Embedded devices are no longer what they used to be 

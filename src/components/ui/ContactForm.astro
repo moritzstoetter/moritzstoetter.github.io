@@ -2,13 +2,14 @@
 import { Image } from "astro:assets";
 import contactImage from "../../assets/contact.png";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Grid from "./Grid.astro";
 
 const lang = getLangFromUrl(Astro.url);
 
 const t = useTranslations(lang);
 ---
 
-<div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:my-8">
+<Grid cols={2} breakpoint="lg" gap={8} class="lg:my-8">
   <div class="relative hidden h-full col-span-1 lg:block">
     <Image
       class="absolute inset-0 object-cover object-left w-full h-full rounded-l-3xl"
@@ -16,7 +17,7 @@ const t = useTranslations(lang);
       alt="asdfasdf asd fas df"
     />
   </div>
-  <div class="flex flex-col col-span-2 gap-8 pb-8 mx-4 lg:col-span-1 lg:mx-0">
+  <div class="flex flex-col col-span-2 gap-8 pb-8 lg:col-span-1">
     <h1>{t("contact.title")}</h1>
     <form
       class="flex flex-col gap-8"
@@ -64,4 +65,4 @@ const t = useTranslations(lang);
       class="button-primary">{t("contact.bookACall")}</a
     >
   </div>
-</div>
+</Grid>

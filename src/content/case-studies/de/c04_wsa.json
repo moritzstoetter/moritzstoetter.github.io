@@ -1,12 +1,41 @@
 {
   "slug": "c04_wsa",
   "title": "BLE Audio Testframework",
+  "client": "WS Audiology",
   "description": "Mit von uns entwickelter Technologie testet der drittgrößte Hörgerätehersteller der Welt seine Hörgeräte.",
   "about": "WS Audiology ist ein multinationaler Konzern, der Hörgeräte entwickelt, produziert und unter einer Reihe von Marken vertreibt, entstanden aus dem Zusammenschluss der Sivantos GmbH (ehemals Siemens) und Widex. Mit etwa 12000 Mitarbeitern und verteilt über Standorte in Deutschland, Dänemark und Singapur ist WSA ein echtes Schwergewicht im Hörgeratesektor.",
   "challenge": "Unser Kunde wollte automatisierte Integrationstests für den brandneuen BLE Audio Standard auf seinen Geräten durchführen. Das Projekt genoss von Anfang an viel Beachtung vom Management und bewies sich immer wieder aufs Neue.",
   "deliveredValue": "Wir wollten sowohl schnell eine hohe Testabdeckung erreichen, als auch ein langfristig nützliches und technologisch exzellentes Produkt abliefern. Um das zu erreichen haben wir von Beginn an auf modulare, formbare Softwarearchitektur gesetzt, die es uns ermöglicht hat, das ganze System iterativ zu verbessern. Als sich zur Mitte des Projektes hin die Anforderungen fundamental geändert haben, waren wir damit in einer hervorragenden Position zu reagieren.",
-  "product": "Tiefgreifende Anforderungs- und Machbarkeitsanalyse in einem komplexen Multi-Stakeholder-Umfeld — Neuentwicklung eines Test-Frameworks für Bluetooth LE Audio Development für central-driven, automatisches Testen neuartiger Hörgerätefirmware — Kommunikation zwischen Test-Central und und Test-PC via Protocol Buffers (NanoPB) — Zephyr basierte Firmwarearchitektur und Implementierung in modernem C++ — Entwicklung von Firmwaremodulen zur Verarbeitung von Audiodaten unter Echtzeitbedingungen — Test-Framework Architektur, Design und Implementation in Python/Pytest — Hybrider Lösungsansatz basierend sowohl auf Zephyr-Shell als auch auf maßgeschneiderter Firmware, um größtmöglich Codeabdeckung in kürzester Zeit zu gewährleisten — Implementierung von hunderten von Tests, die mehrere Dutzend Probleme aufgedeckt haben — Refactoring, bug fixing and Erweiterung angrenzender Legacy-Systeme — CI/CD Integration — Interne Schulung der Teammitglieder zur Nutzung und Erweiterung des Test-Frameworks",
-  "tech": ["Embedded C++20", "Nordic Semiconductor", "ARM Cortex-M", "Zephyr", "BLE Audio", "Pytest", "Protobuf", "CMake", "FreeRTOS", "Multithreading", "Multicore", "Hard real time"],
-  "testimonials": [4, 3],
-  "image": "../assets/wsa.jpg"
+  "product": [
+    "Tiefgreifende Anforderungs- und Machbarkeitsanalyse in einem komplexen Multi-Stakeholder-Umfeld",
+    "Neuentwicklung eines Test-Frameworks für Bluetooth LE Audio Development für central-driven, automatisches Testen neuartiger Hörgerätefirmware",
+    "Kommunikation zwischen Test-Central und und Test-PC via Protocol Buffers (NanoPB)",
+    "Zephyr basierte Firmwarearchitektur und Implementierung in modernem C++",
+    "Entwicklung von Firmwaremodulen zur Verarbeitung von Audiodaten unter Echtzeitbedingungen",
+    "Test-Framework Architektur, Design und Implementation in Python/Pytest",
+    "Hybrider Lösungsansatz basierend sowohl auf Zephyr-Shell als auch auf maßgeschneiderter Firmware, um größtmöglich Codeabdeckung in kürzester Zeit zu gewährleisten",
+    "Implementierung von hunderten von Tests, die mehrere Dutzend Probleme aufgedeckt haben",
+    "Refactoring, bug fixing and Erweiterung angrenzender Legacy-Systeme",
+    "CI/CD Integration",
+    "Interne Schulung der Teammitglieder zur Nutzung und Erweiterung des Test-Frameworks"
+  ],
+  "tech": [
+    "Embedded C++20",
+    "Nordic Semiconductor",
+    "ARM Cortex-M",
+    "Zephyr",
+    "BLE Audio",
+    "Pytest",
+    "Protobuf",
+    "CMake",
+    "FreeRTOS",
+    "Multithreading",
+    "Multicore",
+    "Hard real time"
+  ],
+  "testimonials": [
+    "t04_pavan",
+    "t03_lukas"
+  ],
+  "image": "../assets/wsa.webp"
 }

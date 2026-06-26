@@ -1,9 +1,10 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import { findInsightsByTags } from "../../lib/insights/util";
+import { getLangFromUrl, idIsOfLanguage, useTranslations } from "../../i18n/utils";
 import InsightPreview from "../business/InsightPreview.astro";
+import Grid from "../ui/Grid.astro";
+import Box from "../ui/Box.astro";
+import IconText from "../ui/IconText.astro";
 
 const { slug } = Astro.params;
 const lang = getLangFromUrl(Astro.url);
@@ -14,26 +15,23 @@ const insight = insights.find((s) => s.id === `${lang}/${slug}`);
 
 const rendering = insight ? await render(insight) : undefined;
 
-const relatedInsights = await findInsightsByTags(
-  lang,
-  insight?.data.tags ?? [],
-  slug,
-);
+// Resolve the explicitly-linked related insights by slug, preserving the
+// authored order, in the current language and excluding the current insight.
+const relatedInsights = (insight?.data.insights ?? []).flatMap((s) => {
+  if (s === slug) return [];
+  const e = insights.find(
+    (i) => idIsOfLanguage(i.id, lang) && i.id.split("/")[1] === s,
+  );
+  return e ? [e] : [];
+});
 
 const t = useTranslations(lang);
 ---
 
 {
   !!insight && !!rendering ? (
-    <article class="flex flex-col gap-4 px-4 pb-8 mx-4 md:px-0 lg:mx-0">
-      <h1>{insight.data.title}</h1>
-      <div class="h-96 overflow-hidden">
-        <Image
-          src={insight.data.image}
-          alt={insight.data.imageAlt}
-          class="w-full h-[200%] object-cover object-center -translate-y-1/4"
-        />
-      </div>
+    <article class="flex flex-col gap-8 py-8">
+      <InsightPreview insight={insight} linked={false} swap />
       <div class="pb-8 prose dark:prose-dark max-w-none lg:prose-xl">
         <rendering.Content />
       </div>
@@ -41,14 +39,22 @@ const t = useTranslations(lang);
         <h6>{insight.data.date.toISOString().slice(0, 10)}</h6>
       </div>
       {relatedInsights?.length > 0 && (
-        <>
-          <h2>{t("common.relatedInsights")}</h2>
-          <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="flex flex-col gap-4">
+          <h2 class="text-primaryLight dark:text-primaryDark">
+            {t("common.relatedInsights")}
+          </h2>
+          <Grid cols={3} gap={4}>
             {relatedInsights.map((insight) => (
-              <InsightPreview insight={insight} />
+              <Box padded href={`/${lang}/insights/${insight.id.split("/")[1]}`} customClass="h-full">
+                <IconText
+                  size="sm"
+                  title={insight.data.title}
+                  subtitle={insight.data.subtitle}
+                />
+              </Box>
             ))}
-          </div>
-        </>
+          </Grid>
+        </div>
       )}
     </article>
   ) : (

@@ -4,18 +4,17 @@
   "description": "Wir unterstützen Sie mit unserer Erfahrung und unserem Fachwissen.",
   "tech": [
     {
-      "name": "Hardwareplanung",
-      "description": "Die Wahl der Plattform für Ihr Projekt ist weitreichend und schwer zu korrigieren. Wir haben mit allen gängigen Herstellern und Plattformen gearbeitet und wissen aus persönlicher Erfahrung, was am besten zu Ihnen passt.",
+      "name": "Codereview",
+      "description": "",
       "image": "../assets/consult/hw_planning.png"
     },
     {
       "name": "Softwareplanung",
-      "description": "Software ist unser Kerngeschäft und wir beraten Sie gerne hierzu. Sie es bei der Wahl eines Techstacks für ihr Produkt oder bei der Erstellung einer Architekturplanung. Sprechen Sie uns einfach an!",
+      "description": "Software ist unser Kerngeschäft und wir beraten Sie gerne hierzu. Sei es bei der Wahl eines Techstacks für ihr Produkt oder bei der Erstellung einer Architekturplanung. Sprechen Sie uns einfach an!",
       "image": "../assets/consult/sw_planning.png"
     }
   ],
   "image": "../assets/output_2.webp",
-  "tags": [
-    "consulting"
-  ]
+  "insights": [],
+  "case_studies": []
 }

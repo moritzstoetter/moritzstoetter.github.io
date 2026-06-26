@@ -35,8 +35,6 @@
         }
     ],
     "image": "../assets/output_0.webp",
-    "tags": [
-        "cpp",
-        "development"
-    ]
+    "insights": ["lock_in","less_is_more","modern_sw_dev"],
+    "case_studies": ["c06_laboratory","c04_wsa","c05_urban"]
 }

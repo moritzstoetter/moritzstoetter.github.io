@@ -1,41 +1,27 @@
 ---
-import { Image } from "astro:assets";
 import type { Expertise } from "../../content.config";
 import { getLangFromUrl } from "../../i18n/utils";
-import Box from "../ui/Box.astro";
+import SplitBox from "../ui/SplitBox.astro";
 
-const expertise: Expertise = Astro.props.expertise;
+interface Props {
+  expertise: Expertise;
+  // When true (default) the box links to the expertise subpage; the subpage's
+  // own header passes false so it isn't a self-link.
+  linked?: boolean;
+  // Mirror the image/text arrangement (image right, text left).
+  swap?: boolean;
+}
+
+const { expertise, linked = true, swap = false } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<Box href={`/${lang}/expertise/${expertise.slug}`}>
-  <div class="relative h-80 overflow-hidden rounded-2xl md:h-[28rem]">
-    {/* Background Image: full width on mobile; sharp left half + strongly blurred right half on larger screens */}
-    <div class="absolute inset-0 flex">
-      <div class="w-full h-full overflow-hidden md:w-1/2">
-        <Image
-          src={expertise.image}
-          alt={expertise.title}
-          class="object-cover w-full h-full"
-        />
-      </div>
-      <div class="hidden h-full w-1/2 overflow-hidden md:block">
-        <Image
-          src={expertise.image}
-          alt=""
-          aria-hidden="true"
-          class="h-full w-full scale-110 object-cover blur-3xl"
-        />
-      </div>
-    </div>
-
-    {/* Content Grid */}
-    <div class="relative h-full grid grid-cols-1 md:grid-cols-2">
-      <div class="flex flex-col justify-center gap-4 px-8 py-8 bg-white/75 dark:bg-black/75 md:col-start-2">
-        <h2 class="text-2xl sm:text-4xl lg:text-5xl text-primaryLight dark:text-primaryDark">{expertise.title}</h2>
-        <p class="text-lg sm:text-xl lg:text-2xl">{expertise.description}</p>
-      </div>
-    </div>
-  </div>
-</Box>
+<SplitBox
+  image={expertise.image}
+  imageAlt={expertise.title}
+  title={expertise.title}
+  description={expertise.description}
+  href={linked ? `/${lang}/expertise/${expertise.slug}` : undefined}
+  swap={swap}
+/>

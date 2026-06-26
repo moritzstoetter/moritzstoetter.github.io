@@ -2,7 +2,7 @@
   "slug": "s01_development",
   "title": "Software Development",
   "description": "We develop software solutions that are tailored to your use case. Our specialty are embedded systems, specifically including microcontrollers. Here you can learn about the technologies and tools that we touch every day.",
-  "tech": [ 
+  "tech": [
     {
       "name": "C++",
       "description": "C++ is uniquely suited to bridge the gap between the constraints of a embedded device and the requirements of modern software development. We use the most recent standard that your use case allows. ",
@@ -65,5 +65,6 @@
     }
   ],
   "image": "../assets/development.png",
-  "tags": ["cpp", "development"]
+  "insights": ["lock_in","less_is_more","modern_sw_dev"],
+  "case_studies": ["c06_laboratory","c04_wsa","c05_urban"]
 }

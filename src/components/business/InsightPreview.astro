@@ -1,16 +1,27 @@
 ---
-import { Image } from "astro:assets";
 import { getLangFromUrl } from "../../i18n/utils";
-import Box from "../ui/Box.astro";
+import SplitBox from "../ui/SplitBox.astro";
 
-const insight = Astro.props.insight;
+interface Props {
+  insight: any;
+  // When true (default) the box links to the insight; the insight page's own
+  // header passes false so it isn't a self-link.
+  linked?: boolean;
+  // Mirror the image/text arrangement (image right, text left).
+  swap?: boolean;
+}
+
+const { insight, linked = true, swap = false } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
+const slug = insight.id.split("/")[1];
 ---
 
-<Box href={`/${lang}/insights/${insight.id.split("/")[1]}`} padded>
-  <div class="grid grid-cols-1 gap-4">
-    <Image src={insight.data.image} alt={insight.data.imageAlt} />
-    <h3 class="italic text-center">{insight.data.title}</h3>
-  </div>
-</Box>
+<SplitBox
+  image={insight.data.image}
+  imageAlt={insight.data.imageAlt}
+  title={insight.data.title}
+  subtitle={insight.data.subtitle}
+  href={linked ? `/${lang}/insights/${slug}` : undefined}
+  swap={swap}
+/>

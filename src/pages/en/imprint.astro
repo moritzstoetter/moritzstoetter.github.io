@@ -1,14 +1,14 @@
 ---
 import Box from "../../components/ui/Box.astro";
-import BoxGrid from "../../components/ui/BoxGrid.astro";
+import Grid from "../../components/ui/Grid.astro";
 import Base from "../../layouts/Base.astro";
 ---
 
 <Base>
-  <section class="flex flex-col gap-8 py-8 mx-4 lg:mx-0" id="imprint">
+  <section class="flex flex-col gap-8 py-8" id="imprint">
     <h1>Imprint</h1>
     <h2 class="text-center">Information in accordance with § 5 DDG</h2>
-    <BoxGrid narrow>
+    <Grid cols={2} class="pb-8">
       <Box padded>
         <div class="flex flex-col gap-4">
           <h3 class="text-primaryLight dark:text-primaryDark">Contact</h3>
@@ -48,6 +48,6 @@ import Base from "../../layouts/Base.astro";
           </p>
         </div>
       </Box>
-    </BoxGrid>
+    </Grid>
   </section>
 </Base>

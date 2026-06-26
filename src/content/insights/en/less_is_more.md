@@ -1,10 +1,11 @@
 ---
-title: "The Case for Abstractions and Expressiveness: Less is More"
+title: "Less is More"
+subtitle: "Why every line of code is also a liability: The Case for Abstractions and Expressiveness"
 author: "Moritz Stötter"
 date: 2023-12-09
 image: "../assets/tree.png" # https://docs.astro.build/en/guides/images/#images-in-content-collections
 imageAlt: "order from chaos"
-tags: ["development", "cpp"]
+insights: ["lock_in","modern_sw_dev"]
 ---
 
 

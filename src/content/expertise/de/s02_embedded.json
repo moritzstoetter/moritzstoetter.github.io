@@ -36,12 +36,10 @@
     {
       "name": "Yocto",
       "description": "",
-      "image": "../assets/tech/yocto.webp"
+      "image": "../assets/tech/linux.webp"
     }
   ],
   "image": "../assets/output_3.webp",
-  "tags": [
-    "cpp",
-    "development"
-  ]
+  "insights": ["lock_in","less_is_more","modern_sw_dev"],
+  "case_studies": ["c06_laboratory","c01_climbsmart","c04_wsa"]
 }

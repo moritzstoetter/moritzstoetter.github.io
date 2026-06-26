@@ -13,16 +13,19 @@ const insightsCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      subtitle: z.string().optional(),
       image: image(),
       imageAlt: z.string(),
       author: z.string(),
       date: z.date(),
-      tags: z.array(z.string()),
+      // Explicitly linked related insights, by slug (filename).
+      insights: z.array(z.string()).default([]),
     }),
 });
 
 export interface Insight {
   title: string;
+  subtitle?: string;
   image: {
     src: string;
     width: number;
@@ -32,7 +35,7 @@ export interface Insight {
   imageAlt: string;
   author: string;
   date: Date;
-  tags: string[];
+  insights: string[];
 }
 
 const aboutCollection = defineCollection({
@@ -70,13 +73,15 @@ const caseStudiesCollection = defineCollection({
     z.object({
       slug: z.string(),
       title: z.string(),
+      client: z.string(),
       description: z.string(),
       about: z.string(),
       challenge: z.string(),
       deliveredValue: z.string(),
-      product: z.string(),
+      product: z.array(z.string()),
       tech: z.array(z.string()),
-      testimonials: z.array(z.number()),
+      // Explicitly linked testimonials, by slug (filename).
+      testimonials: z.array(z.string()),
       image: image(),
     }),
 });
@@ -84,13 +89,14 @@ const caseStudiesCollection = defineCollection({
 export interface CaseStudy {
   slug: string;
   title: string;
+  client: string;
   description: string;
   about: string;
   challenge: string;
   deliveredValue: string;
-  product: string;
+  product: string[];
   tech: string[];
-  testimonials: number[];
+  testimonials: string[];
   image: {
     src: string;
     width: number;
@@ -115,7 +121,9 @@ const expertiseCollection = defineCollection({
         }),
       ),
       image: image(),
-      tags: z.array(z.string()),
+      // Explicitly linked related insights / case studies, by slug (filename).
+      insights: z.array(z.string()).default([]),
+      case_studies: z.array(z.string()).default([]),
     }),
 });
 
@@ -143,14 +151,14 @@ export interface Expertise {
     height: number;
     format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
   };
-  tags: string[];
+  insights: string[];
+  case_studies: string[];
 }
 
 const testimonialsCollection = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/testimonials", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
-      identifier: z.number(),
       name: z.string(),
       subheading: z.string(),
       quote: z.string(),
@@ -159,7 +167,6 @@ const testimonialsCollection = defineCollection({
 });
 
 export interface Testimonial {
-  identifier: number;
   name: string;
   subheading: string;
   quote: string;

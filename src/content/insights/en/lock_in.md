@@ -1,10 +1,11 @@
 ---
-title: "Tools That Hold Your Designs Hostage Have No Future"
+title: "Stay Free"
+subtitle: "Tools That Hold Your Designs Hostage Have No Future"
 author: "Moritz Stötter"
 date: 2026-01-27
 image: "../assets/caged.webp" # https://docs.astro.build/en/guides/images/#images-in-content-collections
 imageAlt: "break free"
-tags: ["consulting", "development", "cpp"]
+insights: ["less_is_more","modern_sw_dev"]
 ---
 
 ### Tools That Hold Your Designs Hostage Have No Future

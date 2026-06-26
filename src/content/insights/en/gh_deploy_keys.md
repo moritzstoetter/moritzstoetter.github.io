@@ -1,10 +1,11 @@
 ---
-title: "How to Access a Private GitHub Repo from GitHub Actions"
+title: "Tech Spotlight"
+subtitle: "How to Access a Private GitHub Repo from GitHub Actions"
 author: "Moritz Stötter"
 date: 2025-07-20
 image: "../assets/auto_keys.png" # https://docs.astro.build/en/guides/images/#images-in-content-collections
 imageAlt: ""
-tags: ["CI/CD", "GitHub"]
+insights: []
 ---
 
 

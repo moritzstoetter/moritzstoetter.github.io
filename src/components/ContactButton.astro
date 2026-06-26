@@ -6,7 +6,25 @@ const t = useTranslations(lang);
 ---
 
 <div class="relative flex flex-col p-0 items-end">
-  <a href={`/${lang}/contact`} class="button-primary">
-    {t("home.hero.cta")}
+  <a
+    href={`/${lang}/contact`}
+    class="flex h-16 w-16 items-center justify-center rounded-full border-2 border-transparent bg-primaryLight text-white transition-colors duration-300 hover:bg-primaryLight/80 focus:border-white focus:outline-none dark:bg-primaryDark hover:dark:bg-primaryDark/80"
+    aria-label={t("home.hero.cta")}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="28"
+      height="28"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <path d="m3 7 9 6 9-6"></path>
+    </svg>
   </a>
 </div>

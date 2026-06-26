@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Box from "./Box.astro";
+import IconText from "./IconText.astro";
+
+// Horizontal "split" box, generalised from the landing-page expertise boxes:
+// one half is the sharp image, the other half is a strongly-blurred copy of the
+// same image with a frosted text panel on top. On small screens it collapses to
+// a single stacked card (sharp image background + frosted overlay), exactly like
+// the expertise previews.
+//
+// Layout (default, swap = false):
+//
+//   ┌───────────────┬───────────────┐
+//   │               │ [icon]  Title │
+//   │     image     │       (Sub)   │
+//   │               │ (Description) │
+//   └───────────────┴───────────────┘
+//                     └ frosted copy of image
+//
+// `swap` mirrors it (frosted text left, sharp image right). Everything except
+// `image` and `title` is optional.
+interface Props {
+  image: ImageMetadata;
+  imageAlt?: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
+  icon?: ImageMetadata;
+  iconAlt?: string;
+  href?: string;
+  // false: image left, text right (default). true: image right, text left.
+  swap?: boolean;
+}
+
+const {
+  image,
+  imageAlt = "",
+  title,
+  subtitle,
+  description,
+  icon,
+  iconAlt = "",
+  href,
+  swap = false,
+} = Astro.props;
+
+// The frosted panel: translucent backdrop + padding + vertical centering. The
+// content (icon/title/subtitle/description) lives in IconText. Lifted verbatim
+// from the expertise preview so the look stays identical.
+const panelClass =
+  "flex flex-col justify-center px-8 py-8 bg-backgroundLight/75 dark:bg-backgroundDarker/60";
+---
+
+<Box href={href}>
+  <div class="relative h-80 md:h-[28rem]">
+    {/* Background: sharp half + strongly blurred half (md+). The text always
+        sits over the blurred half; `swap` only re-orders which side that is. */}
+    <div class="absolute inset-0 flex">
+      <div
+        class:list={[
+          "h-full w-full overflow-hidden md:w-1/2",
+          swap && "md:order-2",
+        ]}
+      >
+        <Image src={image} alt={imageAlt} class="h-full w-full object-cover" />
+      </div>
+      <div
+        class:list={[
+          "hidden h-full w-1/2 overflow-hidden md:block",
+          swap && "md:order-1",
+        ]}
+      >
+        <Image
+          src={image}
+          alt=""
+          aria-hidden="true"
+          class="h-full w-full scale-110 object-cover blur-3xl"
+        />
+      </div>
+    </div>
+
+    {/* Frosted panel over the blurred half */}
+    <div class="relative grid h-full grid-cols-1 md:grid-cols-2">
+      <div class:list={[panelClass, swap ? "md:col-start-1" : "md:col-start-2"]}>
+        <IconText
+          title={title}
+          subtitle={subtitle}
+          description={description}
+          icon={icon}
+          iconAlt={iconAlt}
+        />
+      </div>
+    </div>
+  </div>
+</Box>

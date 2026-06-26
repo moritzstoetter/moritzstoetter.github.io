@@ -7,7 +7,6 @@ import {
   useTranslations,
 } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
-import BoxGrid from "../../components/ui/BoxGrid.astro"
 
 const caseStudies = await getCollection("case-studies");
 
@@ -31,11 +30,11 @@ export async function getStaticPaths() {
 
 <Base>
   <h1>{t("caseStudies.title")}</h1>
-  <BoxGrid wide>
+  <div class="flex flex-col gap-16 pb-16">
     {
       [...langCaseStudies].reverse().map((caseStudy) => (
         <CaseStudyPreview caseStudy={caseStudy.data} />
       ))
     }
-</BoxGrid>
+  </div>
 </Base>

@@ -2,9 +2,9 @@
 const { href, padded, customClass } = Astro.props;
 
 const className = [
-  "bg-white dark:bg-backgroundDark rounded-3xl",
+  "bg-white dark:bg-backgroundDark rounded-3xl overflow-hidden",
   href &&
-    "hover:bg-neutral-100 hover:shadow-md dark:hover:bg-backgroundDark/80  dark:hover:shadow-xl overflow-hidden transition duration-300",
+    "hover:bg-neutral-100 hover:shadow-md dark:hover:bg-backgroundDark/80  dark:hover:shadow-xl transition duration-300",
   padded && "p-8",
   customClass && `${customClass}`,
 ]

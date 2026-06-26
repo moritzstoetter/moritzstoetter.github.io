@@ -1,10 +1,11 @@
 ---
-title: "Wie man von GitHub-Actions auf ein privates GitHub-Repository zugreift"
+title: "Tech Spotlight"
+subtitle: "Wie man von GitHub-Actions auf ein privates GitHub-Repository zugreift"
 author: "Moritz Stötter"
 date: 2025-07-20
 image: "../assets/auto_keys.png" # https://docs.astro.build/en/guides/images/#images-in-content-collections
 imageAlt: ""
-tags: ["CI/CD", "GitHub"]
+insights: []
 ---
 
 
