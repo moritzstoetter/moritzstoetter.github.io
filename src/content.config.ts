@@ -52,6 +52,7 @@ const aboutCollection = defineCollection({
       members: z.array(
         z.object({
           name: z.string(),
+          subtitle: localized(z.string()).optional(),
           description: localized(z.string()),
           image: image(),
         }),
@@ -61,6 +62,7 @@ const aboutCollection = defineCollection({
 
 export interface TeamMember {
   name: string;
+  subtitle?: Localized<string>;
   description: Localized<string>;
   image: ImageMeta;
 }

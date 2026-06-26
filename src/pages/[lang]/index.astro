@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 <Base>
   <div class="flex flex-col gap-24 md:gap-40">
     <Hero />
-    <section data-spy="expertise">
+    <section>
       <h1>{t("home.expertise.title")}</h1>
       <ExpertiseList />
     </section>
@@ -30,7 +30,7 @@ export async function getStaticPaths() {
       <h1>{t("home.expertise.testimonials")}</h1>
       <TestimonialSlider testimonials={langTestimonials} />
     </section>
-    <section data-spy="case-studies">
+    <section>
       <h1>{t("caseStudies.title")}</h1>
       <CaseStudyList limit={2} />
       <div class="mt-8 text-right">
@@ -39,7 +39,7 @@ export async function getStaticPaths() {
         </a>
       </div>
     </section>
-    <section data-spy="insights">
+    <section>
       <h1>{t("insights.title")}</h1>
       <InsightList limit={2} />
       <div class="mt-8 text-right">
@@ -48,46 +48,12 @@ export async function getStaticPaths() {
         </a>
       </div>
     </section>
-    <section data-spy="contact" class="mb-16 md:mb-24">
+    <section class="mb-16 md:mb-24">
       <h1>{t("contact.title")}</h1>
       <ContactForm />
     </section>
   </div>
 </Base>
-
-<script>
-  // Scroll-spy: accent the nav link matching whichever section is crossing the
-  // viewport centre. Only active on pages that have [data-spy] sections (home).
-  const links = document.querySelectorAll<HTMLAnchorElement>("[data-spy-link]");
-  const sections = document.querySelectorAll<HTMLElement>("[data-spy]");
-  const activeClasses = ["text-primaryLight", "dark:text-primaryDark"];
-
-  const setActive = (key: string | null) => {
-    links.forEach((link) => {
-      const on = link.dataset.spyLink === key;
-      activeClasses.forEach((c) => link.classList.toggle(c, on));
-    });
-  };
-
-  if (sections.length > 0) {
-    // Track which spy-sections currently cross the centre line; accent the
-    // matching link, or clear when none do (e.g. over the testimonials).
-    const centred = new Set<HTMLElement>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const el = entry.target as HTMLElement;
-          if (entry.isIntersecting) centred.add(el);
-          else centred.delete(el);
-        }
-        const current = centred.values().next().value as HTMLElement | undefined;
-        setActive(current?.dataset.spy ?? null);
-      },
-      { rootMargin: "-50% 0px -50% 0px" },
-    );
-    sections.forEach((section) => observer.observe(section));
-  }
-</script>
 
 <style>
   /* Each home section fades + rises in as it enters, holds while centred, then

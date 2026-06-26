@@ -7,12 +7,6 @@ export const defaultLang = "de";
 
 export const labels = {
   en: {
-    about: {
-      title: "About Us",
-      team: "Team",
-      description:
-        "We at modern embedded have devoted ourselves to applying the highest quality standards to software solutions for embedded devices. We achieve this by employing cutting edge technology and tools, that have proven themselves as gold standards for their specific application. Modularity and malleability are guiding principles in our work.",
-    },
     nav: {
       expertise: "Expertise",
       caseStudies: "Case Studies",
@@ -22,7 +16,7 @@ export const labels = {
     },
     home: {
       hero: {
-        title: "Your partner for embedded excellence",
+        title: "Your Partner for Embedded Excellence",
         subtitle:
           "We help you beat the competition with a product that is outstanding to the core.",
         cta: "Get in touch",
@@ -68,12 +62,6 @@ export const labels = {
     },
   },
   de: {
-    about: {
-      title: "Über uns",
-      team: "Unser Team",
-      description:
-        "Wir von modern embedded haben uns der Anwendung höchster Qualitätsansprüche für Softwarelösungen im Embeddedbereich verschrieben. Das erreichen wir durch den Einsatz der modernsten Technologien und Werkzeugen, die sich jeweils als Goldstandard für ihren jeweiligen Anwendungsfall etabliert haben. Modularität und Formbarkeit sind Leitprinzipien unserer Arbeit.",
-    },
     nav: {
       expertise: "Expertise",
       caseStudies: "Fallstudien",

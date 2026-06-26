@@ -1,15 +1,20 @@
 ---
 import hero from "../assets/hero2.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import SplitBox from "./ui/SplitBox.astro";
+import SplitMedia from "./ui/SplitMedia.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<div id="hero">
-  {/* Frosted text on the left, sharp image on the right (swap) */}
-  <SplitBox
+{/* Home hero: flat top (fuses flush against the nav's flat bottom), rounded
+    bottom — together they read as one rounded unit with a flat seam. The nav is
+    flush above because `main` drops its top padding on home. */}
+<div
+  id="hero"
+  class="overflow-hidden rounded-b-[39px] border-x-2 border-b-2 border-primaryLight/10 dark:border-neutral-700"
+>
+  <SplitMedia
     image={hero}
     imageAlt="hero"
     title={t("home.hero.title")}

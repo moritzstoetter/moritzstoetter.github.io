@@ -1,13 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 import TeamMember from "../../components/business/TeamMember.astro";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 
 const about = await getCollection("about");
-const lang = getLangFromUrl(Astro.url);
 const team = about.find((a) => a.id === "team");
-const t = useTranslations(lang);
 
 export async function getStaticPaths() {
   return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
@@ -15,11 +12,7 @@ export async function getStaticPaths() {
 ---
 
 <Base>
-  <h1>{t("about.title")}</h1>
   <section class="flex flex-col gap-8 pb-8">
-    <p>{t("about.description")}</p>
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-1">
-      {team?.data.members.map((member) => <TeamMember member={member} />)}
-    </div>
+    {team?.data.members.map((member) => <TeamMember member={member} />)}
   </section>
 </Base>
