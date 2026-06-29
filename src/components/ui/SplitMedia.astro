@@ -29,7 +29,7 @@ const {
   icon,
   iconAlt = "",
   swap = false,
-  heightClass = "h-80 md:h-[28rem]",
+  heightClass = "min-h-80 md:min-h-[28rem]",
 } = Astro.props;
 
 // Optional action area below the text (e.g. the masthead's CTA button),
@@ -40,7 +40,7 @@ const panelClass =
   "flex flex-col justify-center px-8 py-8 bg-backgroundLight/75 dark:bg-backgroundDarker/60";
 ---
 
-<div class:list={["relative", heightClass]}>
+<div class:list={["relative flex", heightClass]}>
   {/* Background: sharp half + strongly blurred half (md+). The text always
       sits over the blurred half; `swap` only re-orders which side that is. */}
   <div class="absolute inset-0 flex">
@@ -64,8 +64,11 @@ const panelClass =
     </div>
   </div>
 
-  {/* Frosted panel over the blurred half */}
-  <div class="relative grid h-full grid-cols-1 md:grid-cols-2">
+  {/* Frosted panel over the blurred half. As the sole in-flow child of the
+      flex root it stretches to the box height — which is `min-h` driven, so the
+      box grows to fit text that would otherwise be clipped, while short content
+      still centres within the minimum height. */}
+  <div class="relative grid w-full grid-cols-1 md:grid-cols-2">
     <div class:list={[panelClass, swap ? "md:col-start-1" : "md:col-start-2"]}>
       <IconText
         title={title}

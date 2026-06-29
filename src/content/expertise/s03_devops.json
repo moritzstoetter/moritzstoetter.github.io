@@ -5,6 +5,10 @@
     "c06_laboratory",
     "c05_urban"
   ],
+  "insights": [
+    "modern_sw_dev",
+    "lock_in"
+  ],
   "title": {
     "de": "DevOps + AI",
     "en": "DevOps + AI"
@@ -20,8 +24,8 @@
         "en": "Git"
       },
       "description": {
-        "de": "",
-        "en": ""
+        "de": "Der Industriestandard für Source Control",
+        "en": "The industry standard for source control."
       },
       "image": "./assets/tech/git.webp"
     },
