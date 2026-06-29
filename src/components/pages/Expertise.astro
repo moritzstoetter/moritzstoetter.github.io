@@ -6,6 +6,7 @@ import Grid from "../ui/Grid.astro";
 import Box from "../ui/Box.astro";
 import IconText from "../ui/IconText.astro";
 import Technology from "../business/Technology.astro";
+import RelatedInsights from "../business/RelatedInsights.astro";
 
 const { lang, slug } = Astro.props;
 
@@ -59,22 +60,7 @@ const t = useTranslations(lang);
           </Grid>
         </div>
       )}
-      {relatedInsights.length > 0 && (
-        <div class="flex flex-col gap-4">
-          <h2 class={sectionHeading}>{t("common.relatedInsights")}</h2>
-          <Grid cols={3} gap={4}>
-            {relatedInsights.map((insight) => (
-              <Box padded href={`/${lang}/insights/${insight.id.split("/")[1]}`} customClass="h-full">
-                <IconText
-                  size="sm"
-                  title={insight.data.title}
-                  subtitle={insight.data.subtitle}
-                />
-              </Box>
-            ))}
-          </Grid>
-        </div>
-      )}
+      <RelatedInsights insights={relatedInsights} headingClass={sectionHeading} />
     </section>
   ) : (
     <div>

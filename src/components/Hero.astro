@@ -1,5 +1,5 @@
 ---
-import hero from "../assets/hero2.webp";
+import hero from "../assets/hero.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import SplitMedia from "./ui/SplitMedia.astro";
 
@@ -7,18 +7,22 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-{/* Home hero: flat top (fuses flush against the nav's flat bottom), rounded
-    bottom — together they read as one rounded unit with a flat seam. The nav is
-    flush above because `main` drops its top padding on home. */}
+{/* Home hero: a self-contained rounded box, vertically centred in the first
+    viewport by the home page's hero section. */}
 <div
   id="hero"
-  class="overflow-hidden rounded-b-[39px] border-x-2 border-b-2 border-primaryLight/10 dark:border-neutral-700"
+  class="overflow-hidden rounded-[39px] border-2 border-primaryLight/10 dark:border-neutral-700"
 >
   <SplitMedia
     image={hero}
     imageAlt="hero"
     title={t("home.hero.title")}
     description={t("home.hero.subtitle")}
+    heightClass="h-[34rem] md:h-[40rem] lg:h-[44rem]"
     swap
-  />
+  >
+    <a slot="cta" href={`/${lang}/contact`} class="button-primary w-fit">
+      {t("home.hero.cta")}
+    </a>
+  </SplitMedia>
 </div>

@@ -1,6 +1,7 @@
 ---
 title: "Weniger ist mehr"
 subtitle: "Warum jede Zeile Code auch eine Belastung ist: Das Argument für Abstraktionen und Ausdrucksstärke"
+description: "Jede Zeile Code, die du schreibst, musst du auch pflegen, debuggen und verantworten. Ein Plädoyer dafür, mit Abstraktionen und Ausdrucksstärke mehr mit weniger zu erreichen."
 author: "Moritz Stötter"
 date: 2023-12-09
 image: "../assets/tree.png" # https://docs.astro.build/en/guides/images/#images-in-content-collections

@@ -1,6 +1,7 @@
 ---
 title: "Stay Free"
 subtitle: "Tools That Hold Your Designs Hostage Have No Future"
+description: "Proprietary IDEs, build systems, and code generators quietly hold your designs hostage. Here is how vendor lock-in takes root in embedded development, and how open, standards-based tooling buys back your freedom."
 author: "Moritz Stötter"
 date: 2026-01-27
 image: "../assets/caged.webp" # https://docs.astro.build/en/guides/images/#images-in-content-collections

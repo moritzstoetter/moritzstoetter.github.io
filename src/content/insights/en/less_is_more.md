@@ -1,6 +1,7 @@
 ---
 title: "Less is More"
 subtitle: "Why every line of code is also a liability: The Case for Abstractions and Expressiveness"
+description: "Every line of code you write is a line you have to maintain, debug, and defend. This is the case for leaning on abstractions and expressiveness to do more with less."
 author: "Moritz Stötter"
 date: 2023-12-09
 image: "../assets/tree.png" # https://docs.astro.build/en/guides/images/#images-in-content-collections

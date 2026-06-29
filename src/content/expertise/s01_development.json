@@ -2,9 +2,8 @@
   "slug": "s01_development",
   "image": "./assets/output_0.webp",
   "insights": [
-    "lock_in",
-    "less_is_more",
-    "modern_sw_dev"
+    "modern_sw_dev",
+    "less_is_more"
   ],
   "case_studies": [
     "c06_laboratory",

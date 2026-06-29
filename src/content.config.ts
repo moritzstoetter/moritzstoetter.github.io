@@ -26,6 +26,7 @@ const insightsCollection = defineCollection({
     z.object({
       title: z.string(),
       subtitle: z.string().optional(),
+      description: z.string(),
       image: image(),
       imageAlt: z.string(),
       author: z.string(),
@@ -38,6 +39,7 @@ const insightsCollection = defineCollection({
 export interface Insight {
   title: string;
   subtitle?: string;
+  description: string;
   image: ImageMeta;
   imageAlt: string;
   author: string;

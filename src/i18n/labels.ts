@@ -20,6 +20,7 @@ export const labels = {
         subtitle:
           "We help you beat the competition with a product that is outstanding to the core.",
         cta: "Get in touch",
+        scrollDown: "Scroll down",
       },
       expertise: {
         title: "Our Expertise",
@@ -75,6 +76,7 @@ export const labels = {
         subtitle:
           "Wir helfen Ihnen die Konkurrenz zu schlagen, mit einem herausragenden Produkt - bis in den Kern.",
         cta: "Kontaktieren Sie uns",
+        scrollDown: "Nach unten scrollen",
       },
       expertise: {
         title: "Unsere Expertise",

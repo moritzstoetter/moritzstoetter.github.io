@@ -15,6 +15,9 @@ interface Props {
   iconAlt?: string;
   // false: image left, text right (default). true: image right, text left.
   swap?: boolean;
+  // Height of the split. Defaults to the content-card size; the home masthead
+  // passes a taller value so it reads as a hero rather than another card.
+  heightClass?: string;
 }
 
 const {
@@ -26,13 +29,18 @@ const {
   icon,
   iconAlt = "",
   swap = false,
+  heightClass = "h-80 md:h-[28rem]",
 } = Astro.props;
+
+// Optional action area below the text (e.g. the masthead's CTA button),
+// provided via the `cta` slot. Cards leave it empty and render nothing.
+const hasCta = Astro.slots.has("cta");
 
 const panelClass =
   "flex flex-col justify-center px-8 py-8 bg-backgroundLight/75 dark:bg-backgroundDarker/60";
 ---
 
-<div class="relative h-80 md:h-[28rem]">
+<div class:list={["relative", heightClass]}>
   {/* Background: sharp half + strongly blurred half (md+). The text always
       sits over the blurred half; `swap` only re-orders which side that is. */}
   <div class="absolute inset-0 flex">
@@ -68,4 +76,11 @@ const panelClass =
       />
     </div>
   </div>
+
+  {/* Optional CTA, pinned to the lower-right corner of the whole box. */}
+  {hasCta && (
+    <div class="absolute bottom-0 right-0 z-10 p-6 md:p-8">
+      <slot name="cta" />
+    </div>
+  )}
 </div>

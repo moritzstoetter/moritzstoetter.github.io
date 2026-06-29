@@ -1,15 +1,12 @@
 {
   "slug": "s02_embedded",
   "image": "./assets/output_3.webp",
-  "insights": [
-    "lock_in",
-    "less_is_more",
-    "modern_sw_dev"
-  ],
   "case_studies": [
     "c06_laboratory",
-    "c01_climbsmart",
     "c04_wsa"
+  ],
+  "insights": [
+    "modern_sw_dev"
   ],
   "title": {
     "de": "Mikrocontroller + Embedded Linux",

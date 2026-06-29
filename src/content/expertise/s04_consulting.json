@@ -1,7 +1,9 @@
 {
   "slug": "s04_consulting",
   "image": "./assets/output_2.webp",
-  "insights": [],
+  "insights": [
+    "modern_sw_dev"
+  ],
   "case_studies": [],
   "title": {
     "de": "Consulting + Audit",
@@ -18,8 +20,8 @@
         "en": "Code Review"
       },
       "description": {
-        "de": "",
-        "en": "Book a code review with us for C++ or Python and take your code base to the next level."
+        "de": "Buchen Sie bei uns ein Code-Review für embedded C, C++ oder Python, um zu erfahren, wo Sie stehen, und Ihre Codebasis auf die nächste Stufe zu heben.",
+        "en": "Book a code review with us for C++ or Python to learn where you stand and take your code base to the next level."
       },
       "image": "./assets/consult/hw_planning.png"
     },

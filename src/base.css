@@ -44,6 +44,14 @@
   }
 }
 
+/* Smooth scroll for in-page anchors (e.g. the home scroll-down button),
+   disabled for users who prefer reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 @layer components {
   .button-primary {
     @apply w-full rounded-full border-2 border-transparent bg-primaryLight px-8 py-4 text-center text-white transition-colors duration-300 hover:bg-primaryLight/80 focus:border-white focus:outline-none md:w-fit md:text-left dark:bg-primaryDark hover:dark:bg-primaryDark/80;

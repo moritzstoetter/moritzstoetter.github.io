@@ -1,14 +1,9 @@
 {
-  "slug": "s03_cicd",
+  "slug": "s03_devops",
   "image": "./assets/output_1.webp",
-  "insights": [
-    "lock_in",
-    "less_is_more",
-    "modern_sw_dev"
-  ],
   "case_studies": [
-    "c05_urban",
-    "c06_laboratory"
+    "c06_laboratory",
+    "c05_urban"
   ],
   "title": {
     "de": "DevOps + AI",

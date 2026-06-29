@@ -2,9 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { getLangFromUrl, idIsOfLanguage, useTranslations } from "../../i18n/utils";
 import InsightPreview from "../business/InsightPreview.astro";
-import Grid from "../ui/Grid.astro";
-import Box from "../ui/Box.astro";
-import IconText from "../ui/IconText.astro";
+import RelatedInsights from "../business/RelatedInsights.astro";
 
 const { slug } = Astro.params;
 const lang = getLangFromUrl(Astro.url);
@@ -38,24 +36,10 @@ const t = useTranslations(lang);
       <div class="w-full text-right">
         <h6>{insight.data.date.toISOString().slice(0, 10)}</h6>
       </div>
-      {relatedInsights?.length > 0 && (
-        <div class="flex flex-col gap-4">
-          <h2 class="text-primaryLight dark:text-primaryDark">
-            {t("common.relatedInsights")}
-          </h2>
-          <Grid cols={3} gap={4}>
-            {relatedInsights.map((insight) => (
-              <Box padded href={`/${lang}/insights/${insight.id.split("/")[1]}`} customClass="h-full">
-                <IconText
-                  size="sm"
-                  title={insight.data.title}
-                  subtitle={insight.data.subtitle}
-                />
-              </Box>
-            ))}
-          </Grid>
-        </div>
-      )}
+      <RelatedInsights
+        insights={relatedInsights}
+        headingClass="text-primaryLight dark:text-primaryDark"
+      />
     </article>
   ) : (
     <div>

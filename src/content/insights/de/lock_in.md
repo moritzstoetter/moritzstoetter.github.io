@@ -1,6 +1,7 @@
 ---
 title: "Bleiben Sie Frei"
 subtitle: "Es gibt keine Zukunft für Werkzeuge, die deine Arbeit als Geisel nehmen"
+description: "Proprietäre IDEs, Build-Systeme und Code-Generatoren nehmen deine Designs unbemerkt als Geisel. So entsteht Vendor-Lock-in in der Embedded-Entwicklung – und so gibt dir offenes, standardbasiertes Tooling deine Freiheit zurück."
 author: "Moritz Stötter"
 date: 2026-01-27
 image: "../assets/caged.webp" # https://docs.astro.build/en/guides/images/#images-in-content-collections

@@ -1,6 +1,7 @@
 ---
 title: "Our Philosphy"
 subtitle: "Why modern microcontrollers need modern methods"
+description: "Today's microcontrollers are powerful enough to deserve the practices the rest of software development takes for granted. Our philosophy on bringing modern methods to embedded engineering."
 author: "Moritz Stötter"
 date: 2023-10-06
 image: "../assets/yarn.webp" # https://docs.astro.build/en/guides/images/#images-in-content-collections

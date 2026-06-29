@@ -21,8 +21,33 @@ export async function getStaticPaths() {
 
 <Base>
   <div class="flex flex-col gap-24 md:gap-40">
-    <Hero />
-    <section>
+    {/* First viewport: hero vertically centred, scroll-down cue below it. A
+        plain div (not a section) so the scroll-fade animation — which would
+        render it mid-exit at page top — doesn't apply to the hero. */}
+    <div class="flex min-h-[calc(100svh-7rem)] flex-col justify-center gap-8 md:gap-10">
+      <Hero />
+      <a
+        href="#content"
+        aria-label={t("home.hero.scrollDown")}
+        class="flex h-12 w-12 items-center justify-center self-center rounded-full border-2 border-primaryLight/30 text-primaryLight transition-colors duration-300 hover:border-primaryLight hover:bg-primaryLight hover:text-white focus:border-primaryLight focus:outline-none motion-safe:animate-bounce dark:border-primaryDark/30 dark:text-primaryDark dark:hover:bg-primaryDark dark:hover:text-white"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </a>
+    </div>
+    <section id="content" class="scroll-mt-28">
       <h1>{t("home.expertise.title")}</h1>
       <ExpertiseList />
     </section>

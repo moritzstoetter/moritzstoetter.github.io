@@ -8,8 +8,8 @@
       },
       "image": "./assets/modernembedded.webp",
       "description": {
-        "de": "Wir haben uns der Anwendung höchster Qualitätsansprüche für Softwarelösungen im Embeddedbereich verschrieben. Das erreichen wir durch den Einsatz der modernsten Technologien und Werkzeugen, die sich jeweils als Goldstandard für ihren jeweiligen Anwendungsfall etabliert haben. Modularität und Formbarkeit sind Leitprinzipien unserer Arbeit.",
-        "en": "We have devoted ourselves to applying the highest quality standards to software solutions for embedded devices. We achieve this by employing cutting edge technology and tools, that have proven themselves as gold standards for their specific application. Modularity and malleability are guiding principles in our work."
+        "de": "Wir haben uns der Anwendung moderner Methoden und höchster Qualitätsansprüche für Softwarelösungen im Embeddedbereich verschrieben. ",
+        "en": "We have devoted ourselves to applying modern methods and the highest quality standards to software solutions for embedded devices."
       }
     },
     {
@@ -20,8 +20,8 @@
       },
       "image": "./assets/moritz.webp",
       "description": {
-        "de": "Moritz greift auf viele Jahre Erfahrung auf allen gängigen Plattformen zurück, und weiß genau wie man die phantastische Kraft von C++ auf die kleinsten Geräte anwenden kann. Er war federführend in der Entwicklung und Auslieferung von vielen technischen Produkten und hat diese erfolgreich vom anfänglichen Konzept und der Anforderungsplanung über Architekturdesign und Implementierung, hin zum endgültigen Einsatz geführt. Seine Arbeitsweise stützt sich auf die Verwendung von fortgeschrittenen Sprachfeatures und Werkzeugen, um Sicherheit, optimale Laufzeitperformanz, und saubere, wartbare Schnittstellen zu garantieren.",
-        "en": "Moritz has many years of experience on all the popular platforms, and knows exactly how to apply the awesome power of C++ to the smallest devices. He has spearheaded the development and delivery of many technical products, successfully guiding them from initial concept and requirement analysis through architecture design, implementation, and final deployment. His approach revolves around leveraging advanced language features and tools to achieve safety, optimal runtime performance, and clean, maintainable interfaces."
+        "de": "Moritz greift auf viele Jahre Erfahrung auf allen gängigen Plattformen zurück, und weiß genau wie man die phantastische Kraft von C++ auf die kleinsten Geräte anwenden kann. Er war federführend in der Entwicklung und Auslieferung von zahlreichen Produkten.",
+        "en": "Moritz has many years of experience on all the popular platforms, and knows exactly how to apply the awesome power of C++ to the smallest devices. He has spearheaded the development and delivery of many technical products."
       }
     }
   ]
