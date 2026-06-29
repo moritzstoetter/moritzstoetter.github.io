@@ -1,111 +1,212 @@
 ---
 import Testimonial from "../../components/Testimonial.astro";
 
-const testimonials = Astro.props.testimonials;
+// CSS scroll-snap carousel: the browser owns the scroll position and snapping,
+// so it's resize-proof and supports native touch/trackpad swipe and keyboard
+// scrolling out of the box. The script below is pure enhancement (arrows, dots,
+// pausable autoplay) and degrades gracefully if JS is off.
+const { testimonials } = Astro.props;
+const multiple = testimonials.length >= 2;
 ---
 
-<div class="relative w-full">
-  <div class="w-full overflow-hidden slider-container">
-    <div class="flex transition-transform duration-500 slides">
-      {
-        testimonials
-          .sort(() => Math.random() - 0.5)
-          .map((testimonial: any) => (
-            <div class={"slide flex-none w-full h-80 md:h-[28rem]"}>
-              <Testimonial testimonial={testimonial.data} variant="slider" />
-            </div>
-          ))
-      }
-    </div>
-  </div>
-  {
-    testimonials.length >= 2 && (
-      <button class="caret-left absolute left-1/4 top-36 z-10 h-16 w-16 -translate-x-1/2 -translate-y-1/2 md:flex sm:hidden">
-        <svg
-          class="w-full h-full fill-textLight dark:fill-textDark"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 320 512"
+<div
+  class="relative w-full"
+  data-testimonial-slider
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Testimonials"
+>
+  <ul
+    data-slides
+    tabindex="0"
+    class="no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-[39px] focus:outline-none focus-visible:ring-2 focus-visible:ring-primaryLight/40 dark:focus-visible:ring-primaryDark/40"
+  >
+    {
+      testimonials.map((testimonial: any, i: number) => (
+        <li
+          class="h-80 w-full shrink-0 snap-center md:h-[28rem]"
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${i + 1} of ${testimonials.length}`}
         >
-          <path d="M96.3 273l128 128c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L129.5 256l127.7-127.7c-9.4-9.4-9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-128 128c-9.4 9.4-9.4 24.6 0 33.9z" />
-        </svg>
-      </button>
-    )
-  }
+          <Testimonial testimonial={testimonial.data} variant="slider" />
+        </li>
+      ))
+    }
+  </ul>
+
   {
-    testimonials.length >= 2 && (
-      <button class="caret-right absolute right-1/4 top-36 z-10 h-16 w-16 translate-x-1/2 -translate-y-1/2 md:flex sm:hidden">
-        <svg
-          class="w-full h-full fill-textLight dark:fill-textDark"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 320 512"
+    multiple && (
+      <>
+        <button
+          type="button"
+          data-prev
+          aria-label="Previous testimonial"
+          class="absolute left-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-primaryLight/30 bg-backgroundLight/70 text-primaryLight backdrop-blur-md transition-colors duration-300 hover:border-primaryLight hover:bg-primaryLight hover:text-white focus:border-primaryLight focus:outline-none dark:border-primaryDark/30 dark:bg-backgroundDarker/70 dark:text-primaryDark dark:hover:border-primaryDark dark:hover:bg-primaryDark dark:hover:text-white dark:focus:border-primaryDark"
         >
-          <path d="M224.3 239l-128-128c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L190.1 256l-127.7 127.7c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l128-128c9.4-9.4 9.4-24.6 0-33.9z" />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          data-next
+          aria-label="Next testimonial"
+          class="absolute right-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-primaryLight/30 bg-backgroundLight/70 text-primaryLight backdrop-blur-md transition-colors duration-300 hover:border-primaryLight hover:bg-primaryLight hover:text-white focus:border-primaryLight focus:outline-none dark:border-primaryDark/30 dark:bg-backgroundDarker/70 dark:text-primaryDark dark:hover:border-primaryDark dark:hover:bg-primaryDark dark:hover:text-white dark:focus:border-primaryDark"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+
+        <div data-dots class="mt-6 flex justify-center gap-3">
+          {testimonials.map((_: any, i: number) => (
+            <button
+              type="button"
+              data-dot
+              aria-label={`Go to testimonial ${i + 1}`}
+              class="h-2.5 w-2.5 rounded-full bg-textLight/25 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primaryLight/40 dark:bg-textDark/25 dark:focus-visible:ring-primaryDark/40"
+            />
+          ))}
+        </div>
+      </>
     )
   }
 </div>
 
 <script>
-  const interval_ms = 12000;
-  const mod = (n: number, m: number) => ((n % m) + m) % m;
+  const AUTOPLAY_MS = 12000;
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
-  let currentIndex = 0;
+  const initSlider = (root: HTMLElement) => {
+    const scroller = root.querySelector<HTMLElement>("[data-slides]");
+    if (!scroller) return;
+    const slides = Array.from(
+      scroller.querySelectorAll<HTMLElement>(":scope > li"),
+    );
+    if (slides.length < 2) return;
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const slides = document.querySelectorAll(".slide");
+    const dots = Array.from(root.querySelectorAll<HTMLElement>("[data-dot]"));
+    const prev = root.querySelector<HTMLElement>("[data-prev]");
+    const next = root.querySelector<HTMLElement>("[data-next]");
 
-    function updateIndex(newIndex: number) {
-      const slideWidth = (slides[0] as HTMLElement).offsetWidth;
-      const slidesElement = document.querySelector(".slides") as HTMLElement;
-      if (slidesElement) {
-        const containerWidth = slidesElement.parentElement?.offsetWidth || 0;
-        const visibleSlides = Math.floor(containerWidth / slideWidth);
+    let index = 0;
 
-        currentIndex = mod(newIndex, slides.length + 1 - visibleSlides);
-        slidesElement.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-      }
+    const go = (i: number, smooth = true) => {
+      index = (i + slides.length) % slides.length;
+      scroller.scrollTo({
+        left: index * scroller.clientWidth,
+        behavior: smooth && !reduceMotion ? "smooth" : "auto",
+      });
+    };
+
+    // Reflect the live scroll position into the active dot. Driven by scroll so
+    // it stays correct for swipes and keyboard scrolling too, not just buttons.
+    const syncActive = () => {
+      index = Math.round(scroller.scrollLeft / scroller.clientWidth);
+      dots.forEach((dot, i) => {
+        const active = i === index;
+        dot.classList.toggle("bg-primaryLight", active);
+        dot.classList.toggle("dark:bg-primaryDark", active);
+        dot.classList.toggle("bg-textLight/25", !active);
+        dot.classList.toggle("dark:bg-textDark/25", !active);
+        if (active) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+    };
+
+    let scrollRaf = 0;
+    scroller.addEventListener("scroll", () => {
+      cancelAnimationFrame(scrollRaf);
+      scrollRaf = requestAnimationFrame(syncActive);
+    });
+
+    prev?.addEventListener("click", () => go(index - 1));
+    next?.addEventListener("click", () => go(index + 1));
+    dots.forEach((dot, i) => dot.addEventListener("click", () => go(i)));
+
+    // Autoplay, but only when motion is allowed. Pauses while the user hovers,
+    // focuses within, or the tab is hidden — so it never fights the user.
+    if (!reduceMotion) {
+      let timer = 0;
+      const stop = () => clearInterval(timer);
+      const start = () => {
+        stop();
+        timer = window.setInterval(() => go(index + 1), AUTOPLAY_MS);
+      };
+      root.addEventListener("pointerenter", stop);
+      root.addEventListener("pointerleave", start);
+      root.addEventListener("focusin", stop);
+      root.addEventListener("focusout", start);
+      document.addEventListener("visibilitychange", () =>
+        document.hidden ? stop() : start(),
+      );
+      start();
     }
 
-    setInterval(() => {
-      updateIndex(currentIndex + 1);
-    }, interval_ms);
+    syncActive();
+  };
 
-    const leftButton = document.querySelector(".caret-left");
-    const rightButton = document.querySelector(".caret-right");
-
-    leftButton?.addEventListener("click", () => {
-      updateIndex(currentIndex - 1);
-    });
-
-    rightButton?.addEventListener("click", () => {
-      updateIndex(currentIndex + 1);
-    });
-  });
+  document
+    .querySelectorAll<HTMLElement>("[data-testimonial-slider]")
+    .forEach(initSlider);
 </script>
 
 <style>
-  .slider-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
+  /* Hide the native scrollbar; the dots + arrows are the affordance. */
+  .no-scrollbar {
+    scrollbar-width: none;
   }
-  .slider-container {
-    width: 100%;
-    overflow: hidden;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-  .slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  .slide {
-    flex: 0 0 auto;
-  }
-  .caret-left,
-  .caret-right {
-    color: white;
-    padding: 0.5rem;
-    cursor: pointer;
+
+  /* Scroll-linked crossfade: each slide is transparent at the scroller's edges
+     and opaque when snapped/centred, driven by its own position on the inline
+     (horizontal) axis. For a full-width slide the snapped state is the 50%
+     point of the cover range, hence opacity 1 there. Gated like the home
+     sections: unsupported browsers and reduced-motion users just see the slide,
+     unfaded. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      [data-slides] > li {
+        animation: testimonial-fade linear both;
+        animation-timeline: view(inline);
+      }
+
+      @keyframes testimonial-fade {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+    }
   }
 </style>
