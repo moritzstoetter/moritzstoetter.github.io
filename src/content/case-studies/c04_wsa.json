@@ -1,0 +1,71 @@
+{
+  "slug": "c04_wsa",
+  "client": "WS Audiology",
+  "image": "./assets/wsa.webp",
+  "tech": [
+    "Embedded C++20",
+    "Nordic Semiconductor",
+    "ARM Cortex-M",
+    "Zephyr",
+    "BLE Audio",
+    "Pytest",
+    "Protobuf",
+    "CMake",
+    "FreeRTOS",
+    "Multithreading",
+    "Multicore",
+    "Hard real time"
+  ],
+  "testimonials": [
+    "t04_pavan",
+    "t03_lukas"
+  ],
+  "title": {
+    "de": "BLE Audio Testframework",
+    "en": "BLE Audio Testing Framework"
+  },
+  "description": {
+    "de": "Mit von uns entwickelter Technologie testet der drittgrößte Hörgerätehersteller der Welt seine Hörgeräte.",
+    "en": "The world's third largest manufacturer of hearing aids, tests its devices with technology, that we developed."
+  },
+  "about": {
+    "de": "WS Audiology ist ein multinationaler Konzern, der Hörgeräte entwickelt, produziert und unter einer Reihe von Marken vertreibt, entstanden aus dem Zusammenschluss der Sivantos GmbH (ehemals Siemens) und Widex. Mit etwa 12000 Mitarbeitern und verteilt über Standorte in Deutschland, Dänemark und Singapur ist WSA ein echtes Schwergewicht im Hörgeratesektor.",
+    "en": "WS Audiology is a multi-national company, that develops, manufactures and distributes hearing aids under a range of brands. With roughly 12000 employees and locations in Germany, Denmark and Singapore, WSA is a true heavy weight in the hearing aid sector."
+  },
+  "challenge": {
+    "de": "Unser Kunde wollte automatisierte Integrationstests für den brandneuen BLE Audio Standard auf seinen Geräten durchführen. Das Projekt genoss von Anfang an viel Beachtung vom Management und bewies sich immer wieder aufs Neue.",
+    "en": "Our client wanted to perform automatic integration tests for the brand new BLE Audio Standard on their devices. The project received a lot of attention from the management right from the start, and proved itself time and time again."
+  },
+  "deliveredValue": {
+    "de": "Wir wollten sowohl schnell eine hohe Testabdeckung erreichen, als auch ein langfristig nützliches und technologisch exzellentes Produkt abliefern. Um das zu erreichen haben wir von Beginn an auf modulare, formbare Softwarearchitektur gesetzt, die es uns ermöglicht hat, das ganze System iterativ zu verbessern. Als sich zur Mitte des Projektes hin die Anforderungen fundamental geändert haben, waren wir damit in einer hervorragenden Position zu reagieren.",
+    "en": "We wanted to quickly reach a high test coverage, while at the same time providing an excellent product that will be useful long-term. To achieve this we implemented a modular and malleable software architecture, that allowed us to develop the entire system iteratively. When th requirements changed fundamentally about half way of the project, we were in an excellent position to react."
+  },
+  "product": {
+    "de": [
+      "Tiefgreifende Anforderungs- und Machbarkeitsanalyse in einem komplexen Multi-Stakeholder-Umfeld",
+      "Neuentwicklung eines Test-Frameworks für Bluetooth LE Audio Development für central-driven, automatisches Testen neuartiger Hörgerätefirmware",
+      "Kommunikation zwischen Test-Central und und Test-PC via Protocol Buffers (NanoPB)",
+      "Zephyr basierte Firmwarearchitektur und Implementierung in modernem C++",
+      "Entwicklung von Firmwaremodulen zur Verarbeitung von Audiodaten unter Echtzeitbedingungen",
+      "Test-Framework Architektur, Design und Implementation in Python/Pytest",
+      "Hybrider Lösungsansatz basierend sowohl auf Zephyr-Shell als auch auf maßgeschneiderter Firmware, um größtmöglich Codeabdeckung in kürzester Zeit zu gewährleisten",
+      "Implementierung von hunderten von Tests, die mehrere Dutzend Probleme aufgedeckt haben",
+      "Refactoring, bug fixing and Erweiterung angrenzender Legacy-Systeme",
+      "CI/CD Integration",
+      "Interne Schulung der Teammitglieder zur Nutzung und Erweiterung des Test-Frameworks"
+    ],
+    "en": [
+      "In-depth requirements and feasibility analysis in a complex multi-stakeholder environment",
+      "Development of a testing framework for Bluetooth LE Audio testing from scratch for central driven, automated testing of novel hearing aid firmware",
+      "Communication between the test central and the test PC via Protocol Buffers (NanoPB)",
+      "Zephyr based firmware architecture design and implementation in modern C++",
+      "Development of firmware modules for audio processing under hard real-time constraints",
+      "Test framework architecture design and implementation in Python/Pytest",
+      "Hybrid approach using the Zephyr shell as well custom firmware implementation, for very high code coverage in very limited time",
+      "Implementation of hundreds of tests that caught dozens of issues",
+      "Refactoring, bug fixing and extension of neighboring legacy systems",
+      "CI/CD integration",
+      "Internal training of company employees on the use and extension of the test system"
+    ]
+  }
+}

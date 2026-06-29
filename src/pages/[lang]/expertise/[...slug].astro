@@ -1,0 +1,20 @@
+---
+import Expertise from "../../../components/pages/Expertise.astro";
+import Base from "../../../layouts/Base.astro";
+
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("expertise");
+  return pages.flatMap((page) => [
+    { params: { lang: "de", slug: page.id } },
+    { params: { lang: "en", slug: page.id } },
+  ]);
+}
+
+const { lang, slug } = Astro.params;
+---
+
+<Base>
+  <Expertise lang={lang} slug={slug} />
+</Base>

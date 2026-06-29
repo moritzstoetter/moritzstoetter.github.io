@@ -1,0 +1,9 @@
+{
+  "name": "Lukas",
+  "subheading": "Embedded Software Developer @ WSAudiology",
+  "image": "./assets/lukas.jpeg",
+  "quote": {
+    "de": "Moritz hat uns mit seiner Fähigkeit komplexe Softwarearchitekturen zu entwerfen, und sie in modernem C++ und Python umzusetzen sehr geholfen. Das von ihm entwickelte System, leistet uns bereits gute Dienste, und wird uns lange begleiten.",
+    "en": "Moritz helped us a lot with his ability to design complex software architectures and implement them in modern C++ and Python. The system he developed is already serving us well and will be with us for a long time."
+  }
+}

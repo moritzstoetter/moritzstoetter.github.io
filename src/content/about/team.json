@@ -1,0 +1,28 @@
+{
+  "members": [
+    {
+      "name": "modern embedded",
+      "subtitle": {
+        "de": "Herausragend bis in den Kern",
+        "en": "Outstanding to the Core"
+      },
+      "image": "./assets/modernembedded.webp",
+      "description": {
+        "de": "Wir haben uns der Anwendung moderner Methoden und höchster Qualitätsansprüche für Softwarelösungen im Embeddedbereich verschrieben. ",
+        "en": "We have devoted ourselves to applying modern methods and the highest quality standards to software solutions for embedded devices."
+      }
+    },
+    {
+      "name": "Moritz Stötter",
+      "subtitle": {
+        "de": "Embedded C++ Spezialist",
+        "en": "Embedded C++ Specialist"
+      },
+      "image": "./assets/moritz.webp",
+      "description": {
+        "de": "Moritz greift auf viele Jahre Erfahrung auf allen gängigen Plattformen zurück, und weiß genau wie man die phantastische Kraft von C++ auf die kleinsten Geräte anwenden kann. Er war federführend in der Entwicklung und Auslieferung von zahlreichen Produkten.",
+        "en": "Moritz has many years of experience on all the popular platforms, and knows exactly how to apply the awesome power of C++ to the smallest devices. He has spearheaded the development and delivery of many technical products."
+      }
+    }
+  ]
+}

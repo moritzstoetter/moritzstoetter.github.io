@@ -1,25 +1,20 @@
 ---
-import { Image } from "astro:assets";
 import type { Tech } from "../../content.config";
+import { getLangFromUrl, pick } from "../../i18n/utils";
 import Box from "../ui/Box.astro";
+import IconText from "../ui/IconText.astro";
 
 const tech: Tech = Astro.props.technology;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <Box padded>
-  <div class="grid items-center grid-cols-1 gap-4 md:grid-cols-3">
-    <div class="flex justify-center col-span-1">
-      <Image 
-        class="w-full max-w-[150px] h-auto" 
-        src={tech.image} 
-        alt={tech.name ?? "tech"} 
-      />
-    </div>
-    <div class="flex flex-col md:col-span-2">
-      <h3 class="text-primaryLight dark:text-primaryDark">{tech.name}</h3>
-    </div>
-    <div class="md:col-span-3">
-      <p>{tech.description}</p>
-    </div>
-  </div>
- </Box>
+  <IconText
+    size="sm"
+    title={pick(tech.name, lang)}
+    subtitle={tech.subtitle ? pick(tech.subtitle, lang) : undefined}
+    description={pick(tech.description, lang)}
+    icon={tech.image || undefined}
+    iconAlt={pick(tech.name, lang)}
+  />
+</Box>

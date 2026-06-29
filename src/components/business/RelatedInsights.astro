@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Grid from "../ui/Grid.astro";
+import Box from "../ui/Box.astro";
+import IconText from "../ui/IconText.astro";
+
+// A "Related Insights" section: heading + grid of compact insight cards. Takes
+// already-resolved entries (each page resolves its own list, which differ in
+// how they're selected), and a `headingClass` so the host page controls the
+// heading style. Renders nothing when the list is empty.
+interface Props {
+  insights: CollectionEntry<"insights">[];
+  headingClass: string;
+}
+
+const { insights, headingClass } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+{
+  insights.length > 0 && (
+    <div class="flex flex-col gap-4">
+      <h2 class={headingClass}>{t("common.relatedInsights")}</h2>
+      <Grid cols={3} gap={4}>
+        {insights.map((insight) => (
+          <Box padded href={`/${lang}/insights/${insight.id.split("/")[1]}`} customClass="h-full">
+            <IconText
+              size="sm"
+              title={insight.data.title}
+              subtitle={insight.data.subtitle}
+              description={insight.data.description}
+            />
+          </Box>
+        ))}
+      </Grid>
+    </div>
+  )
+}

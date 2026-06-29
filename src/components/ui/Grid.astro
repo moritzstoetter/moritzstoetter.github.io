@@ -1,0 +1,37 @@
+---
+// Responsive grid primitive: a single column on mobile that expands to `cols`
+// equal columns from `breakpoint` upwards. Class strings are kept literal so
+// Tailwind can detect them.
+interface Props {
+  cols?: 2 | 3 | 4;
+  breakpoint?: "md" | "lg";
+  gap?: 4 | 8 | 16;
+  as?: "div" | "section";
+  class?: string;
+}
+
+const {
+  cols = 3,
+  breakpoint = "md",
+  gap = 8,
+  as: Wrapper = "div",
+  class: className,
+}: Props = Astro.props;
+
+const colClasses = {
+  md: { 2: "md:grid-cols-2", 3: "md:grid-cols-3", 4: "md:grid-cols-4" },
+  lg: { 2: "lg:grid-cols-2", 3: "lg:grid-cols-3", 4: "lg:grid-cols-4" },
+};
+const gapClasses = { 4: "gap-4", 8: "gap-8", 16: "gap-16" };
+---
+
+<Wrapper
+  class:list={[
+    "grid grid-cols-1",
+    colClasses[breakpoint][cols],
+    gapClasses[gap],
+    className,
+  ]}
+>
+  <slot />
+</Wrapper>

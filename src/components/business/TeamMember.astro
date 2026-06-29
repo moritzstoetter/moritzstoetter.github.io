@@ -1,18 +1,16 @@
 ---
-import { Image } from "astro:assets";
 import type { TeamMember } from "../../content.config";
-import Box from "../ui/Box.astro";
+import { getLangFromUrl, pick } from "../../i18n/utils";
+import SplitBox from "../ui/SplitBox.astro";
 
 const member: TeamMember = Astro.props.member;
+const lang = getLangFromUrl(Astro.url);
 ---
 
-<Box padded>
-    <div class="flex flex-col md:flex-row items-center gap-4">
-    <Image
-      class="w-full rounded-full max-w-md px-3"
-      src={member.image}
-      alt={member.name}
-    />
-    <p class="">{member.description}</p>
-  </div>
-</Box>
+<SplitBox
+  image={member.image}
+  imageAlt={member.name}
+  title={member.name}
+  subtitle={member.subtitle ? pick(member.subtitle, lang) : undefined}
+  description={pick(member.description, lang)}
+/>

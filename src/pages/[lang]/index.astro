@@ -1,57 +1,113 @@
 ---
 import { getCollection } from "astro:content";
-import ServicePreview from "../../components/business/ServicePreview.astro";
 import Hero from "../../components/Hero.astro";
 import TestimonialSlider from "../../components/ui/TestimonialSlider.astro";
-import {
-  getLangFromUrl,
-  idIsOfLanguage,
-  useTranslations,
-} from "../../i18n/utils";
+import ExpertiseList from "../../components/business/ExpertiseList.astro";
+import CaseStudyList from "../../components/business/CaseStudyList.astro";
+import InsightList from "../../components/business/InsightList.astro";
+import ContactForm from "../../components/ui/ContactForm.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 
-const services = await getCollection("services");
-const testimonials = await getCollection("testimonials");
-
 const lang = getLangFromUrl(Astro.url);
-
-const langServices = services.filter((s) => idIsOfLanguage(s.id, lang));
-const langTestimonials = testimonials.filter((t) => idIsOfLanguage(t.id, lang));
-
 const t = useTranslations(lang);
 
+const langTestimonials = await getCollection("testimonials");
+
 export async function getStaticPaths() {
-  return [
-    {
-      params: {
-        lang: "de",
-      },
-    },
-    {
-      params: {
-        lang: "en",
-      },
-    },
-  ];
+  return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
 }
 ---
 
 <Base>
-  <div class="flex flex-col gap-16 mx-4 md:gap-24 lg:md-0">
-    <Hero />
+  <div class="flex flex-col gap-24 md:gap-40">
+    {/* First viewport: hero vertically centred, scroll-down cue below it. A
+        plain div (not a section) so the scroll-fade animation — which would
+        render it mid-exit at page top — doesn't apply to the hero. */}
+    <div class="flex min-h-[calc(100svh-7rem)] flex-col justify-center gap-8 md:gap-10">
+      <Hero />
+      <a
+        href="#content"
+        aria-label={t("home.hero.scrollDown")}
+        class="flex h-12 w-12 items-center justify-center self-center rounded-full border-2 border-primaryLight/30 text-primaryLight transition-colors duration-300 hover:border-primaryLight hover:bg-primaryLight hover:text-white focus:border-primaryLight focus:outline-none motion-safe:animate-bounce dark:border-primaryDark/30 dark:text-primaryDark dark:hover:border-primaryDark dark:hover:bg-primaryDark dark:hover:text-white dark:focus:border-primaryDark"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </a>
+    </div>
+    <section id="content" class="scroll-mt-28">
+      <h1>{t("home.expertise.title")}</h1>
+      <ExpertiseList />
+    </section>
     <section>
-      <h1>{t("home.services.title")}</h1>
-      <div class="flex flex-col gap-16">
-        {
-          langServices?.map((service) => (
-            <ServicePreview service={service.data} />
-          ))
-        }
+      <h1>{t("home.expertise.testimonials")}</h1>
+      <TestimonialSlider testimonials={langTestimonials} />
+    </section>
+    <section>
+      <h1>{t("caseStudies.title")}</h1>
+      <CaseStudyList limit={2} />
+      <div class="mt-8 text-right">
+        <a class="focused-link text-lg" href={`/${lang}/case-studies/`}>
+          {t("common.seeAll")} →
+        </a>
+      </div>
+    </section>
+    <section>
+      <h1>{t("insights.title")}</h1>
+      <InsightList limit={2} />
+      <div class="mt-8 text-right">
+        <a class="focused-link text-lg" href={`/${lang}/insights/`}>
+          {t("common.seeAll")} →
+        </a>
       </div>
     </section>
     <section class="mb-16 md:mb-24">
-      <h1>{t("home.services.testimonials")}</h1>
-      <TestimonialSlider testimonials={langTestimonials} />
+      <h1>{t("contact.title")}</h1>
+      <ContactForm />
     </section>
   </div>
 </Base>
+
+<style>
+  /* Each home section fades + rises in as it enters, holds while centred, then
+     fades + rises away as it exits the top. Pure CSS scroll-driven animation.
+     Gated behind @supports because the end state is invisible — browsers
+     without scroll-timeline must NOT apply it (they'd hide everything); they
+     just show the sections normally. Reduced-motion users skip it too. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      section {
+        animation: section-scroll linear both;
+        animation-timeline: view();
+      }
+
+      @keyframes section-scroll {
+        0% {
+          opacity: 0;
+          transform: translateY(4rem) scale(0.94);
+        }
+        30%,
+        70% {
+          opacity: 1;
+          transform: none;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-4rem) scale(0.94);
+        }
+      }
+    }
+  }
+</style>

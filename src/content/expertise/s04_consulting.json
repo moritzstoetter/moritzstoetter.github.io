@@ -1,0 +1,40 @@
+{
+  "slug": "s04_consulting",
+  "image": "./assets/output_2.webp",
+  "insights": [
+    "modern_sw_dev"
+  ],
+  "case_studies": [],
+  "title": {
+    "de": "Consulting + Audit",
+    "en": "Consulting"
+  },
+  "description": {
+    "de": "Wir unterstützen Sie mit unserer Erfahrung und unserem Fachwissen.",
+    "en": "We Support You with Our Experience and Expertise."
+  },
+  "tech": [
+    {
+      "name": {
+        "de": "Codereview",
+        "en": "Code Review"
+      },
+      "description": {
+        "de": "Buchen Sie bei uns ein Code-Review für embedded C, C++ oder Python, um zu erfahren, wo Sie stehen, und Ihre Codebasis auf die nächste Stufe zu heben.",
+        "en": "Book a code review with us for C++ or Python to learn where you stand and take your code base to the next level."
+      },
+      "image": "./assets/consult/hw_planning.png"
+    },
+    {
+      "name": {
+        "de": "Softwareplanung",
+        "en": "Software planning"
+      },
+      "description": {
+        "de": "Software ist unser Kerngeschäft und wir beraten Sie gerne hierzu. Sei es bei der Wahl eines Techstacks für ihr Produkt oder bei der Erstellung einer Architekturplanung. Sprechen Sie uns einfach an!",
+        "en": "Software is our daily business and we are happy to advise you on this topic. We can help with choosing a tech stack or with planning an entire software architecture. Just reach out!"
+      },
+      "image": "./assets/consult/sw_planning.png"
+    }
+  ]
+}

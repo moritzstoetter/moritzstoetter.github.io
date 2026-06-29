@@ -4,6 +4,7 @@
 @config "../tailwind.config.js";
 
 @layer base {
+
   p,
   span,
   div,
@@ -34,6 +35,20 @@
 
   p {
     @apply text-lg;
+    line-height: 1.8;
+  }
+
+  /* Slightly looser global text for readability (less dense). */
+  body {
+    line-height: 1.8;
+  }
+}
+
+/* Smooth scroll for in-page anchors (e.g. the home scroll-down button),
+   disabled for users who prefer reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 

@@ -1,41 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-import CaseStudyPreview from "../../components/business/CaseStudyPreview.astro";
-import {
-  getLangFromUrl,
-  idIsOfLanguage,
-  useTranslations,
-} from "../../i18n/utils";
+import CaseStudyList from "../../components/business/CaseStudyList.astro";
 import Base from "../../layouts/Base.astro";
-import BoxGrid from "../../components/ui/BoxGrid.astro"
-
-const caseStudies = await getCollection("case-studies");
-
-const lang = getLangFromUrl(Astro.url);
-
-const langCaseStudies = caseStudies.filter((s) => idIsOfLanguage(s.id, lang));
-
-const t = useTranslations(lang);
 
 export async function getStaticPaths() {
-  const pages = await getCollection("case-studies");
-
-  const paths = pages.map((page) => {
-    const [lang] = page.id.split("/");
-    return { params: { lang }, props: page };
-  });
-
-  return paths;
+  return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
 }
 ---
 
 <Base>
-  <h1>{t("caseStudies.title")}</h1>
-  <BoxGrid wide>
-    {
-      [...langCaseStudies].reverse().map((caseStudy) => (
-        <CaseStudyPreview caseStudy={caseStudy.data} />
-      ))
-    }
-</BoxGrid>
+  <div class="pb-16">
+    <CaseStudyList />
+  </div>
 </Base>

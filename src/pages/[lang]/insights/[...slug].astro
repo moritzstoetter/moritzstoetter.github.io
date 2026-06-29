@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+import Insight from "../../../components/pages/Insight.astro";
+import Base from "../../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("insights");
+
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+  });
+
+  return paths;
+}
+---
+
+<Base>
+  <Insight />
+</Base>

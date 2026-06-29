@@ -1,0 +1,87 @@
+{
+  "slug": "c06_laboratory",
+  "client": "Life Science Market Leader",
+  "image": "./assets/laboratory.webp",
+  "tech": [
+    "C++23",
+    "C++20",
+    "Python",
+    "STM32",
+    "ARM Cortex-M",
+    "ESP32",
+    "Risc-V",
+    "FreeRTOS",
+    "CMake",
+    "Conan",
+    "Catch2",
+    "Trompeloeil",
+    "CI/CD",
+    "WiFi",
+    "BLE",
+    "HTTPS",
+    "Server-Sent-Events",
+    "RPC",
+    "MessagePack",
+    "USB",
+    "AES-CTR",
+    "Docker",
+    "Segger Ozone",
+    "UART",
+    "DMA"
+  ],
+  "testimonials": [
+    "t06_toni"
+  ],
+  "title": {
+    "de": "Wireless- und Inter-Prozessor-Kommunikation",
+    "en": "Wireless- and Inter-Processor-Communication"
+  },
+  "description": {
+    "de": "Wir haben hochmoderne Laborgeräte auf Sendung gebracht.",
+    "en": "We brought cutting-edge laboratory equipment onto the air."
+  },
+  "about": {
+    "de": "Der Kunde war ein international führendes Life-Science-Unternehmen mit Hauptsitz in Norddeutschland, das Instrumente, Verbrauchsmaterialien und Dienstleistungen für den Einsatz in Laboren auf der ganzen Welt entwickelt, herstellt und vertreibt. Seine Produkte stehen für die Spitze der deutschen Ingenieurskunst in Bezug auf Innovation und Qualität.",
+    "en": "The customer was a leading international life sciences company headquartered in northern Germany that develops, manufactures, and distributes instruments, consumables, and services for use in laboratories around the world. Its products represent the pinnacle of German engineering in terms of innovation and quality."
+  },
+  "challenge": {
+    "de": "Nach einigen Rückschlägen bei der Hardware-Auswahl und mit anderen Dienstleistern bat man uns um Hilfe bei der Firmware-Entwicklung für ein Wireless-Modul und dessen Integration in die Software einer Neuentwicklung. Von Anfang an sahen wir uns mit Designherausforderungen, hohen Anforderungen und einer großen Codebasis konfrontiert.",
+    "en": "After several setbacks in hardware selection and with other service providers, we were asked to assist with firmware development for a wireless module and its integration into the software of a new development. From the outset, we were confronted with design challenges, high requirements, and a large code base."
+  },
+  "deliveredValue": {
+    "de": "Wir implementierten die Firmware für dieses Multi-MCU-System auf der Grundlage des kundeneigenen Frameworks und integrierten es in sein Produkt und CI/CD. Damit ermöglichten wir dem Kunden die nahtlose Anbindung eines neuen Flaggschiffmodells und verschafften ihnen damit erneut einen Vorsprung vor der Konkurrenz.",
+    "en": "We implemented the firmware for this multi-MCU system based on the customer's own framework and integrated it into their product and CI/CD. This enabled the customer to seamlessly connect a new flagship model, giving them another competitive edge."
+  },
+  "product": {
+    "de": [
+      "Evaluierung und Risikoanalyse der ESP-AT-Firmware",
+      "Entwurf und und Proof-of-Concept eines bidirektionalen RPC-Protokolls basierend auf MessagePack",
+      "Implementierung eines WiFi-Station-Dienstes",
+      "Implementierung eines BLE-Beacon-Dienstes",
+      "Implementierung eines HTTPS-Server-Dienstes mit Unterstützung von Server-Sent-Events",
+      "Unterstützung eines WiFi- und BLE-Zertifizierungsverfahrens",
+      "Integration einer MessagePack-basierten RPC-Schnittstelle in Firmware auf dem ESP32-C3 und dem STM32H7",
+      "Integration der ESP32-Firmware in die GitLab-CI des Kunden mit maßgeschneidertem Docker-Container",
+      "Implementierung eines modularen, Stream-basierten Transport-Layers mit Multiplexer, Verschlüsselung und mehr",
+      "Flash-Verschlüsselung auf dem ESP32C3",
+      "DMA-basierte UART-Kommunikation auf dem STM32, um die Haupt-MCU zu entlasten",
+      "Leistungsoptimierung (zeitlich) der Fertigungstestsoftware",
+      "Tiefgreifendes Interrupt-Debugging im USB-OTG device"
+    ],
+    "en": [
+      "Evaluation and risk analysis of ESP-AT firmware",
+      "Design and proof-of-concept of a bidirectional RPC protocol based on MessagePack",
+      "Implementation of a WiFi station service",
+      "Implementation of a BLE beacon service",
+      "Implementation of an HTTPS server service with support for server-sent events",
+      "Support for a WiFi and BLE certification process",
+      "Integration of a MessagePack-based RPC interface into firmware on the ESP32-C3 and STM32H7",
+      "Integration of ESP32 firmware into the customer's GitLab CI with a customized Docker container",
+      "Implementation of a modular, stream-based transport layer with multiplexer, encryption, and more",
+      "Flash encryption on the ESP32C3",
+      "DMA-based UART communication on the STM32 to relieve the main MCU",
+      "Performance optimization (temporal) of the production test software",
+      "In-depth interrupt debugging in the USB-OTG device"
+    ]
+  }
+}

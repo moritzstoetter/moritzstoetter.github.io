@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import CaseStudyPreview from "./CaseStudyPreview.astro";
+
+// Stacked list of case-study previews (newest first). `limit` clips to the
+// first N (omit to show all). Shared by the root page and the listing page.
+interface Props {
+  limit?: number;
+}
+const { limit }: Props = Astro.props;
+
+const all = [...(await getCollection("case-studies"))].reverse();
+const items = limit ? all.slice(0, limit) : all;
+---
+
+<div class="flex flex-col gap-16">
+  {items.map((caseStudy) => <CaseStudyPreview caseStudy={caseStudy.data} />)}
+</div>

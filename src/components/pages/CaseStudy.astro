@@ -1,57 +1,36 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { useTranslations } from "../../i18n/utils";
+import { pick, useTranslations } from "../../i18n/utils";
+import CaseStudyPreview from "../business/CaseStudyPreview.astro";
 import Box from "../ui/Box.astro";
-import Tag from "../ui/Tag.astro";
-import TestimonialSlider from "../ui/TestimonialSlider.astro";
-import BoxGrid from "../ui/BoxGrid.astro";
+import Grid from "../ui/Grid.astro";
+import Testimonial from "../Testimonial.astro";
 
 const { lang, slug } = Astro.props;
 
 const caseStudies = await getCollection("case-studies");
 const testimonials = await getCollection("testimonials");
 
-const caseStudy = caseStudies.find((s) => s.id === `${lang}/${slug}`)?.data;
-const langTestimonials = testimonials.filter(
-  (t) =>
-    t.id.startsWith(lang) &&
-    caseStudy?.testimonials.includes(t.data.identifier),
-);
+const caseStudy = caseStudies.find((s) => s.id === slug)?.data;
+const langTestimonials = (caseStudy?.testimonials ?? []).flatMap((s) => {
+  const voice = testimonials.find((t) => t.id === s);
+  return voice ? [voice] : [];
+});
 
 const t = useTranslations(lang);
 ---
 
 {
   !!caseStudy ? (
-    <section class="flex flex-col gap-8 py-8 mx-4 lg:mx-0" id={caseStudy.title}>
-      <h1 class="flex items-center justify-center col-span-full ">
-        {caseStudy.title}
-      </h1>
-      <div class="flex flex-row items-center gap-4">
-        {/* <span class="text-primaryLight dark:text-primaryDark text-2xl">{t("caseStudies.technologies")}</span> */}
-        <ul class="flex flex-row flex-wrap items-center justify-center gap-4">
-          {caseStudy.tech.map((tech) => (
-            <Tag text={tech} />
-          ))}
-        </ul>
-      </div>
-      <BoxGrid narrow>
+    <section class="flex flex-col gap-8 pb-8" id={caseStudy.slug}>
+      <CaseStudyPreview caseStudy={caseStudy} linked={false} swap />
+      <Grid cols={2} class="pb-8">
         <Box padded>
           <div class="flex flex-col gap-4">
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.aboutTheClient")}
             </h2>
-            <p>{caseStudy.about}</p>
-          </div>
-        </Box>
-        <Box>
-          <div class="overflow-hidden w-full h-full rounded-3xl">
-            <Image
-              src={caseStudy.image}
-              alt={caseStudy.title}
-              class="w-full h-full object-cover inset-0"
-            />
+            <p>{pick(caseStudy.about, lang)}</p>
           </div>
         </Box>
         <Box padded>
@@ -59,7 +38,7 @@ const t = useTranslations(lang);
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.theChallenge")}
             </h2>
-            <p>{caseStudy.challenge}</p>
+            <p>{pick(caseStudy.challenge, lang)}</p>
           </div>
         </Box>
         <Box padded>
@@ -67,7 +46,15 @@ const t = useTranslations(lang);
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.deliveredValue")}
             </h2>
-            <p>{caseStudy.deliveredValue}</p>
+            <p>{pick(caseStudy.deliveredValue, lang)}</p>
+          </div>
+        </Box>
+        <Box padded>
+          <div class="flex flex-col gap-4">
+            <h2 class="text-primaryLight dark:text-primaryDark">
+              {t("caseStudies.technologies")}
+            </h2>
+            <p>{caseStudy.tech.join(" — ")}</p>
           </div>
         </Box>
         <Box padded customClass="col-span-full">
@@ -75,22 +62,29 @@ const t = useTranslations(lang);
             <h2 class="text-primaryLight dark:text-primaryDark">
               {t("caseStudies.theProduct")}
             </h2>
-            <p>{caseStudy.product}</p>
+            <p>{pick(caseStudy.product, lang).join(" — ")}</p>
           </div>
         </Box>
-        <Box padded customClass="col-span-full">
-          <div class="flex flex-col gap-4">
-            {langTestimonials?.length > 0 && (
-              <>
-                <h2 class="text-primaryLight dark:text-primaryDark">
-                  {t("caseStudies.testimonial")}
-                </h2>
-                <TestimonialSlider testimonials={langTestimonials}/>
-              </>
-            )}
-          </div>
-        </Box>
-      </BoxGrid>
+        {langTestimonials?.length > 0 && (
+          <Box
+            padded
+            customClass={langTestimonials.length > 1 ? "col-span-full" : undefined}
+          >
+            <div class="flex flex-col gap-4">
+              <h2 class="text-primaryLight dark:text-primaryDark">
+                {t("caseStudies.testimonial")}
+              </h2>
+              <div class="flex flex-col gap-4 md:flex-row md:justify-center">
+                {langTestimonials.slice(0, 3).map((voice) => (
+                  <div class="md:flex-1">
+                    <Testimonial testimonial={voice.data} variant="caseStudy" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Box>
+        )}
+      </Grid>
     </section>
   ) : (
     <div>

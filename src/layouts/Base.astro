@@ -3,8 +3,17 @@ import Nav from "../components/Nav.astro";
 import { getLangFromUrl } from "../i18n/utils";
 import "../base.css";
 import Footer from "../components/Footer.astro";
+import ContactButton from "../components/ContactButton.astro";
 
 const lang = getLangFromUrl(Astro.url);
+
+// A "contact us" CTA hovers in the bottom-right corner of every page except
+// the contact page itself.
+const showContact = !/\/contact\/?$/.test(Astro.url.pathname);
+
+// The home page's hero fills the first viewport, so its main drops the usual
+// top padding (the hero section manages its own height instead).
+const isHome = /^\/(de|en)\/?$/.test(Astro.url.pathname);
 ---
 
 <html lang={lang} class="dark">
@@ -71,10 +80,42 @@ const lang = getLangFromUrl(Astro.url);
     class="flex flex-col justify-between min-h-screen bg-backgroundLight dark:bg-backgroundDarker">
     <div class="relative w-full max-w-5xl lg:mx-auto">
       <Nav />
-      <main>
+      <main class:list={["px-4 lg:px-0", !isHome && "pt-4 md:pt-16"]}>
         <slot />
       </main>
     </div>
     <Footer />
+    {
+      showContact && (
+        <div
+          id="floating-contact"
+          class:list={[
+            "fixed bottom-8 right-8 z-50 transition-opacity duration-300",
+            // On home the hero is in view on load, so start hidden; the observer
+            // below reveals it once the hero scrolls out.
+            isHome && "opacity-0 pointer-events-none",
+          ]}
+        >
+          <ContactButton />
+        </div>
+      )
+    }
+    {/* Hide the floating contact button while the home hero is in view — its
+        in-box CTA already covers that action there. */}
+    <script>
+      const hero = document.getElementById("hero");
+      const fab = document.getElementById("floating-contact");
+      if (hero && fab) {
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            const hidden = entry.isIntersecting;
+            fab.classList.toggle("opacity-0", hidden);
+            fab.classList.toggle("pointer-events-none", hidden);
+          },
+          { threshold: 0 },
+        );
+        observer.observe(hero);
+      }
+    </script>
   </body>
 </html>

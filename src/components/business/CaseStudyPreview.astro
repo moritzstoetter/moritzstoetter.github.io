@@ -1,17 +1,28 @@
 ---
-import { Image } from "astro:assets";
 import type { CaseStudy } from "../../content.config";
-import { getLangFromUrl } from "../../i18n/utils";
-import Box from "../ui/Box.astro";
+import { getLangFromUrl, pick } from "../../i18n/utils";
+import SplitBox from "../ui/SplitBox.astro";
 
-const caseStudy: CaseStudy = Astro.props.caseStudy;
+interface Props {
+  caseStudy: CaseStudy;
+  // When true (default) the box links to the case-study subpage; the subpage's
+  // own header passes false so it isn't a self-link.
+  linked?: boolean;
+  // Mirror the image/text arrangement (image right, text left).
+  swap?: boolean;
+}
+
+const { caseStudy, linked = true, swap = false } = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<Box padded href={`/${lang}/case-studies/${caseStudy.slug}`}>
-  <div class="flex flex-col gap-4">
-    <Image src={caseStudy.image} alt={caseStudy.title} />
-    <h2>{caseStudy.title}</h2>
-    <p>{caseStudy.description}</p>
-  </div>
-</Box>
+<SplitBox
+  image={caseStudy.image}
+  imageAlt={pick(caseStudy.title, lang)}
+  title={pick(caseStudy.title, lang)}
+  subtitle={caseStudy.client}
+  description={pick(caseStudy.description, lang)}
+  href={linked ? `/${lang}/case-studies/${caseStudy.slug}` : undefined}
+  swap={swap}
+/>

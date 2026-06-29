@@ -2,37 +2,49 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-// Derive the entry id from its file path (lang/<name>), stripping the
-// extension. Without this, the glob loader would use a `slug` field present in
-// the JSON data as the id, dropping the language prefix and colliding across
-// the de/en variants.
+// Derive the entry id from its file path, stripping the extension. For insights
+// (still split per language) this yields `lang/<name>`; for the merged data
+// collections it yields just `<name>` (the slug).
 const pathId = ({ entry }: { entry: string }) => entry.replace(/\.[^.]+$/, "");
 
-const blogCollection = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/blog", generateId: pathId }),
+// A field carried in both languages. Both are required, so a missing
+// translation fails the build — structural protection against drift.
+const localized = <T extends z.ZodTypeAny>(schema: T) =>
+  z.object({ de: schema, en: schema });
+export type Localized<T> = { de: T; en: T };
+
+interface ImageMeta {
+  src: string;
+  width: number;
+  height: number;
+  format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+}
+
+const insightsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/insights", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      subtitle: z.string().optional(),
+      description: z.string(),
       image: image(),
       imageAlt: z.string(),
       author: z.string(),
       date: z.date(),
-      tags: z.array(z.string()),
+      // Explicitly linked related insights, by slug (filename).
+      insights: z.array(z.string()).default([]),
     }),
 });
 
-export interface BlogPost {
+export interface Insight {
   title: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  subtitle?: string;
+  description: string;
+  image: ImageMeta;
   imageAlt: string;
   author: string;
   date: Date;
-  tags: string[];
+  insights: string[];
 }
 
 const aboutCollection = defineCollection({
@@ -42,7 +54,8 @@ const aboutCollection = defineCollection({
       members: z.array(
         z.object({
           name: z.string(),
-          description: z.string(),
+          subtitle: localized(z.string()).optional(),
+          description: localized(z.string()),
           image: image(),
         }),
       ),
@@ -51,13 +64,9 @@ const aboutCollection = defineCollection({
 
 export interface TeamMember {
   name: string;
-  description: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  subtitle?: Localized<string>;
+  description: Localized<string>;
+  image: ImageMeta;
 }
 
 export interface About {
@@ -69,109 +78,96 @@ const caseStudiesCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
-      title: z.string(),
-      description: z.string(),
-      about: z.string(),
-      challenge: z.string(),
-      deliveredValue: z.string(),
-      product: z.string(),
-      tech: z.array(z.string()),
-      testimonials: z.array(z.number()),
+      client: z.string(),
       image: image(),
+      tech: z.array(z.string()),
+      // Explicitly linked testimonials, by slug (filename).
+      testimonials: z.array(z.string()),
+      title: localized(z.string()),
+      description: localized(z.string()),
+      about: localized(z.string()),
+      challenge: localized(z.string()),
+      deliveredValue: localized(z.string()),
+      product: localized(z.array(z.string())),
     }),
 });
 
 export interface CaseStudy {
   slug: string;
-  title: string;
-  description: string;
-  about: string;
-  challenge: string;
-  deliveredValue: string;
-  product: string;
+  client: string;
+  image: ImageMeta;
   tech: string[];
-  testimonials: number[];
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  testimonials: string[];
+  title: Localized<string>;
+  description: Localized<string>;
+  about: Localized<string>;
+  challenge: Localized<string>;
+  deliveredValue: Localized<string>;
+  product: Localized<string[]>;
 }
 
-const servicesCollection = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/services", generateId: pathId }),
+const expertiseCollection = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/expertise", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
       slug: z.string(),
-      title: z.string(),
-      description: z.string(),
+      image: image(),
+      // Explicitly linked related insights / case studies, by slug (filename).
+      insights: z.array(z.string()).default([]),
+      case_studies: z.array(z.string()).default([]),
+      title: localized(z.string()),
+      description: localized(z.string()),
       tech: z.array(
         z.object({
-          name: z.string(),
-          description: z.string(),
-          image: image(),
+          name: localized(z.string()),
+          subtitle: localized(z.string()).optional(),
+          description: localized(z.string()),
+          // Empty string allowed as a placeholder for tech without a logo yet.
+          image: z.union([z.literal(""), image()]),
         }),
       ),
-      image: image(),
-      tags: z.array(z.string()),
     }),
 });
 
 export interface Tech {
-  name: string;
-  description: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  name: Localized<string>;
+  subtitle?: Localized<string>;
+  description: Localized<string>;
+  image: ImageMeta | "";
 }
 
-export interface Service {
+export interface Expertise {
   slug: string;
-  title: string;
-  description: string;
+  image: ImageMeta;
+  insights: string[];
+  case_studies: string[];
+  title: Localized<string>;
+  description: Localized<string>;
   tech: Tech[];
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
-  tags: string[];
 }
 
 const testimonialsCollection = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/testimonials", generateId: pathId }),
   schema: ({ image }) =>
     z.object({
-      identifier: z.number(),
       name: z.string(),
       subheading: z.string(),
-      quote: z.string(),
       image: image(),
+      quote: localized(z.string()),
     }),
 });
 
 export interface Testimonial {
-  identifier: number;
   name: string;
   subheading: string;
-  quote: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-  };
+  image: ImageMeta;
+  quote: Localized<string>;
 }
 
 export const collections = {
-  blog: blogCollection,
+  insights: insightsCollection,
   about: aboutCollection,
   "case-studies": caseStudiesCollection,
-  services: servicesCollection,
+  expertise: expertiseCollection,
   testimonials: testimonialsCollection,
 };

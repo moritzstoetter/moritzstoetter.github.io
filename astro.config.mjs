@@ -6,6 +6,13 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   output: "static",
   site: "https://moritzstoetter.github.io/",
+  // Old /blog URLs were renamed to /insights. Redirect to preserve inbound
+  // links and SEO (static build emits meta-refresh redirect pages).
+  redirects: {
+    "/[lang]/blog": "/[lang]/insights",
+    "/[lang]/blog/[...slug]": "/[lang]/insights/[...slug]",
+    "/[lang]/services/[...slug]": "/[lang]/expertise/[...slug]",
+  },
   vite: {
     plugins: [tailwindcss()],
   },

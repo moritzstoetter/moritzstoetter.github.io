@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from "astro:content";
+import { getLangFromUrl, idIsOfLanguage, useTranslations } from "../../i18n/utils";
+import InsightPreview from "../business/InsightPreview.astro";
+import RelatedInsights from "../business/RelatedInsights.astro";
+
+const { slug } = Astro.params;
+const lang = getLangFromUrl(Astro.url);
+
+const insights = await getCollection("insights");
+
+const insight = insights.find((s) => s.id === `${lang}/${slug}`);
+
+const rendering = insight ? await render(insight) : undefined;
+
+// Resolve the explicitly-linked related insights by slug, preserving the
+// authored order, in the current language and excluding the current insight.
+const relatedInsights = (insight?.data.insights ?? []).flatMap((s) => {
+  if (s === slug) return [];
+  const e = insights.find(
+    (i) => idIsOfLanguage(i.id, lang) && i.id.split("/")[1] === s,
+  );
+  return e ? [e] : [];
+});
+
+const t = useTranslations(lang);
+---
+
+{
+  !!insight && !!rendering ? (
+    <article class="flex flex-col gap-8 pb-8">
+      <InsightPreview insight={insight} linked={false} swap />
+      <div class="pb-8 prose dark:prose-dark max-w-none lg:prose-xl">
+        <rendering.Content />
+      </div>
+      <div class="w-full text-right">
+        <h6>{insight.data.date.toISOString().slice(0, 10)}</h6>
+      </div>
+      <RelatedInsights
+        insights={relatedInsights}
+        headingClass="text-primaryLight dark:text-primaryDark"
+      />
+    </article>
+  ) : (
+    <div>
+      <h1>{t("insights.notFound")}</h1>
+    </div>
+  )
+}

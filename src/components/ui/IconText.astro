@@ -1,0 +1,88 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+// Backdrop-agnostic content block: an optional icon beside a title + optional
+// subtitle, with an optional description below. Carries no background of its
+// own — the consumer positions it (e.g. SplitBox drops it into its frosted
+// panel; grid cards wrap it in a padded Box).
+//
+//   ┌────────┐
+//   │ [icon] │  Title
+//   │        │  (Subtitle)
+//   └────────┘
+//   (Description)
+//
+// size:
+//   "lg" (default) — split-box panel scale; the icon is a translucent chip
+//                    tuned for a busy/frosted backdrop.
+//   "sm"           — compact scale for grid cards on solid surfaces; the icon
+//                    renders plainly (no chip, which would be near-invisible).
+interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  icon?: ImageMetadata;
+  iconAlt?: string;
+  size?: "lg" | "sm";
+}
+
+const {
+  title,
+  subtitle,
+  description,
+  icon,
+  iconAlt = "",
+  size = "lg",
+} = Astro.props;
+
+// Keep full class strings literal so Tailwind can detect them.
+const styles = {
+  lg: {
+    gap: "gap-4",
+    iconGap: "gap-4",
+    iconBox: "h-16 w-16 rounded-2xl bg-white/70 p-2 dark:bg-backgroundDark/70",
+    title: "text-2xl sm:text-4xl lg:text-5xl",
+    subtitle: "text-lg",
+    description: "text-lg sm:text-xl lg:text-2xl",
+  },
+  sm: {
+    gap: "gap-2",
+    iconGap: "gap-3",
+    iconBox: "h-12 w-12",
+    title: "text-lg sm:text-xl lg:text-2xl",
+    subtitle: "text-sm",
+    description: "text-base",
+  },
+}[size];
+---
+
+<div class:list={["flex flex-col", styles.gap]}>
+  <div class:list={["flex items-center", styles.iconGap]}>
+    {
+      icon && (
+        <div
+          class:list={[
+            "flex shrink-0 items-center justify-center",
+            styles.iconBox,
+          ]}
+        >
+          <Image src={icon} alt={iconAlt} class="h-full w-full object-contain" />
+        </div>
+      )
+    }
+    <div class="flex flex-col">
+      <h2 class:list={[styles.title, "text-primaryLight dark:text-primaryDark"]}>
+        {title}
+      </h2>
+      {
+        subtitle && (
+          <p class:list={[styles.subtitle, "text-textLight/60 dark:text-textDark/60"]}>
+            {subtitle}
+          </p>
+        )
+      }
+    </div>
+  </div>
+  {description && <p class={styles.description}>{description}</p>}
+</div>

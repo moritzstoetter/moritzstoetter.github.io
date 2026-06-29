@@ -1,0 +1,14 @@
+---
+import ExpertiseList from "../../components/business/ExpertiseList.astro";
+import Base from "../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
+}
+---
+
+<Base>
+  <div class="pb-16">
+    <ExpertiseList />
+  </div>
+</Base>

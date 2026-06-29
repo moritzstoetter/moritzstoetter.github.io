@@ -1,33 +1,28 @@
 ---
-import { Image } from "astro:assets";
-import hero from "../assets/hero.png";
+import hero from "../assets/hero.webp";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import ContactButton from "./ContactButton.astro";
+import SplitMedia from "./ui/SplitMedia.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section
+{/* Home hero: a self-contained rounded box, vertically centred in the first
+    viewport by the home page's hero section. */}
+<div
   id="hero"
-  class="relative grid items-center grid-cols-1 mt-4 md:mt-16 md:grid-cols-2 overflow-hidden rounded-3xl"
+  class="overflow-hidden rounded-[39px] border-2 border-primaryLight/10 dark:border-neutral-700"
 >
-  <!-- Background Image Container -->
-  <div class="absolute inset-0 w-full h-full">
-    <Image 
-      src={hero} 
-      alt="hero" 
-      class="object-cover w-full h-full"
-    />
-  </div>
-  
-  <!-- Content Container with background overlay for better text readability -->
-  <div class="relative z-10 flex flex-col  bg-white/75 dark:bg-black/75 p-8">
-    <h1 class="text-start sm:text-4xl lg:text-5xl text-primaryLight dark:text-primaryDark">
-      {t("home.hero.title")}
-    </h1>
-    <h3 class="pb-8">{t("home.hero.subtitle")}</h3>
-    <ContactButton/>
-  </div>
-  <div class="hidden md:block"> <!-- Empty div to maintain grid layout --> </div>
-</section>
+  <SplitMedia
+    image={hero}
+    imageAlt="hero"
+    title={t("home.hero.title")}
+    description={t("home.hero.subtitle")}
+    heightClass="min-h-[34rem] md:min-h-[40rem] lg:min-h-[44rem]"
+    swap
+  >
+    <a slot="cta" href={`/${lang}/contact`} class="button-primary w-fit">
+      {t("home.hero.cta")}
+    </a>
+  </SplitMedia>
+</div>

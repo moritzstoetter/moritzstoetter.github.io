@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import contactImage from "../../assets/contact.png";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -8,60 +6,44 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:my-8">
-  <div class="relative hidden h-full col-span-1 lg:block">
-    <Image
-      class="absolute inset-0 object-cover object-left w-full h-full rounded-l-3xl"
-      src={contactImage}
-      alt="asdfasdf asd fas df"
+<div class="flex flex-col gap-8 pb-8">
+  <form
+    class="flex flex-col gap-8"
+    method="post"
+    action="https://forms.un-static.com/forms/abef4a4f20c48f436cdb7eb8ca72aee60b38f607"
+  >
+    <input
+      name="name"
+      placeholder={t("contact.name")}
+      type="text"
+      required="required"
     />
-  </div>
-  <div class="flex flex-col col-span-2 gap-8 pb-8 mx-4 lg:col-span-1 lg:mx-0">
-    <h1>{t("contact.title")}</h1>
-    <form
-      class="flex flex-col gap-8"
-      method="post"
-      action="https://forms.un-static.com/forms/abef4a4f20c48f436cdb7eb8ca72aee60b38f607"
-    >
-      <input
-        name="name"
-        placeholder={t("contact.name")}
-        type="text"
-        required="required"
-      />
-      <input
-        name="email"
-        placeholder={t("contact.email")}
-        type="text"
-        required="required"
-      />
-      <textarea
-        name="message"
-        placeholder={t("contact.message")}
-        cols="40"
-        rows="10"
-        required="required"></textarea>
-      <div class="flex justify-between gap-4">
-        <button class="button-primary" name="submit" type="submit"
-          >{t("contact.send")}</button
+    <input
+      name="email"
+      placeholder={t("contact.email")}
+      type="text"
+      required="required"
+    />
+    <textarea
+      name="message"
+      placeholder={t("contact.message")}
+      cols="40"
+      rows="10"
+      required="required"></textarea>
+    <div class="flex justify-between gap-4">
+      <p class="email-disclaimer">
+        <small
+          >powered by <a
+            rel="nofollow"
+            class="focused-link"
+            href="https://un-static.com/"
+            target="_blank">Un-static Forms</a
+          ></small
         >
-        <p class="email-disclaimer">
-          <small
-            >powered by <a
-              rel="nofollow"
-              class="focused-link"
-              href="https://un-static.com/"
-              target="_blank">Un-static Forms</a
-            ></small
-          >
-        </p>
-      </div>
-    </form>
-    <p>{t("contact.bookACallDescription")}</p>
-    <a
-      href="https://cal.com/moritzstoetter/30min"
-      target="_blank"
-      class="button-primary">{t("contact.bookACall")}</a
-    >
-  </div>
+      </p>
+      <button class="button-primary" name="submit" type="submit"
+        >{t("contact.send")}</button
+      >
+    </div>
+  </form>
 </div>
