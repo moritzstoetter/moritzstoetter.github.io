@@ -30,7 +30,7 @@
   },
   "challenge": {
     "de": "Unser Kunde wollte seine Produkte in einem Meshnetzwerk miteinander zu vernetzen, und hatte ein Auge auf Thread und Matter geworfen. Wir wurden beauftragt, die Technologien im Hinblick auf den Anwendungsfall zu evaluieren und eine Proof-of-concept-Losung zu erarbeiten.",
-    "en": "The client was under great time pressure and was looking for a solution to connect a large number of lamps with one another, without relying solely on wireless technologies. After some set backs, cropled reached out to us for the development of a solution, that connects the devices over their power supply."
+    "en": "Our customer wanted to connect its products to each other in a mesh network and had set its sights on Thread and Matter. We were tasked with evaluating these technologies in light of the use case and developing a proof-of-concept solution."
   },
   "deliveredValue": {
     "de": "Wir bauten rasch eine Testumgebung aus kundenspezifischer Hardware auf, mithilfe der wir die Technologien unter die Lupe nehmen konnten. Dank dieser Sandbox war schnell geklärt, dass Thread auf OpenThread eine interessante und belastbare Lösung für cropled sein kann. Es wurde ebenfalls sichtbar, dass Matter noch nicht reif für den Einsatz war. Auf Basis dieser Erkenntnisse gaben wir unsere Empfehlung ab, die unserem Kunden viel Aufwand und eine mögliche Sackgasse erspart hat.",
