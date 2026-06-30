@@ -6,13 +6,19 @@ import ExpertiseList from "../../components/business/ExpertiseList.astro";
 import CaseStudyList from "../../components/business/CaseStudyList.astro";
 import InsightList from "../../components/business/InsightList.astro";
 import ContactForm from "../../components/ui/ContactForm.astro";
+import Divider from "../../components/ui/Divider.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const langTestimonials = await getCollection("testimonials");
+const langTestimonials = [...(await getCollection("testimonials"))].reverse();
+
+// Single source of truth for the home page's vertical rhythm. Every section
+// uses the same symmetric padding and the parent adds no gap, so the whitespace
+// between any two sections — divider centred in it — is uniform.
+const sectionY = "py-12 md:py-20";
 
 export async function getStaticPaths() {
   return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
@@ -20,42 +26,29 @@ export async function getStaticPaths() {
 ---
 
 <Base>
-  <div class="flex flex-col gap-24 md:gap-40">
-    {/* First viewport: hero vertically centred, scroll-down cue below it. A
-        plain div (not a section) so the scroll-fade animation — which would
-        render it mid-exit at page top — doesn't apply to the hero. */}
-    <div class="flex min-h-[calc(100svh-7rem)] flex-col justify-center gap-8 md:gap-10">
-      <Hero />
-      <a
-        href="#content"
-        aria-label={t("home.hero.scrollDown")}
-        class="flex h-12 w-12 items-center justify-center self-center rounded-full border-2 border-primaryLight/30 text-primaryLight transition-colors duration-300 hover:border-primaryLight hover:bg-primaryLight hover:text-white focus:border-primaryLight focus:outline-none motion-safe:animate-bounce dark:border-primaryDark/30 dark:text-primaryDark dark:hover:border-primaryDark dark:hover:bg-primaryDark dark:hover:text-white dark:focus:border-primaryDark"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="m6 9 6 6 6-6"></path>
-        </svg>
-      </a>
-    </div>
-    <section id="content" class="scroll-mt-28">
+  {/* Uniform vertical rhythm: each section carries the same symmetric `sectionY`
+      padding and the parent adds no gap, so every section boundary — with the
+      divider centred in it — is one `sectionY` from each side. */}
+  <div class="flex flex-col">
+    {/* Hero: full-bleed band directly under the navbar bar. The divider that
+        follows has no padding above it, so it lands flush on the hero's lower
+        edge. */}
+    <Hero />
+    <Divider />
+    <section
+      id="content"
+      class:list={["scroll-mt-28 [&>h1:first-child]:mt-0", sectionY]}
+    >
       <h1>{t("home.expertise.title")}</h1>
       <ExpertiseList />
     </section>
-    <section>
+    <Divider />
+    <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>
       <h1>{t("home.expertise.testimonials")}</h1>
       <TestimonialSlider testimonials={langTestimonials} />
     </section>
-    <section>
+    <Divider />
+    <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>
       <h1>{t("caseStudies.title")}</h1>
       <CaseStudyList limit={2} />
       <div class="mt-8 text-right">
@@ -64,7 +57,8 @@ export async function getStaticPaths() {
         </a>
       </div>
     </section>
-    <section>
+    <Divider />
+    <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>
       <h1>{t("insights.title")}</h1>
       <InsightList limit={2} />
       <div class="mt-8 text-right">
@@ -73,7 +67,8 @@ export async function getStaticPaths() {
         </a>
       </div>
     </section>
-    <section class="mb-16 md:mb-24">
+    <Divider />
+    <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>
       <h1>{t("contact.title")}</h1>
       <ContactForm />
     </section>

@@ -7,12 +7,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-{/* Home hero: a self-contained rounded box, vertically centred in the first
-    viewport by the home page's hero section. */}
-<div
-  id="hero"
-  class="overflow-hidden rounded-[39px] border-2 border-primaryLight/10 dark:border-neutral-700"
->
+{/* Home hero: a full-bleed band spanning the viewport, vertically placed in the
+    first viewport by the home page's hero section. Edge-to-edge, so it drops the
+    card's rounding/border. */}
+<div id="hero" class="full-bleed overflow-hidden">
   <SplitMedia
     image={hero}
     imageAlt="hero"

@@ -8,13 +8,16 @@ import { getLangFromUrl } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 
-// Standalone sticky bordered pill, used on every page (home included).
-const wrapperClass =
-  "sticky z-50 flex flex-col px-8 py-2 mx-4 mt-8 border-2 lg:mx-0 bg-white/50 backdrop-blur-md top-4 dark:bg-backgroundDarker/80 rounded-[39px] border-primaryLight/10 dark:border-neutral-700";
+// Full-width sticky bar at the top of every page (home included). The bar
+// background and bottom border span the viewport; the inner row stays aligned
+// to the page's max-w-5xl content column.
+const barClass =
+  "full-bleed sticky top-0 z-50 border-b bg-white/50 backdrop-blur-md dark:bg-backgroundDarker/80 border-primaryLight/10 dark:border-neutral-700";
 ---
 
-<div class={wrapperClass}>
-  <div class="flex items-center justify-between">
+<div class={barClass}>
+  <div class="mx-auto flex w-full max-w-5xl flex-col px-4 py-2 lg:px-0">
+    <div class="flex items-center justify-between">
     <a href={`/${lang}/`}>
       <div class="hidden md:block pr-4">
         <div class="block dark:hidden">
@@ -71,6 +74,7 @@ const wrapperClass =
     <div class="py-4" id="mobile-menu-content">
       <NavList alignment="vertical" />
     </div>
+  </div>
   </div>
 </div>
 

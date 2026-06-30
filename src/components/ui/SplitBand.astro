@@ -1,0 +1,43 @@
+---
+import type { ImageMetadata } from "astro";
+import SplitMedia from "./SplitMedia.astro";
+
+// Full-width counterpart to the old SplitBox: the SplitMedia split runs
+// edge-to-edge as a band, with no card surface or rounding. The wrapper does
+// two jobs Box used to do — clip the blurred, scaled background image
+// (overflow-hidden) — and one new one: break out of the centered max-w-5xl
+// column to span the viewport (full-bleed). Stack several and they touch.
+interface Props {
+  image: ImageMetadata;
+  imageAlt?: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
+  icon?: ImageMetadata;
+  iconAlt?: string;
+  href?: string;
+  swap?: boolean;
+  heightClass?: string;
+  solidPanel?: boolean;
+}
+
+const { href, ...media } = Astro.props;
+
+const className =
+  "full-bleed block overflow-hidden bg-white dark:bg-backgroundDark" +
+  (href
+    ? " transition duration-300 hover:brightness-95 dark:hover:brightness-110"
+    : "");
+---
+
+{
+  href ? (
+    <a class={className} href={href}>
+      <SplitMedia {...media} />
+    </a>
+  ) : (
+    <div class={className}>
+      <SplitMedia {...media} />
+    </div>
+  )
+}

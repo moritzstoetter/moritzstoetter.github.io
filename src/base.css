@@ -53,6 +53,15 @@
 }
 
 @layer components {
+  /* Break an element out of the centered max-w-5xl column so it spans the full
+     viewport width (used by the navbar bar and the hero band). The breakout is
+     relative to the column, so calc(50% - 50vw) pulls each edge to the
+     viewport. */
+  .full-bleed {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
   .button-primary {
     @apply w-full rounded-full border-2 border-transparent bg-primaryLight px-8 py-4 text-center text-white transition-colors duration-300 hover:bg-primaryLight/80 focus:border-white focus:outline-none md:w-fit md:text-left dark:bg-primaryDark hover:dark:bg-primaryDark/80;
   }
