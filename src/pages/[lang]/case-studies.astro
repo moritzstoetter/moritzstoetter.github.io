@@ -1,13 +1,16 @@
 ---
 import CaseStudyList from "../../components/business/CaseStudyList.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
 
 export async function getStaticPaths() {
   return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
 }
 ---
 
-<Base>
+<Base title={t("meta.caseStudies.title")} description={t("meta.caseStudies.description")}>
   <div class="pb-16">
     <CaseStudyList />
   </div>

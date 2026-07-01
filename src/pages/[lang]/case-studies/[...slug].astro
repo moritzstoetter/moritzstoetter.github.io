@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import CaseStudy from "../../../components/pages/CaseStudy.astro";
+import { pick } from "../../../i18n/utils";
 import Base from "../../../layouts/Base.astro";
 
 export async function getStaticPaths() {
@@ -11,9 +12,16 @@ export async function getStaticPaths() {
   ]);
 }
 
-const { lang, slug } = Astro.params;
+const { slug } = Astro.params;
+const lang = Astro.params.lang as "de" | "en";
+
+const caseStudy = (await getCollection("case-studies")).find(
+  (s) => s.id === slug,
+)?.data;
+const title = caseStudy ? pick(caseStudy.title, lang) : undefined;
+const description = caseStudy ? pick(caseStudy.description, lang) : undefined;
 ---
 
-<Base>
+<Base title={title} description={description}>
   <CaseStudy lang={lang} slug={slug} />
 </Base>

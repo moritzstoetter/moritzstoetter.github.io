@@ -13,8 +13,10 @@ export async function getStaticPaths() {
 
   return paths;
 }
+
+const { data } = Astro.props;
 ---
 
-<Base>
+<Base title={data.title} description={data.description}>
   <Insight />
 </Base>

@@ -7,6 +7,41 @@ import ContactButton from "../components/ContactButton.astro";
 
 const lang = getLangFromUrl(Astro.url);
 
+// Per-page SEO. Every page passes its own title/description; without them a
+// page would inherit the site-wide defaults (fine only for the home page).
+interface Props {
+  title?: string;
+  description?: string;
+  // Absolute or root-relative path to a social-share image; defaults to the logo.
+  image?: string;
+}
+const { title, description, image } = Astro.props;
+
+const SITE = "https://modernembedded.tech";
+const BRAND = "modern embedded";
+const DEFAULT_DESCRIPTION =
+  "Cutting edge software development for embedded devices in modern C++.";
+
+const pageTitle = title
+  ? `${title} | ${BRAND}`
+  : `${BRAND} — Cutting edge embedded software development`;
+const pageDescription = description ?? DEFAULT_DESCRIPTION;
+
+// Canonical + social URLs must reflect the *actual* page, not the home page.
+const canonical = new URL(Astro.url.pathname, SITE).href;
+const ogImage = new URL(image ?? "/logo_dark.png", SITE).href;
+
+// hreflang alternates: every route exists in both languages, so we derive the
+// counterpart URL by swapping the leading locale segment. x-default points at
+// the default locale (de).
+const localizedPath = (l: string) =>
+  Astro.url.pathname.replace(/^\/(de|en)/, `/${l}`);
+const alternates = [
+  { hreflang: "de", href: new URL(localizedPath("de"), SITE).href },
+  { hreflang: "en", href: new URL(localizedPath("en"), SITE).href },
+  { hreflang: "x-default", href: new URL(localizedPath("de"), SITE).href },
+];
+
 // A "contact us" CTA hovers in the bottom-right corner of every page except
 // the contact page itself.
 const showContact = !/\/contact\/?$/.test(Astro.url.pathname);
@@ -20,15 +55,8 @@ const isHome = /^\/(de|en)\/?$/.test(Astro.url.pathname);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content="Cutting edge software development for embedded devices."
-    />
-    <meta
-      name="keywords"
-      content="Freelance, C++, Embedded, RTOS, Software Developer, BLE, Wifi, Firmware, Senior Software Developer, Software Architect"
-    />
-    <title>modern embedded</title>
+    <meta name="description" content={pageDescription} />
+    <title>{pageTitle}</title>
 
     <!-- Favicons -->
     <!-- SVG favicon with embedded CSS -->
@@ -48,21 +76,29 @@ const isHome = /^\/(de|en)\/?$/.test(Astro.url.pathname);
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={`https://modernembedded.tech/${lang}/`} />
-    <meta property="og:title" content="modern embedded - Cutting edge embedded software development" />
-    <meta property="og:description" content="Cutting edge software development for embedded devices in modern C++." />
-    <meta property="og:image" content="https://modernembedded.tech/logo_dark.png" />
-    <meta property="og:site_name" content="modern embedded" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={BRAND} />
+    <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={`https://modernembedded.tech/${lang}/`} />
-    <meta property="twitter:title" content="modern embedded - Cutting edge embedded software development" />
-    <meta property="twitter:description" content="Cutting edge software development for embedded devices in modern C++." />
-    <meta property="twitter:image" content="https://modernembedded.tech/logo_dark.png" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={pageTitle} />
+    <meta property="twitter:description" content={pageDescription} />
+    <meta property="twitter:image" content={ogImage} />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href={`https://modernembedded.tech/${lang}/`} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- hreflang alternates for the de/en versions of this page -->
+    {
+      alternates.map((a) => (
+        <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+      ))
+    }
     <!-- Check for dark mode to avoid light/dark theme blinking -->
     <script is:inline>
       if (

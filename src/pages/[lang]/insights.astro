@@ -1,13 +1,16 @@
 ---
 import InsightList from "../../components/business/InsightList.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
 
 export async function getStaticPaths() {
   return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
 }
 ---
 
-<Base>
+<Base title={t("meta.insights.title")} description={t("meta.insights.description")}>
   <div class="pb-16">
     <InsightList />
   </div>

@@ -1,5 +1,6 @@
 ---
 import Expertise from "../../../components/pages/Expertise.astro";
+import { pick } from "../../../i18n/utils";
 import Base from "../../../layouts/Base.astro";
 
 import { getCollection } from "astro:content";
@@ -12,9 +13,16 @@ export async function getStaticPaths() {
   ]);
 }
 
-const { lang, slug } = Astro.params;
+const { slug } = Astro.params;
+const lang = Astro.params.lang as "de" | "en";
+
+const expertise = (await getCollection("expertise")).find(
+  (s) => s.id === slug,
+)?.data;
+const title = expertise ? pick(expertise.title, lang) : undefined;
+const description = expertise ? pick(expertise.description, lang) : undefined;
 ---
 
-<Base>
+<Base title={title} description={description}>
   <Expertise lang={lang} slug={slug} />
 </Base>

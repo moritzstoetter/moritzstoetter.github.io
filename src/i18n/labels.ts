@@ -61,6 +61,37 @@ export const labels = {
       relatedCaseStudies: "Related Case Studies",
       seeAll: "See all",
     },
+    meta: {
+      home: {
+        description:
+          "Freelance embedded software development and consulting in modern C++ — firmware, RTOS, BLE and Wi-Fi for products that stand out to the core.",
+      },
+      expertise: {
+        title: "Expertise",
+        description:
+          "Embedded software, firmware, RTOS, connectivity and DevOps — the engineering expertise behind reliable, high-quality products.",
+      },
+      caseStudies: {
+        title: "Case Studies",
+        description:
+          "Real embedded projects we delivered — from BLE and Thread connectivity to industrial PLC control and lab automation.",
+      },
+      insights: {
+        title: "Insights",
+        description:
+          "Articles on modern embedded software development, C++ and pragmatic engineering practices.",
+      },
+      about: {
+        title: "About",
+        description:
+          "The people behind modern embedded — senior embedded software engineers and architects.",
+      },
+      contact: {
+        title: "Contact",
+        description:
+          "Get in touch to discuss your embedded software project or book a non-binding consultation.",
+      },
+    },
   },
   de: {
     nav: {
@@ -116,6 +147,37 @@ export const labels = {
       relatedInsights: "Verwandte Insights",
       relatedCaseStudies: "Verwandte Fallstudien",
       seeAll: "Alle ansehen",
+    },
+    meta: {
+      home: {
+        description:
+          "Freelance Embedded-Softwareentwicklung und Beratung in modernem C++ — Firmware, RTOS, BLE und Wi-Fi für Produkte, die bis in den Kern überzeugen.",
+      },
+      expertise: {
+        title: "Expertise",
+        description:
+          "Embedded-Software, Firmware, RTOS, Konnektivität und DevOps — die Ingenieurskompetenz hinter zuverlässigen, hochwertigen Produkten.",
+      },
+      caseStudies: {
+        title: "Fallstudien",
+        description:
+          "Reale Embedded-Projekte, die wir umgesetzt haben — von BLE- und Thread-Konnektivität bis zu industrieller SPS-Steuerung und Laborautomation.",
+      },
+      insights: {
+        title: "Insights",
+        description:
+          "Artikel über moderne Embedded-Softwareentwicklung, C++ und pragmatische Engineering-Praktiken.",
+      },
+      about: {
+        title: "Über uns",
+        description:
+          "Die Menschen hinter modern embedded — erfahrene Embedded-Softwareentwickler und -Architekten.",
+      },
+      contact: {
+        title: "Kontakt",
+        description:
+          "Kontaktieren Sie uns, um Ihr Embedded-Softwareprojekt zu besprechen oder ein unverbindliches Beratungsgespräch zu vereinbaren.",
+      },
     },
   },
 } as const;
