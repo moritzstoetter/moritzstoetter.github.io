@@ -1,10 +1,12 @@
 ---
-import Testimonial from "../../components/Testimonial.astro";
+import Box from "../../components/ui/Box.astro";
+import TestimonialContent from "../../components/TestimonialContent.astro";
 
 // CSS scroll-snap carousel: the browser owns the scroll position and snapping,
 // so it's resize-proof and supports native touch/trackpad swipe and keyboard
-// scrolling out of the box. The script below is pure enhancement (arrows, dots,
-// pausable autoplay) and degrades gracefully if JS is off.
+// scrolling out of the box. One static Box wraps the scroller, so only the
+// content moves on swipe while the box surface stays put. The script below is
+// pure enhancement (arrows, dots) and degrades gracefully if JS is off.
 const { testimonials } = Astro.props;
 const multiple = testimonials.length >= 2;
 ---
@@ -16,24 +18,32 @@ const multiple = testimonials.length >= 2;
   aria-roledescription="carousel"
   aria-label="Testimonials"
 >
-  <ul
-    data-slides
-    tabindex="0"
-    class="no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-[39px] focus:outline-none focus-visible:ring-2 focus-visible:ring-primaryLight/40 dark:focus-visible:ring-primaryDark/40"
+  <Box
+    padded
+    customClass="focus-within:ring-2 focus-within:ring-primaryLight/40 dark:focus-within:ring-primaryDark/40"
   >
-    {
-      testimonials.map((testimonial: any, i: number) => (
-        <li
-          class="min-h-80 w-full shrink-0 snap-center md:min-h-[28rem]"
-          role="group"
-          aria-roledescription="slide"
-          aria-label={`${i + 1} of ${testimonials.length}`}
-        >
-          <Testimonial testimonial={testimonial.data} variant="slider" />
-        </li>
-      ))
-    }
-  </ul>
+    <ul
+      data-slides
+      tabindex="0"
+      class="no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain focus:outline-none"
+    >
+      {
+        testimonials.map((testimonial: any, i: number) => (
+          <li
+            class="min-h-80 w-full shrink-0 snap-center md:min-h-[28rem]"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${testimonials.length}`}
+          >
+            <TestimonialContent
+              testimonial={testimonial.data}
+              variant="slider"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </Box>
 
   {
     multiple && (
@@ -97,7 +107,6 @@ const multiple = testimonials.length >= 2;
 </div>
 
 <script>
-  const AUTOPLAY_MS = 12000;
   const reduceMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
@@ -148,25 +157,6 @@ const multiple = testimonials.length >= 2;
     prev?.addEventListener("click", () => go(index - 1));
     next?.addEventListener("click", () => go(index + 1));
     dots.forEach((dot, i) => dot.addEventListener("click", () => go(i)));
-
-    // Autoplay, but only when motion is allowed. Pauses while the user hovers,
-    // focuses within, or the tab is hidden — so it never fights the user.
-    if (!reduceMotion) {
-      let timer = 0;
-      const stop = () => clearInterval(timer);
-      const start = () => {
-        stop();
-        timer = window.setInterval(() => go(index + 1), AUTOPLAY_MS);
-      };
-      root.addEventListener("pointerenter", stop);
-      root.addEventListener("pointerleave", start);
-      root.addEventListener("focusin", stop);
-      root.addEventListener("focusout", start);
-      document.addEventListener("visibilitychange", () =>
-        document.hidden ? stop() : start(),
-      );
-      start();
-    }
 
     syncActive();
   };

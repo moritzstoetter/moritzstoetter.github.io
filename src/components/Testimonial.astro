@@ -1,52 +1,18 @@
 ---
-import { Image } from "astro:assets";
 import type { Testimonial } from "../content.config";
-import { getLangFromUrl, pick } from "../i18n/utils";
 import Box from "./ui/Box.astro";
+import TestimonialContent from "./TestimonialContent.astro";
 
+// A testimonial in its own Box surface (used on case-study pages). The slider
+// uses TestimonialContent directly inside one shared static box instead.
 interface Props {
   testimonial: Testimonial;
   variant?: "slider" | "caseStudy";
 }
 
 const { testimonial, variant = "slider" } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
-
-// Size variants. Keep full class strings literal so Tailwind can detect them.
-const styles = {
-  slider: {
-    gap: "gap-8",
-    image: "w-36 h-36",
-    name: "text-2xl sm:text-2xl lg:text-3xl",
-    subheading: "text-lg sm:text-xl lg:text-2xl",
-    quote: "text-lg sm:text-xl lg:text-2xl",
-  },
-  caseStudy: {
-    gap: "gap-4",
-    image: "w-16 h-16",
-    name: "font-medium",
-    subheading: "text-sm",
-    quote: "",
-  },
-}[variant];
 ---
 
 <Box padded customClass="h-full">
-  <div class:list={["flex flex-col h-full", styles.gap]}>
-    <div class="flex flex-col items-center gap-2 text-center">
-      <Image
-        src={testimonial.image}
-        alt={testimonial.name}
-        class:list={[
-          "grow-0 shrink-0 object-cover rounded-full",
-          styles.image,
-        ]}
-      />
-      <p class={styles.name}>{testimonial.name}</p>
-      <p class:list={["text-textLight/50 dark:text-textDark/50", styles.subheading]}>
-        {testimonial.subheading}
-      </p>
-    </div>
-    <p class:list={["italic text-center", styles.quote]}>"{pick(testimonial.quote, lang)}"</p>
-  </div>
+  <TestimonialContent testimonial={testimonial} variant={variant} />
 </Box>
