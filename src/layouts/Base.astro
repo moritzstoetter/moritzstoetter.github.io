@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import Nav from "../components/Nav.astro";
 import { getLangFromUrl } from "../i18n/utils";
 import "../base.css";
@@ -14,8 +15,13 @@ interface Props {
   description?: string;
   // Absolute or root-relative path to a social-share image; defaults to the logo.
   image?: string;
+  // Deep pages pass a breadcrumb trail ({ name, path }); rendered as a
+  // BreadcrumbList. Listing/home pages omit it.
+  breadcrumbs?: { name: string; path: string }[];
+  // Any extra JSON-LD schema object(s) a page wants to emit (e.g. Person).
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
-const { title, description, image } = Astro.props;
+const { title, description, image, breadcrumbs, jsonLd } = Astro.props;
 
 const SITE = "https://modernembedded.tech";
 const BRAND = "modern embedded";
@@ -40,6 +46,72 @@ const alternates = [
   { hreflang: "de", href: new URL(localizedPath("de"), SITE).href },
   { hreflang: "en", href: new URL(localizedPath("en"), SITE).href },
   { hreflang: "x-default", href: new URL(localizedPath("de"), SITE).href },
+];
+
+// --- Structured data (JSON-LD) -------------------------------------------
+// Site-wide organization identity, emitted on every page. Reviews carry the
+// real testimonial text/author but no ratingValue — we don't collect numeric
+// ratings, and inventing them to earn star snippets violates Google's policy.
+const testimonials = await getCollection("testimonials");
+const reviews = testimonials.map((tt) => ({
+  "@type": "Review",
+  author: { "@type": "Person", name: tt.data.name },
+  reviewBody: tt.data.quote[lang],
+}));
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE}/#organization`,
+  name: BRAND,
+  url: `${SITE}/`,
+  logo: `${SITE}/logo_dark.png`,
+  image: `${SITE}/logo_dark.png`,
+  description: DEFAULT_DESCRIPTION,
+  email: "info@modernembedded.tech",
+  telephone: "+49-151-23048794",
+  founder: {
+    "@type": "Person",
+    name: "Moritz Stötter",
+    jobTitle: "Embedded C++ Specialist",
+  },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Krottenkopfstr. 1",
+    postalCode: "81377",
+    addressLocality: "München",
+    addressCountry: "DE",
+  },
+  knowsAbout: [
+    "Embedded software development",
+    "Modern C++",
+    "RTOS",
+    "Firmware",
+    "Bluetooth Low Energy",
+    "Wi-Fi",
+    "DevOps",
+  ],
+  review: reviews,
+};
+
+const breadcrumbSchema = breadcrumbs?.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbs.map((b, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: b.name,
+        item: new URL(b.path, SITE).href,
+      })),
+    }
+  : undefined;
+
+const extraSchemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const schemas = [
+  organizationSchema,
+  ...(breadcrumbSchema ? [breadcrumbSchema] : []),
+  ...extraSchemas,
 ];
 
 // A "contact us" CTA hovers in the bottom-right corner of every page except
@@ -97,6 +169,13 @@ const isHome = /^\/(de|en)\/?$/.test(Astro.url.pathname);
     {
       alternates.map((a) => (
         <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+      ))
+    }
+
+    <!-- Structured data (JSON-LD) -->
+    {
+      schemas.map((s) => (
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(s)} />
       ))
     }
     <!-- Check for dark mode to avoid light/dark theme blinking -->

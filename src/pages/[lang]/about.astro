@@ -4,17 +4,41 @@ import TeamMember from "../../components/business/TeamMember.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 
-const t = useTranslations(getLangFromUrl(Astro.url));
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const about = await getCollection("about");
 const team = about.find((a) => a.id === "team");
+
+// A Person schema for the human team member (the "modern embedded" entry is the
+// organization itself, already covered by the site-wide Organization schema).
+const moritz = team?.data.members.find((m) => m.name === "Moritz Stötter");
+const personSchema = moritz
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: moritz.name,
+      jobTitle: moritz.subtitle ? moritz.subtitle[lang] : undefined,
+      description: moritz.description[lang],
+      image: "https://modernembedded.tech/moritz.webp",
+      worksFor: {
+        "@type": "Organization",
+        name: "modern embedded",
+        url: "https://modernembedded.tech/",
+      },
+    }
+  : undefined;
 
 export async function getStaticPaths() {
   return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
 }
 ---
 
-<Base title={t("meta.about.title")} description={t("meta.about.description")}>
+<Base
+  title={t("meta.about.title")}
+  description={t("meta.about.description")}
+  jsonLd={personSchema}
+>
   <section class="flex flex-col gap-8 pb-8">
     {team?.data.members.map((member) => <TeamMember member={member} />)}
   </section>

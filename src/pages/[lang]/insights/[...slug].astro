@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Insight from "../../../components/pages/Insight.astro";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 import Base from "../../../layouts/Base.astro";
 
 export async function getStaticPaths() {
@@ -15,8 +16,34 @@ export async function getStaticPaths() {
 }
 
 const { data } = Astro.props;
+const { slug } = Astro.params;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const breadcrumbs = [
+  { name: "modern embedded", path: `/${lang}/` },
+  { name: t("meta.insights.title"), path: `/${lang}/insights/` },
+  { name: data.title, path: `/${lang}/insights/${slug}/` },
+];
+
+// Article schema for the individual insight (blog post rich results).
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: data.title,
+  description: data.description,
+  author: { "@type": "Person", name: data.author },
+  datePublished: data.date.toISOString(),
+  inLanguage: lang,
+  mainEntityOfPage: `https://modernembedded.tech/${lang}/insights/${slug}/`,
+};
 ---
 
-<Base title={data.title} description={data.description}>
+<Base
+  title={data.title}
+  description={data.description}
+  breadcrumbs={breadcrumbs}
+  jsonLd={articleSchema}
+>
   <Insight />
 </Base>

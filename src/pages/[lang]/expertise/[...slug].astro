@@ -1,6 +1,6 @@
 ---
 import Expertise from "../../../components/pages/Expertise.astro";
-import { pick } from "../../../i18n/utils";
+import { pick, useTranslations } from "../../../i18n/utils";
 import Base from "../../../layouts/Base.astro";
 
 import { getCollection } from "astro:content";
@@ -21,8 +21,15 @@ const expertise = (await getCollection("expertise")).find(
 )?.data;
 const title = expertise ? pick(expertise.title, lang) : undefined;
 const description = expertise ? pick(expertise.description, lang) : undefined;
+
+const t = useTranslations(lang);
+const breadcrumbs = [
+  { name: "modern embedded", path: `/${lang}/` },
+  { name: t("meta.expertise.title"), path: `/${lang}/expertise/` },
+  ...(title ? [{ name: title, path: `/${lang}/expertise/${slug}/` }] : []),
+];
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} breadcrumbs={breadcrumbs}>
   <Expertise lang={lang} slug={slug} />
 </Base>
