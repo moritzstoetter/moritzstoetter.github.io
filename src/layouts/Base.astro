@@ -35,7 +35,9 @@ const pageDescription = description ?? DEFAULT_DESCRIPTION;
 
 // Canonical + social URLs must reflect the *actual* page, not the home page.
 const canonical = new URL(Astro.url.pathname, SITE).href;
-const ogImage = new URL(image ?? "/logo_dark.png", SITE).href;
+// Social scrapers want a real 1200×630 card in a widely-supported raster
+// format (PNG/JPG — several don't render WebP), so the default stays PNG.
+const ogImage = new URL(image ?? "/logo_og.png", SITE).href;
 
 // hreflang alternates: every route exists in both languages, so we derive the
 // counterpart URL by swapping the leading locale segment. x-default points at
@@ -65,8 +67,8 @@ const organizationSchema = {
   "@id": `${SITE}/#organization`,
   name: BRAND,
   url: `${SITE}/`,
-  logo: `${SITE}/logo_dark.png`,
-  image: `${SITE}/logo_dark.png`,
+  logo: `${SITE}/logo_dark.webp`,
+  image: `${SITE}/logo_og.png`,
   description: DEFAULT_DESCRIPTION,
   email: "info@modernembedded.tech",
   telephone: "+49-151-23048794",
