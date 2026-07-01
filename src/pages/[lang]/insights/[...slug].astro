@@ -1,8 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
 import Insight from "../../../components/pages/Insight.astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 import Base from "../../../layouts/Base.astro";
+
+const SITE = "https://modernembedded.tech";
+const BRAND = "modern embedded";
 
 export async function getStaticPaths() {
   const pages = await getCollection("insights");
@@ -26,24 +30,43 @@ const breadcrumbs = [
   { name: data.title, path: `/${lang}/insights/${slug}/` },
 ];
 
-// Article schema for the individual insight (blog post rich results).
+const canonical = `${SITE}/${lang}/insights/${slug}/`;
+const published = data.date.toISOString();
+
+// Social scrapers want an absolute raster card; several don't render WebP, so
+// derive a 1200-wide JPEG from the post's own image (was previously the logo).
+const og = await getImage({ src: data.image, width: 1200, format: "jpeg" });
+const ogImage = new URL(og.src, SITE).href;
+
+// Article schema for the individual insight (blog post rich results). image and
+// publisher are required/recommended for the article thumbnail snippet.
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: data.title,
   description: data.description,
+  image: [ogImage],
   author: { "@type": "Person", name: data.author },
-  datePublished: data.date.toISOString(),
+  publisher: {
+    "@type": "Organization",
+    name: BRAND,
+    logo: { "@type": "ImageObject", url: `${SITE}/logo_dark.webp` },
+  },
+  datePublished: published,
+  dateModified: published,
   inLanguage: lang,
-  mainEntityOfPage: `https://modernembedded.tech/${lang}/insights/${slug}/`,
+  mainEntityOfPage: canonical,
 };
 ---
 
 <Base
   title={data.title}
   description={data.description}
+  image={ogImage}
   breadcrumbs={breadcrumbs}
   jsonLd={articleSchema}
+  ogType="article"
+  article={{ publishedTime: published, modifiedTime: published, author: data.author }}
 >
   <Insight />
 </Base>

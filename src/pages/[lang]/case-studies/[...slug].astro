@@ -1,8 +1,11 @@
 ---
 import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
 import CaseStudy from "../../../components/pages/CaseStudy.astro";
 import { pick, useTranslations } from "../../../i18n/utils";
 import Base from "../../../layouts/Base.astro";
+
+const SITE = "https://modernembedded.tech";
 
 export async function getStaticPaths() {
   const pages = await getCollection("case-studies");
@@ -21,14 +24,46 @@ const caseStudy = (await getCollection("case-studies")).find(
 const title = caseStudy ? pick(caseStudy.title, lang) : undefined;
 const description = caseStudy ? pick(caseStudy.description, lang) : undefined;
 
+// Absolute 1200-wide JPEG card from the case study's own image (was the logo).
+const og = caseStudy
+  ? await getImage({ src: caseStudy.image, width: 1200, format: "jpeg" })
+  : undefined;
+const ogImage = og ? new URL(og.src, SITE).href : undefined;
+
 const t = useTranslations(lang);
 const breadcrumbs = [
   { name: "modern embedded", path: `/${lang}/` },
   { name: t("caseStudies.title"), path: `/${lang}/case-studies/` },
   ...(title ? [{ name: title, path: `/${lang}/case-studies/${slug}/` }] : []),
 ];
+
+// A case study is a delivered work sample — CreativeWork, credited to and
+// produced by the organization entity emitted site-wide (#organization).
+const caseStudySchema =
+  caseStudy && title
+    ? {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        name: title,
+        headline: title,
+        description,
+        image: ogImage,
+        inLanguage: lang,
+        keywords: caseStudy.tech.join(", "),
+        creator: { "@id": `${SITE}/#organization` },
+        provider: { "@id": `${SITE}/#organization` },
+        about: caseStudy.client,
+        url: `${SITE}/${lang}/case-studies/${slug}/`,
+      }
+    : undefined;
 ---
 
-<Base title={title} description={description} breadcrumbs={breadcrumbs}>
+<Base
+  title={title}
+  description={description}
+  image={ogImage}
+  breadcrumbs={breadcrumbs}
+  jsonLd={caseStudySchema}
+>
   <CaseStudy lang={lang} slug={slug} />
 </Base>

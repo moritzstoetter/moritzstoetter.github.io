@@ -20,13 +20,33 @@ interface Props {
   breadcrumbs?: { name: string; path: string }[];
   // Any extra JSON-LD schema object(s) a page wants to emit (e.g. Person).
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  // og:type — "article" for insights (adds article:* meta), else "website".
+  ogType?: "website" | "article";
+  // Article metadata, emitted only when ogType === "article".
+  article?: { publishedTime: string; modifiedTime?: string; author?: string };
 }
-const { title, description, image, breadcrumbs, jsonLd } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  breadcrumbs,
+  jsonLd,
+  ogType = "website",
+  article,
+} = Astro.props;
 
 const SITE = "https://modernembedded.tech";
 const BRAND = "modern embedded";
 const DEFAULT_DESCRIPTION =
   "Cutting edge software development for embedded devices in modern C++.";
+
+// Profiles that represent this same entity elsewhere. Consolidates the brand
+// into one Knowledge-Graph node (schema.org sameAs).
+const SAME_AS = [
+  "https://www.linkedin.com/company/105752649",
+  "https://github.com/modernembedded/",
+  "https://gitlab.com/modernembedded/",
+];
 
 const pageTitle = title
   ? `${title} | ${BRAND}`
@@ -93,6 +113,7 @@ const organizationSchema = {
     "Wi-Fi",
     "DevOps",
   ],
+  sameAs: SAME_AS,
   review: reviews,
 };
 
@@ -149,13 +170,26 @@ const isHome = /^\/(de|en)\/?$/.test(Astro.url.pathname);
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content={BRAND} />
     <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
+    {
+      ogType === "article" && article && (
+        <>
+          <meta property="article:published_time" content={article.publishedTime} />
+          {article.modifiedTime && (
+            <meta property="article:modified_time" content={article.modifiedTime} />
+          )}
+          {article.author && (
+            <meta property="article:author" content={article.author} />
+          )}
+        </>
+      )
+    }
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />

@@ -4,6 +4,9 @@ import { pick, useTranslations } from "../../../i18n/utils";
 import Base from "../../../layouts/Base.astro";
 
 import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
+
+const SITE = "https://modernembedded.tech";
 
 export async function getStaticPaths() {
   const pages = await getCollection("expertise");
@@ -22,14 +25,47 @@ const expertise = (await getCollection("expertise")).find(
 const title = expertise ? pick(expertise.title, lang) : undefined;
 const description = expertise ? pick(expertise.description, lang) : undefined;
 
+// Absolute 1200-wide JPEG card from the expertise image (was the logo).
+const og = expertise
+  ? await getImage({ src: expertise.image, width: 1200, format: "jpeg" })
+  : undefined;
+const ogImage = og ? new URL(og.src, SITE).href : undefined;
+
 const t = useTranslations(lang);
 const breadcrumbs = [
   { name: "modern embedded", path: `/${lang}/` },
   { name: t("meta.expertise.title"), path: `/${lang}/expertise/` },
   ...(title ? [{ name: title, path: `/${lang}/expertise/${slug}/` }] : []),
 ];
+
+// An expertise page is a service offering — Service, provided by the
+// organization entity emitted site-wide (#organization).
+const serviceSchema =
+  expertise && title
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: title,
+        serviceType: title,
+        description,
+        image: ogImage,
+        provider: { "@id": `${SITE}/#organization` },
+        areaServed: [
+          { "@type": "Place", name: "Europe" },
+          { "@type": "Country", name: "United States" },
+          { "@type": "Country", name: "Canada" },
+        ],
+        url: `${SITE}/${lang}/expertise/${slug}/`,
+      }
+    : undefined;
 ---
 
-<Base title={title} description={description} breadcrumbs={breadcrumbs}>
+<Base
+  title={title}
+  description={description}
+  image={ogImage}
+  breadcrumbs={breadcrumbs}
+  jsonLd={serviceSchema}
+>
   <Expertise lang={lang} slug={slug} />
 </Base>
