@@ -27,6 +27,9 @@ export const labels = {
         testimonials: "What our customers say",
         notFound: "Expertise not found",
       },
+      industries: {
+        title: "Our Focus",
+      },
     },
     footer: {
       imprint: "Imprint",
@@ -113,6 +116,9 @@ export const labels = {
         title: "Unsere Expertise",
         testimonials: "Was unsere Kunden sagen",
         notFound: "Expertise nicht gefunden",
+      },
+      industries: {
+        title: "Unser Fokus",
       },
     },
     footer: {

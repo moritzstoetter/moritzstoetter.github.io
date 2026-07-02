@@ -1,0 +1,12 @@
+{
+  "slug": "high_tech",
+  "icon": "cpu",
+  "title": {
+    "de": "High Tech",
+    "en": "High Tech"
+  },
+  "description": {
+    "de": "Embedded-Software für innovative Produkte, wo fortschrittliche Hardware auf moderne Software trifft.",
+    "en": "Embedded software for cutting-edge products where advanced hardware meets modern software."
+  }
+}

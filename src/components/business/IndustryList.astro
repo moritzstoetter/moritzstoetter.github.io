@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import Grid from "../ui/Grid.astro";
+import IndustryPreview from "./IndustryPreview.astro";
+
+// Responsive grid of industry cards (3-up desktop, 2-up tablet, 1-up mobile).
+// `limit` clips to the first N (omit to show all). Order follows the numeric
+// filename prefix of each entry in src/content/industries.
+interface Props {
+  limit?: number;
+}
+const { limit }: Props = Astro.props;
+
+const all = await getCollection("industries");
+const items = limit ? all.slice(0, limit) : all;
+---
+
+<Grid cols={3} breakpoint="md" gap={8} as="ul" class="list-none p-0">
+  {
+    items.map((item) => (
+      <li class="h-full">
+        <IndustryPreview industry={item.data} />
+      </li>
+    ))
+  }
+</Grid>

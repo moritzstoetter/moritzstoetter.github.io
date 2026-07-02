@@ -1,0 +1,12 @@
+{
+  "slug": "life_sciences",
+  "icon": "microscope",
+  "title": {
+    "de": "Life Sciences",
+    "en": "Life Sciences"
+  },
+  "description": {
+    "de": "Präzise eingebettete Systeme für Forschung und Diagnostik.",
+    "en": "Precision embedded systems for research and diagnostics."
+  }
+}

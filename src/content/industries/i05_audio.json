@@ -1,0 +1,12 @@
+{
+  "slug": "audio",
+  "icon": "audio-lines",
+  "title": {
+    "de": "Audio",
+    "en": "Audio"
+  },
+  "description": {
+    "de": "Latenzarme, hochwertige Echtzeit-Audioverarbeitung.",
+    "en": "Low-latency, high-fidelity real-time audio processing."
+  }
+}

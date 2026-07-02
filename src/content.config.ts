@@ -146,6 +146,25 @@ export interface Expertise {
   tech: Tech[];
 }
 
+const industriesCollection = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/industries", generateId: pathId }),
+  schema: () =>
+    z.object({
+      slug: z.string(),
+      // Filename stem (without extension) in src/assets/industry-icons/.
+      icon: z.string(),
+      title: localized(z.string()),
+      description: localized(z.string()),
+    }),
+});
+
+export interface Industry {
+  slug: string;
+  icon: string;
+  title: Localized<string>;
+  description: Localized<string>;
+}
+
 const testimonialsCollection = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/testimonials", generateId: pathId }),
   schema: ({ image }) =>
@@ -169,5 +188,6 @@ export const collections = {
   about: aboutCollection,
   "case-studies": caseStudiesCollection,
   expertise: expertiseCollection,
+  industries: industriesCollection,
   testimonials: testimonialsCollection,
 };

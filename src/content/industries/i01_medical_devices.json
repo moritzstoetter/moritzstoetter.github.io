@@ -1,0 +1,12 @@
+{
+  "slug": "medical_devices",
+  "icon": "heart-pulse",
+  "title": {
+    "de": "Medizingeräte",
+    "en": "Medical Devices"
+  },
+  "description": {
+    "de": "Sicherheitskritische Embedded-Firmware für regulierte Medizingeräte.",
+    "en": "Safety-critical embedded firmware for regulated medical devices."
+  }
+}

@@ -3,17 +3,34 @@ import { getCollection } from "astro:content";
 import Hero from "../../components/Hero.astro";
 import TestimonialSlider from "../../components/ui/TestimonialSlider.astro";
 import ExpertiseList from "../../components/business/ExpertiseList.astro";
+import IndustryList from "../../components/business/IndustryList.astro";
 import CaseStudyList from "../../components/business/CaseStudyList.astro";
 import InsightList from "../../components/business/InsightList.astro";
 import ContactForm from "../../components/ui/ContactForm.astro";
 import Divider from "../../components/ui/Divider.astro";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getLangFromUrl, pick, useTranslations } from "../../i18n/utils";
 import Base from "../../layouts/Base.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const langTestimonials = [...(await getCollection("testimonials"))].reverse();
+
+// ItemList structured data for the "Our Focus" section: names the domains we
+// target so search engines can connect the brand entity to them. Mirrors the
+// visible cards; order follows the collection.
+const industries = await getCollection("industries");
+const focusSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: t("home.industries.title"),
+  itemListElement: industries.map((item, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: pick(item.data.title, lang),
+    description: pick(item.data.description, lang),
+  })),
+};
 
 // Single source of truth for the home page's vertical rhythm. Every section
 // uses the same symmetric padding and the parent adds no gap, so the whitespace
@@ -25,7 +42,7 @@ export async function getStaticPaths() {
 }
 ---
 
-<Base description={t("meta.home.description")}>
+<Base description={t("meta.home.description")} jsonLd={focusSchema}>
   {/* Uniform vertical rhythm: each section carries the same symmetric `sectionY`
       padding and the parent adds no gap, so every section boundary — with the
       divider centred in it — is one `sectionY` from each side. */}
@@ -41,6 +58,14 @@ export async function getStaticPaths() {
     >
       <h1>{t("home.expertise.title")}</h1>
       <ExpertiseList />
+    </section>
+    <Divider />
+    <section
+      aria-labelledby="focus-heading"
+      class:list={["[&>h1:first-child]:mt-0", sectionY]}
+    >
+      <h1 id="focus-heading">{t("home.industries.title")}</h1>
+      <IndustryList />
     </section>
     <Divider />
     <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>

@@ -1,0 +1,12 @@
+{
+  "slug": "scientific_instruments",
+  "icon": "flask-conical",
+  "title": {
+    "de": "Wissenschaftliche Instrumente",
+    "en": "Scientific Instruments"
+  },
+  "description": {
+    "de": "Robuste eingebettete Steuerung und Datenerfassung für wissenschaftliche Instrumente und Messgeräte.",
+    "en": "Robust embedded control and data acquisition for scientific instruments and measurement devices."
+  }
+}

@@ -69,6 +69,17 @@
     },
     {
       "name": {
+        "de": "Bare Metal",
+        "en": "Bare Metal"
+      },
+      "description": {
+        "de": "Nicht jedes Produkt braucht ein RTOS. Wenn Timing, Ressourcen oder Determinismus es verlangen, schreiben wir schlanke Bare-Metal-Firmware direkt gegen die Hardware.",
+        "en": "Not every product needs an RTOS. When timing, footprint or determinism demand it, we write lean bare-metal firmware straight against the hardware."
+      },
+      "image": ""
+    },
+    {
+      "name": {
         "de": "FreeRTOS",
         "en": "FreeRTOS"
       },

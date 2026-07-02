@@ -1,0 +1,47 @@
+---
+import type { Industry } from "../../content.config";
+import { getLangFromUrl, pick } from "../../i18n/utils";
+import Box from "../ui/Box.astro";
+
+// A single industry card: a centred, stacked line-icon + name + one-liner on a
+// Box surface. Non-linked (there are no per-industry detail pages). The icon is
+// an inline SVG tinted via `currentColor`, so it follows the accent colour and
+// adapts to light/dark mode.
+interface Props {
+  industry: Industry;
+}
+
+const { industry } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+// Line icons live as raw SVG in src/assets/industry-icons/<icon>.svg. Eagerly
+// loaded so we can look one up by name at build time.
+const icons = import.meta.glob("../../assets/industry-icons/*.svg", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+
+const iconSvg = icons[`../../assets/industry-icons/${industry.icon}.svg`];
+if (!iconSvg) {
+  throw new Error(
+    `Industry "${industry.slug}" references missing icon "${industry.icon}" (src/assets/industry-icons/${industry.icon}.svg)`,
+  );
+}
+---
+
+<Box padded customClass="h-full">
+  <div class="flex h-full flex-col items-center justify-center gap-4 text-center">
+    <div
+      class="h-14 w-14 text-textLight dark:text-textDark [&>svg]:h-full [&>svg]:w-full"
+      aria-hidden="true"
+      set:html={iconSvg}
+    />
+    <h2 class="text-xl text-textLight lg:text-2xl dark:text-textDark">
+      {pick(industry.title, lang)}
+    </h2>
+    <p class="text-base text-textLight/60 dark:text-textDark/60">
+      {pick(industry.description, lang)}
+    </p>
+  </div>
+</Box>
