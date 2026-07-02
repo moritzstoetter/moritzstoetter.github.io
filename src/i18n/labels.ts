@@ -51,12 +51,17 @@ export const labels = {
     },
     contact: {
       title: "Contact",
+      lead: "Let's talk about your project.",
       send: "Send",
+      sending: "Sending…",
+      success: "Thanks, your message has been sent.",
+      error: "Something went wrong. Please try again or email us directly.",
       bookACall: "Book a call",
       bookACallDescription:
         "If you would like to schedule a non-binding consultation, please make an appointment here.",
       name: "Name",
       email: "Email",
+      company: "Company",
       message: "Message",
     },
     common: {
@@ -141,12 +146,17 @@ export const labels = {
     },
     contact: {
       title: "Kontakt",
+      lead: "Sprechen wir über Ihr Projekt.",
       send: "Senden",
+      sending: "Wird gesendet…",
+      success: "Danke, Ihre Nachricht wurde gesendet.",
+      error: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
       bookACall: "Termin vereinbaren",
       bookACallDescription:
         "Falls sie ein unverbindliches Beratungsgespräch wünschen, können Sie hier einen Termin vereinbaren.",
       name: "Name",
       email: "E-Mail",
+      company: "Firma",
       message: "Nachricht",
     },
     common: {

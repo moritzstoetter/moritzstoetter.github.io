@@ -2,48 +2,138 @@
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-
 const t = useTranslations(lang);
+
+// Un-static form endpoint. The plain POST here is the no-JS fallback; the
+// script below enhances it to submit via the `/ajax` variant and give inline
+// feedback instead of navigating away. Spam-checking/reCAPTCHA must be disabled
+// on this form in the un-static dashboard, and its "Honeypot Field" set to
+// `website` (matching the hidden decoy below) so un-static drops bot
+// submissions server-side too.
+const ACTION =
+  "https://forms.un-static.com/forms/abef4a4f20c48f436cdb7eb8ca72aee60b38f607";
 ---
 
-<div class="flex flex-col gap-8 pb-8">
-  <form
-    class="flex flex-col gap-8"
-    method="post"
-    action="https://forms.un-static.com/forms/abef4a4f20c48f436cdb7eb8ca72aee60b38f607"
-  >
-    <input
-      name="name"
-      placeholder={t("contact.name")}
-      type="text"
-      required="required"
-    />
-    <input
-      name="email"
-      placeholder={t("contact.email")}
-      type="text"
-      required="required"
-    />
-    <textarea
-      name="message"
-      placeholder={t("contact.message")}
-      cols="40"
-      rows="10"
-      required="required"></textarea>
-    <div class="flex justify-between gap-4">
-      <p class="email-disclaimer">
-        <small
-          >powered by <a
-            rel="nofollow"
-            class="focused-link"
-            href="https://un-static.com/"
-            target="_blank">Un-static Forms</a
-          ></small
-        >
-      </p>
-      <button class="button-primary" name="submit" type="submit"
-        >{t("contact.send")}</button
+<form
+  class="flex h-full flex-col gap-4"
+  method="post"
+  action={ACTION}
+  data-contact-form
+  data-msg-sending={t("contact.sending")}
+  data-msg-success={t("contact.success")}
+  data-msg-error={t("contact.error")}
+>
+  <input
+    name="name"
+    placeholder={t("contact.name")}
+    type="text"
+    required="required"
+  />
+  <input
+    name="email"
+    placeholder={t("contact.email")}
+    type="email"
+    required="required"
+  />
+  <input name="company" placeholder={t("contact.company")} type="text" />
+  <textarea
+    name="message"
+    placeholder={t("contact.message")}
+    cols="40"
+    rows="6"
+    class="flex-1"
+    required="required"></textarea>
+
+  {/* Honeypot: off-screen and out of the tab/screen-reader path, so humans
+      never fill it. Bots that fill every field give themselves away — the
+      script drops those before the endpoint, and un-static (with its Honeypot
+      Field set to `website`) rejects them server-side on the no-JS path. */}
+  <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+    <label>
+      Website
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+
+  <div class="flex items-center justify-between gap-4">
+    <p class="email-disclaimer">
+      <small
+        >powered by <a
+          rel="nofollow"
+          class="focused-link"
+          href="https://un-static.com/"
+          target="_blank">Un-static Forms</a
+        ></small
       >
-    </div>
-  </form>
-</div>
+    </p>
+    <button class="button-primary" name="submit" type="submit"
+      >{t("contact.send")}</button
+    >
+  </div>
+
+  <p data-form-status role="status" aria-live="polite" class="hidden text-sm"></p>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+
+  if (form) {
+    const status = form.querySelector<HTMLElement>("[data-form-status]")!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const honeypot = form.querySelector<HTMLInputElement>('input[name="website"]');
+    const endpoint = `${form.getAttribute("action")}/ajax`;
+    const msg = form.dataset;
+
+    const setStatus = (text: string, tone: "info" | "ok" | "err") => {
+      status.textContent = text;
+      status.className = "text-sm " + {
+        info: "text-textLight/60 dark:text-textDark/60",
+        ok: "text-primaryLight dark:text-primaryDark",
+        err: "text-red-700 dark:text-red-400",
+      }[tone];
+    };
+
+    const field = (name: string) =>
+      (form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement).value;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Honeypot tripped: pretend success (give the bot no signal), send nothing.
+      if (honeypot && honeypot.value.trim() !== "") {
+        setStatus(msg.msgSuccess!, "ok");
+        form.reset();
+        return;
+      }
+
+      const payload = {
+        name: field("name"),
+        email: field("email"),
+        company: field("company"),
+        message: field("message"),
+      };
+
+      button.disabled = true;
+      setStatus(msg.msgSending!, "info");
+
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && json.success) {
+          setStatus(msg.msgSuccess!, "ok");
+          form.reset();
+        } else {
+          setStatus(msg.msgError!, "err");
+        }
+      } catch {
+        setStatus(msg.msgError!, "err");
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>

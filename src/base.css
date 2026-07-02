@@ -77,7 +77,7 @@
 
   textarea,
   input {
-    @apply rounded-lg border-2 border-transparent bg-white px-4 py-2 text-lg hover:bg-neutral-100 focus:border-primaryLight focus:bg-primaryLight/5 focus:outline-none dark:bg-backgroundDark hover:dark:bg-backgroundDark/80 dark:focus:border-primaryDark focus:dark:bg-neutral-800;
+    @apply rounded-lg border-2 border-neutral-200 bg-white px-4 py-2 text-lg hover:bg-neutral-100 focus:border-primaryLight focus:bg-primaryLight/5 focus:outline-none dark:border-neutral-700 dark:bg-backgroundDarker hover:dark:bg-backgroundDark/80 dark:focus:border-primaryDark focus:dark:bg-neutral-800;
   }
 }
 
@@ -102,4 +102,29 @@ html.dark .astro-code span {
 code::before,
 code::after {
   content: none !important;
+}
+
+/* Browsers repaint autofilled inputs (name/email) with their own yellow/blue
+   background + text colour, so they look different from empty/typed fields.
+   Mask that with an inset box-shadow in our field colour and pin the text fill
+   colour. Values mirror the `input`/`textarea` rule above (white / backgroundDarker
+   and textLight / textDark). Unlayered so it beats the UA autofill style. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: #3c3836;
+  caret-color: #3c3836;
+  box-shadow: 0 0 0 1000px #fff inset;
+  /* Delay the autofill background transition indefinitely so it never shows. */
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+html.dark input:-webkit-autofill,
+html.dark input:-webkit-autofill:hover,
+html.dark input:-webkit-autofill:focus,
+html.dark textarea:-webkit-autofill {
+  -webkit-text-fill-color: #f9f5d7;
+  caret-color: #f9f5d7;
+  box-shadow: 0 0 0 1000px #282828 inset;
 }

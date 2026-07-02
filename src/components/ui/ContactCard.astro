@@ -1,0 +1,49 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Box from "./Box.astro";
+import ContactForm from "./ContactForm.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Public contact details — mirror the Organization schema in Base.astro.
+const EMAIL = "info@modernembedded.tech";
+
+// Scheduling link for the "Book a call" CTA.
+const BOOKING_URL = "https://cal.com/modernembedded/30min";
+
+const mailIcon =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>';
+---
+
+<Box padded>
+  <div class="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
+    {/* Invitation + direct contact + booking */}
+    <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
+        <h3 class="text-2xl text-primaryLight lg:text-3xl dark:text-primaryDark">
+          {t("contact.lead")}
+        </h3>
+        <p class="text-textLight/70 dark:text-textDark/70">
+          {t("contact.bookACallDescription")}
+        </p>
+      </div>
+      <a
+        href={BOOKING_URL}
+        target="_blank"
+        rel="noopener"
+        class="button-primary w-fit"
+      >
+        {t("contact.bookACall")}
+      </a>
+      <div class="mt-2 flex flex-col gap-3">
+        <a class="focused-link flex w-fit items-center gap-3" href={`mailto:${EMAIL}`}>
+          <span set:html={mailIcon} />{EMAIL}
+        </a>
+      </div>
+    </div>
+
+    {/* The form itself */}
+    <ContactForm />
+  </div>
+</Box>

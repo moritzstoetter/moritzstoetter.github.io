@@ -255,21 +255,29 @@ const isHome = /^\/(de|en)\/?$/.test(Astro.url.pathname);
         </div>
       )
     }
-    {/* Hide the floating contact button while the home hero is in view — its
-        in-box CTA already covers that action there. */}
+    {/* Hide the floating contact button while a section that already covers the
+        "get in touch" action is in view — the home hero (its in-box CTA) and
+        the home contact section (the form itself). Redundant otherwise. */}
     <script>
-      const hero = document.getElementById("hero");
       const fab = document.getElementById("floating-contact");
-      if (hero && fab) {
+      const watched = ["hero", "contact-section"]
+        .map((id) => document.getElementById(id))
+        .filter((el) => el !== null);
+      if (fab && watched.length) {
+        const visible = new Set();
         const observer = new IntersectionObserver(
-          ([entry]) => {
-            const hidden = entry.isIntersecting;
-            fab.classList.toggle("opacity-0", hidden);
-            fab.classList.toggle("pointer-events-none", hidden);
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) visible.add(entry.target);
+              else visible.delete(entry.target);
+            }
+            const hide = visible.size > 0;
+            fab.classList.toggle("opacity-0", hide);
+            fab.classList.toggle("pointer-events-none", hide);
           },
           { threshold: 0 },
         );
-        observer.observe(hero);
+        watched.forEach((el) => observer.observe(el));
       }
     </script>
   </body>
