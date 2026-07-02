@@ -39,6 +39,7 @@ export async function getStaticPaths() {
   description={t("meta.about.description")}
   jsonLd={personSchema}
 >
+  <h1 class="section-title">{t("meta.about.title")}</h1>
   <section class="flex flex-col gap-8 pb-8">
     {team?.data.members.map((member) => <TeamMember member={member} />)}
   </section>
