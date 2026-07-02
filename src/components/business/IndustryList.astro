@@ -8,8 +8,11 @@ import IndustryPreview from "./IndustryPreview.astro";
 // filename prefix of each entry in src/content/industries.
 interface Props {
   limit?: number;
+  // Heading level for each card title, forwarded to the previews. Defaults to
+  // h2; the home page passes h3.
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
-const { limit }: Props = Astro.props;
+const { limit, titleAs = "h2" }: Props = Astro.props;
 
 const all = await getCollection("industries");
 const items = limit ? all.slice(0, limit) : all;
@@ -19,7 +22,7 @@ const items = limit ? all.slice(0, limit) : all;
   {
     items.map((item) => (
       <li class="h-full">
-        <IndustryPreview industry={item.data} />
+        <IndustryPreview industry={item.data} titleAs={titleAs} />
       </li>
     ))
   }

@@ -35,7 +35,7 @@ const focusSchema = {
 // Single source of truth for the home page's vertical rhythm. Every section
 // uses the same symmetric padding and the parent adds no gap, so the whitespace
 // between any two sections — divider centred in it — is uniform.
-const sectionY = "py-12 md:py-20";
+const sectionY = "py-20 md:py-36";
 
 export async function getStaticPaths() {
   return [{ params: { lang: "de" } }, { params: { lang: "en" } }];
@@ -54,28 +54,28 @@ export async function getStaticPaths() {
     <Divider />
     <section
       id="content"
-      class:list={["scroll-mt-28 [&>h1:first-child]:mt-0", sectionY]}
+      class:list={["scroll-mt-28 [&>h2:first-child]:mt-0", sectionY]}
     >
-      <h1>{t("home.expertise.title")}</h1>
-      <ExpertiseList />
+      <h2 class="section-title">{t("home.expertise.title")}</h2>
+      <ExpertiseList titleAs="h3" />
     </section>
     <Divider />
     <section
       aria-labelledby="focus-heading"
-      class:list={["[&>h1:first-child]:mt-0", sectionY]}
+      class:list={["[&>h2:first-child]:mt-0", sectionY]}
     >
-      <h1 id="focus-heading">{t("home.industries.title")}</h1>
-      <IndustryList />
+      <h2 id="focus-heading" class="section-title">{t("home.industries.title")}</h2>
+      <IndustryList titleAs="h3" />
     </section>
     <Divider />
-    <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>
-      <h1>{t("home.expertise.testimonials")}</h1>
+    <section class:list={["[&>h2:first-child]:mt-0", sectionY]}>
+      <h2 class="section-title">{t("home.expertise.testimonials")}</h2>
       <TestimonialSlider testimonials={langTestimonials} />
     </section>
     <Divider />
-    <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>
-      <h1>{t("caseStudies.title")}</h1>
-      <CaseStudyList limit={2} />
+    <section class:list={["[&>h2:first-child]:mt-0", sectionY]}>
+      <h2 class="section-title">{t("caseStudies.title")}</h2>
+      <CaseStudyList limit={2} titleAs="h3" />
       <div class="mt-8 text-right">
         <a class="focused-link text-lg" href={`/${lang}/case-studies/`}>
           {t("common.seeAll")} →
@@ -83,9 +83,9 @@ export async function getStaticPaths() {
       </div>
     </section>
     <Divider />
-    <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>
-      <h1>{t("insights.title")}</h1>
-      <InsightList limit={2} />
+    <section class:list={["[&>h2:first-child]:mt-0", sectionY]}>
+      <h2 class="section-title">{t("insights.title")}</h2>
+      <InsightList limit={2} titleAs="h3" />
       <div class="mt-8 text-right">
         <a class="focused-link text-lg" href={`/${lang}/insights/`}>
           {t("common.seeAll")} →
@@ -93,8 +93,8 @@ export async function getStaticPaths() {
       </div>
     </section>
     <Divider />
-    <section class:list={["[&>h1:first-child]:mt-0", sectionY]}>
-      <h1>{t("contact.title")}</h1>
+    <section class:list={["[&>h2:first-child]:mt-0", sectionY]}>
+      <h2 class="section-title">{t("contact.title")}</h2>
       <ContactForm />
     </section>
   </div>

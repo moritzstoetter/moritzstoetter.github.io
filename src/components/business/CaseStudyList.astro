@@ -6,13 +6,16 @@ import CaseStudyPreview from "./CaseStudyPreview.astro";
 // first N (omit to show all). Shared by the root page and the listing page.
 interface Props {
   limit?: number;
+  // Heading level for each card title, forwarded to the previews. Defaults to
+  // h2 (listing page); the home page passes h3.
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
-const { limit }: Props = Astro.props;
+const { limit, titleAs = "h2" }: Props = Astro.props;
 
 const all = [...(await getCollection("case-studies"))].reverse();
 const items = limit ? all.slice(0, limit) : all;
 ---
 
 <div class="flex flex-col gap-16">
-  {items.map((caseStudy) => <CaseStudyPreview caseStudy={caseStudy.data} />)}
+  {items.map((caseStudy) => <CaseStudyPreview caseStudy={caseStudy.data} titleAs={titleAs} />)}
 </div>

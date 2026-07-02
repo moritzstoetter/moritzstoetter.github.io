@@ -18,6 +18,9 @@ interface Props {
   // Height of the split. Defaults to the content-card size; the home masthead
   // passes a taller value so it reads as a hero rather than another card.
   heightClass?: string;
+  // Heading level for the title (passed to IconText). Defaults to h2; the home
+  // hero passes h1, home cards pass h3.
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
 
 const {
@@ -30,6 +33,7 @@ const {
   iconAlt = "",
   swap = false,
   heightClass = "min-h-80 md:min-h-[28rem]",
+  titleAs = "h2",
 } = Astro.props;
 
 // Optional action area below the text (e.g. the masthead's CTA button),
@@ -76,6 +80,7 @@ const panelClass =
         description={description}
         icon={icon}
         iconAlt={iconAlt}
+        titleAs={titleAs}
       />
     </div>
   </div>

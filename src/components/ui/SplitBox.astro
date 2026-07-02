@@ -16,6 +16,7 @@ interface Props {
   iconAlt?: string;
   href?: string;
   swap?: boolean;
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
 
 const { href, ...media } = Astro.props;

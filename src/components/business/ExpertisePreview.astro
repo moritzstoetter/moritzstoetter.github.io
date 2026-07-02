@@ -10,9 +10,12 @@ interface Props {
   linked?: boolean;
   // Mirror the image/text arrangement (image right, text left).
   swap?: boolean;
+  // Heading level for the card title. Defaults to h2 (listing pages); the home
+  // page passes h3 so cards sit under the section's h2.
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
 
-const { expertise, linked = true, swap = false } = Astro.props;
+const { expertise, linked = true, swap = false, titleAs = "h2" } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 ---
@@ -24,4 +27,5 @@ const lang = getLangFromUrl(Astro.url);
   description={pick(expertise.description, lang)}
   href={linked ? `/${lang}/expertise/${expertise.slug}` : undefined}
   swap={swap}
+  titleAs={titleAs}
 />

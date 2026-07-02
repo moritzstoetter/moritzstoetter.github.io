@@ -21,7 +21,12 @@
     @apply break-words hyphens-auto;
   }
 
-  h1 {
+  /* The prominent, centred/uppercase heading look. Decoupled from the `h1`
+     element so heading *level* (document outline / SEO) is independent of
+     appearance: the single page `h1` (e.g. the home hero) is styled by its own
+     utilities, while section titles use `<h2 class="section-title">` and prose
+     page titles keep it on their `h1`. */
+  .section-title {
     @apply my-8 text-center text-2xl font-bold uppercase sm:text-3xl md:my-16 lg:text-4xl;
   }
 

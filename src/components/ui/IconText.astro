@@ -25,6 +25,9 @@ interface Props {
   icon?: ImageMetadata;
   iconAlt?: string;
   size?: "lg" | "sm";
+  // Heading level for the title, so callers control the document outline
+  // independently of the visual size (which `size` drives). Defaults to h2.
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
 
 const {
@@ -34,7 +37,10 @@ const {
   icon,
   iconAlt = "",
   size = "lg",
+  titleAs = "h2",
 } = Astro.props;
+
+const Heading = titleAs;
 
 // Keep full class strings literal so Tailwind can detect them.
 const styles = {
@@ -72,9 +78,9 @@ const styles = {
       )
     }
     <div class="flex flex-col">
-      <h2 class:list={[styles.title, "text-primaryLight dark:text-primaryDark"]}>
+      <Heading class:list={[styles.title, "text-primaryLight dark:text-primaryDark"]}>
         {title}
-      </h2>
+      </Heading>
       {
         subtitle && (
           <p class:list={[styles.subtitle, "text-textLight/60 dark:text-textDark/60"]}>

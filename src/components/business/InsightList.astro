@@ -9,8 +9,11 @@ import InsightPreview from "./InsightPreview.astro";
 // listing page.
 interface Props {
   limit?: number;
+  // Heading level for each card title, forwarded to the previews. Defaults to
+  // h2 (listing page); the home page passes h3.
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
-const { limit }: Props = Astro.props;
+const { limit, titleAs = "h2" }: Props = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
 const all = (await getCollection("insights"))
@@ -20,5 +23,5 @@ const items = limit ? all.slice(0, limit) : all;
 ---
 
 <div class="flex flex-col gap-16">
-  {items.map((insight) => <InsightPreview insight={insight} />)}
+  {items.map((insight) => <InsightPreview insight={insight} titleAs={titleAs} />)}
 </div>

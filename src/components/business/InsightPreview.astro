@@ -9,9 +9,12 @@ interface Props {
   linked?: boolean;
   // Mirror the image/text arrangement (image right, text left).
   swap?: boolean;
+  // Heading level for the card title. Defaults to h2 (listing pages); the home
+  // page passes h3 so cards sit under the section's h2.
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
 
-const { insight, linked = true, swap = false } = Astro.props;
+const { insight, linked = true, swap = false, titleAs = "h2" } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const slug = insight.id.split("/")[1];
@@ -25,4 +28,5 @@ const slug = insight.id.split("/")[1];
   description={insight.data.description}
   href={linked ? `/${lang}/insights/${slug}` : undefined}
   swap={swap}
+  titleAs={titleAs}
 />

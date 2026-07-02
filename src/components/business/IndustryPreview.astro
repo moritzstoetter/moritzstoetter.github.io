@@ -9,9 +9,13 @@ import Box from "../ui/Box.astro";
 // adapts to light/dark mode.
 interface Props {
   industry: Industry;
+  // Heading level for the industry name. Defaults to h2; the home page passes
+  // h3 so cards sit under the section's h2.
+  titleAs?: "h1" | "h2" | "h3" | "h4";
 }
 
-const { industry } = Astro.props;
+const { industry, titleAs = "h2" } = Astro.props;
+const Heading = titleAs;
 const lang = getLangFromUrl(Astro.url);
 
 // Line icons live as raw SVG in src/assets/industry-icons/<icon>.svg. Eagerly
@@ -37,9 +41,9 @@ if (!iconSvg) {
       aria-hidden="true"
       set:html={iconSvg}
     />
-    <h2 class="text-xl text-textLight lg:text-2xl dark:text-textDark">
+    <Heading class="text-xl text-textLight lg:text-2xl dark:text-textDark">
       {pick(industry.title, lang)}
-    </h2>
+    </Heading>
     <p class="text-base text-textLight/60 dark:text-textDark/60">
       {pick(industry.description, lang)}
     </p>
