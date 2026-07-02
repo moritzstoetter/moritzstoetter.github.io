@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { pick, useTranslations } from "../../i18n/utils";
-import CaseStudyPreview from "../business/CaseStudyPreview.astro";
-import Box from "../ui/Box.astro";
-import Grid from "../ui/Grid.astro";
-import Testimonial from "../Testimonial.astro";
+import { pick, useTranslations } from "../../../i18n/utils";
+import CaseStudyPreview from "./CaseStudyPreview.astro";
+import Box from "../../ui/Box.astro";
+import Grid from "../../ui/Grid.astro";
+import Testimonial from "../testimonials/Testimonial.astro";
 
 const { lang, slug } = Astro.props;
 

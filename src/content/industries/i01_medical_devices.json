@@ -2,8 +2,8 @@
   "slug": "medical_devices",
   "icon": "heart-pulse",
   "title": {
-    "de": "Medizingeräte",
-    "en": "Medical Devices"
+    "de": "Medizintechnik",
+    "en": "Medical Technology"
   },
   "description": {
     "de": "Sicherheitskritische Embedded-Firmware für regulierte Medizingeräte.",

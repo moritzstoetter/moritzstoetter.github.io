@@ -1,7 +1,7 @@
 ---
-import type { TeamMember } from "../../content.config";
-import { getLangFromUrl, pick } from "../../i18n/utils";
-import SplitBox from "../ui/SplitBox.astro";
+import type { TeamMember } from "../../../content.config";
+import { getLangFromUrl, pick } from "../../../i18n/utils";
+import SplitBox from "../../ui/SplitBox.astro";
 
 const member: TeamMember = Astro.props.member;
 const lang = getLangFromUrl(Astro.url);

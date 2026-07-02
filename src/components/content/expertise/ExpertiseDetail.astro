@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import { idIsOfLanguage, pick, useTranslations } from "../../i18n/utils";
-import ExpertisePreview from "../business/ExpertisePreview.astro";
-import Grid from "../ui/Grid.astro";
-import Box from "../ui/Box.astro";
-import IconText from "../ui/IconText.astro";
-import Technology from "../business/Technology.astro";
-import RelatedInsights from "../business/RelatedInsights.astro";
+import { idIsOfLanguage, pick, useTranslations } from "../../../i18n/utils";
+import ExpertisePreview from "./ExpertisePreview.astro";
+import Grid from "../../ui/Grid.astro";
+import Box from "../../ui/Box.astro";
+import IconText from "../../ui/IconText.astro";
+import Technology from "./Technology.astro";
+import RelatedInsights from "../insights/RelatedInsights.astro";
 
 const { lang, slug } = Astro.props;
 

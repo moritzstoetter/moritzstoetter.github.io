@@ -1,8 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
-import { getLangFromUrl, idIsOfLanguage, useTranslations } from "../../i18n/utils";
-import InsightPreview from "../business/InsightPreview.astro";
-import RelatedInsights from "../business/RelatedInsights.astro";
+import { getLangFromUrl, idIsOfLanguage, useTranslations } from "../../../i18n/utils";
+import InsightPreview from "./InsightPreview.astro";
+import RelatedInsights from "./RelatedInsights.astro";
 
 const { slug } = Astro.params;
 const lang = getLangFromUrl(Astro.url);

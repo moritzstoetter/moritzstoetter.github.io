@@ -1,8 +1,8 @@
 ---
-import type { Tech } from "../../content.config";
-import { getLangFromUrl, pick } from "../../i18n/utils";
-import Box from "../ui/Box.astro";
-import IconText from "../ui/IconText.astro";
+import type { Tech } from "../../../content.config";
+import { getLangFromUrl, pick } from "../../../i18n/utils";
+import Box from "../../ui/Box.astro";
+import IconText from "../../ui/IconText.astro";
 
 const tech: Tech = Astro.props.technology;
 const lang = getLangFromUrl(Astro.url);

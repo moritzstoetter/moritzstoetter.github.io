@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import Nav from "../components/Nav.astro";
+import Nav from "../components/layout/Nav.astro";
 import { getLangFromUrl } from "../i18n/utils";
 import "../base.css";
-import Footer from "../components/Footer.astro";
-import ContactButton from "../components/ContactButton.astro";
+import Footer from "../components/layout/Footer.astro";
+import ContactButton from "../components/layout/ContactButton.astro";
 
 const lang = getLangFromUrl(Astro.url);
 
